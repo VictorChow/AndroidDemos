@@ -3,40 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        tools:context="demos.fragment.FirstFragment">
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/black2" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/grey0" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/grey0" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/grey" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/grey1" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/grey2" />
-
-        </LinearLayout>
-
-    </ScrollView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/grey" />
+    </LinearLayout>
 
     <!--<View-->
     <!--android:layout_width="match_parent"-->

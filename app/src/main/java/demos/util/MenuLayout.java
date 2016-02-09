@@ -19,8 +19,10 @@ public class MenuLayout extends ViewGroup {
     private View mMenuView;
     private View mContentView;
     private VelocityTracker mVelocityTracker;
-    private ViewWrapper wrapper;
+    private ViewWrapper mContentWrapper;
+    private ViewWrapper mMenuWrapper;
     private boolean mIsShowMenu;
+    private boolean mIsMenuSlide = true;
     private float mDownX;
     private float mDownY;
     private float mOffsetX;
@@ -36,7 +38,8 @@ public class MenuLayout extends ViewGroup {
         super.onFinishInflate();
         mMenuView = getChildAt(0);
         mContentView = getChildAt(1);
-        wrapper = new ViewWrapper(mContentView);
+        mContentWrapper = new ViewWrapper(mContentView);
+        mMenuWrapper = new ViewWrapper(mMenuView);
     }
 
     @Override
@@ -48,7 +51,11 @@ public class MenuLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        mMenuView.layout(0, 0, mMenuView.getMeasuredWidth(), mMenuView.getMeasuredHeight());
+        if (mIsMenuSlide) {
+            mMenuView.layout(-mMenuView.getMeasuredWidth() / 3, 0, mMenuView.getMeasuredWidth() - mMenuView.getMeasuredWidth() / 3, mMenuView.getMeasuredHeight());
+        } else {
+            mMenuView.layout(0, 0, mMenuView.getMeasuredWidth(), mMenuView.getMeasuredHeight());
+        }
         mContentView.layout(0, 0, mContentView.getMeasuredWidth(), mContentView.getMeasuredHeight());
     }
 
@@ -113,6 +120,10 @@ public class MenuLayout extends ViewGroup {
                 }
                 float contentViewX = mIsShowMenu ? mMenuWidth : 0;
                 mContentView.setX(contentViewX + mOffsetX);
+                if (mIsMenuSlide) {
+                    float menuViewX = mIsShowMenu ? 0 : -mMenuView.getMeasuredWidth() / 3;
+                    mMenuView.setX(menuViewX + mOffsetX / 3);
+                }
                 break;
             case MotionEvent.ACTION_UP:
                 mVelocityTracker.computeCurrentVelocity(1000);
@@ -153,11 +164,19 @@ public class MenuLayout extends ViewGroup {
         return true;
     }
 
+
     private void startAnimator(float endX, int duration) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(wrapper, "left", endX);
-        animator.setDuration(duration);
-        animator.setInterpolator(new DecelerateInterpolator());
-        animator.start();
+        ObjectAnimator contentAnimator = ObjectAnimator.ofFloat(mContentWrapper, "left", endX);
+        contentAnimator.setDuration(duration);
+        contentAnimator.setInterpolator(new DecelerateInterpolator());
+        contentAnimator.start();
+        if (mIsMenuSlide) {
+            float menuEndX = endX == 0 ? -mMenuWidth / 3 : 0;
+            ObjectAnimator menuAnimator = ObjectAnimator.ofFloat(mMenuWrapper, "left", menuEndX);
+            menuAnimator.setDuration(duration);
+            menuAnimator.setInterpolator(new DecelerateInterpolator());
+            menuAnimator.start();
+        }
         mIsShowMenu = endX != 0;
     }
 
