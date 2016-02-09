@@ -3,7 +3,6 @@ package demos.view;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 
 /**
  * Created by Victor on 16/2/9.
@@ -31,11 +30,5 @@ public class FriendlyViewPager extends ViewPager {
 
             }
         });
-    }
-
-
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        return !ViewDragGroup.IS_SHOW_MENU && super.onTouchEvent(ev);
     }
 }

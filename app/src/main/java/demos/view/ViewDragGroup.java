@@ -22,7 +22,6 @@ public class ViewDragGroup extends FrameLayout {
     private float mDownX;
     private float mOffsetX;
 
-
     public static boolean IS_SHOW_MENU;
 
     private ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {

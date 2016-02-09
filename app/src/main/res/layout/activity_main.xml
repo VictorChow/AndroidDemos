@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<demos.view.ViewDragGroup xmlns:android="http://schemas.android.com/apk/res/android"
+<demos.util.MenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <View
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:background="@color/grey" />
+        android:background="@color/blue2" />
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/black2" />-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,4 +60,4 @@
                 android:scaleType="center" />
         </LinearLayout>
     </LinearLayout>
-</demos.view.ViewDragGroup>
+</demos.util.MenuLayout>
