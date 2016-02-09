@@ -1,34 +1,11 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="demos.fragment.FirstFragment">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:text="第1个" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/blue2" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/yellow" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/green" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/red0" />
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

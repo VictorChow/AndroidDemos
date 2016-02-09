@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.victor.androiddemos.R;
 
@@ -28,6 +29,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     ImageView ivBtn2;
     @Bind(R.id.iv_btn_3)
     ImageView ivBtn3;
+    @Bind(R.id.ll_main)
+    LinearLayout llMain;
 
     @OnClick({R.id.iv_btn_1, R.id.iv_btn_2, R.id.iv_btn_3})
     void onItemClick(View v) {
@@ -70,6 +73,16 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         drawables.add(drawable1);
         drawables.add(drawable2);
         drawables.add(drawable3);
+
+        setMenuItemClick();
+    }
+
+    private void setMenuItemClick() {
+        int count = llMain.getChildCount();
+        for (int i = 0; i < count; i++) {
+            final int finalI = i;
+            llMain.getChildAt(i).setOnClickListener(v -> ShowToast.shortToast("第" + finalI + "项"));
+        }
     }
 
     @Override

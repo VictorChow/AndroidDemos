@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
 
 import com.victor.androiddemos.R;
 
@@ -53,13 +54,26 @@ public class ScratchCardView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
+        ViewParent parent;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                parent = getParent();
+                while (parent != null) {
+                    parent.requestDisallowInterceptTouchEvent(true);
+                    parent = parent.getParent();
+                }
                 path.reset();
                 path.moveTo(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
                 path.lineTo(x, y);
+                break;
+            case MotionEvent.ACTION_UP:
+                parent = getParent();
+                while (parent != null) {
+                    parent.requestDisallowInterceptTouchEvent(false);
+                    parent = parent.getParent();
+                }
                 break;
         }
         fgCanvas.drawPath(path, fgPaint);
