@@ -12,22 +12,22 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/grey0" />
+            android:background="@color/blue2" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/grey" />
+            android:background="@color/yellow" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/grey1" />
+            android:background="@color/green" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/grey2" />
+            android:background="@color/red0" />
 
     </LinearLayout>
 

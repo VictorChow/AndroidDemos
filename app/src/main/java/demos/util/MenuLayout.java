@@ -68,13 +68,16 @@ public class MenuLayout extends ViewGroup {
             case MotionEvent.ACTION_MOVE:
                 mOffsetX = event.getX() - mDownX;
                 mOffsetY = event.getY() - mDownY;
-                if (FriendlyViewPager.IS_FIRST_PAGER) {
-                    if (mOffsetX > 0) {
-                        intercept = mOffsetX > Math.abs(mOffsetY);
-                    }
-                }
                 if (mIsShowMenu) {
-                    intercept = true;
+                    if (mOffsetX < 0 && Math.abs(mOffsetX) >= Math.abs(mOffsetY)) {
+                        intercept = true;
+                    }
+                } else {
+                    if (mOffsetX > 0 && Math.abs(mOffsetX) >= Math.abs(mOffsetY)) {
+                        if (FriendlyViewPager.IS_FIRST_PAGER) {
+                            intercept = true;
+                        }
+                    }
                 }
                 break;
         }
