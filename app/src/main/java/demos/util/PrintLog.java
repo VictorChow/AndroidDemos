@@ -1,4 +1,4 @@
-package com.example.victor.androiddemos.activity.util;
+package demos.util;
 
 import android.text.TextUtils;
 import android.util.Log;

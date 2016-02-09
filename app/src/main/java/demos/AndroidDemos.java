@@ -1,4 +1,4 @@
-package com.example.victor.androiddemos.activity;
+package demos;
 
 import android.app.Application;
 import android.content.Context;

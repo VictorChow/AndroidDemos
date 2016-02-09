@@ -1,4 +1,4 @@
-package com.example.victor.androiddemos.activity.view;
+package demos.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,11 +13,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.victor.androiddemos.R;
+import com.victor.androiddemos.R;
 
 
 /**
  * Created by Victor on 16/1/10.
+ * 刮刮乐
  */
 public class ScratchCardView extends View {
     private Canvas fgCanvas;

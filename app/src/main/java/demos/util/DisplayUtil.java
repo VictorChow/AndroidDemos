@@ -1,4 +1,4 @@
-package com.example.victor.androiddemos.activity.util;
+package demos.util;
 
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
@@ -9,7 +9,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.widget.TextView;
 
-import com.example.victor.androiddemos.activity.AndroidDemos;
+import demos.AndroidDemos;
 
 
 /**

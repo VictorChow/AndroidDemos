@@ -1,12 +1,12 @@
-package com.example.victor.androiddemos.activity.adapter;
+package demos.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.victor.androiddemos.activity.fragment.FirstFragment;
-import com.example.victor.androiddemos.activity.fragment.SecondFragment;
-import com.example.victor.androiddemos.activity.fragment.ThirdFragment;
+import demos.fragment.FirstFragment;
+import demos.fragment.SecondFragment;
+import demos.fragment.ThirdFragment;
 
 import java.util.ArrayList;
 

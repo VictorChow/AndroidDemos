@@ -1,4 +1,4 @@
-package com.example.victor.androiddemos.activity.activity;
+package demos.activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,15 +7,15 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.victor.androiddemos.R;
-import com.example.victor.androiddemos.activity.adapter.VpMainAdapter;
-import com.example.victor.androiddemos.activity.util.ShowToast;
+import com.victor.androiddemos.R;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import demos.adapter.VpMainAdapter;
+import demos.util.ShowToast;
 
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 

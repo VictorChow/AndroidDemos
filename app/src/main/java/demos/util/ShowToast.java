@@ -1,9 +1,9 @@
-package com.example.victor.androiddemos.activity.util;
+package demos.util;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.victor.androiddemos.activity.AndroidDemos;
+import demos.AndroidDemos;
 
 /**
  * Created by Victor on 2015-9-6.

@@ -1,4 +1,4 @@
-package com.example.victor.androiddemos.activity.fragment;
+package demos.fragment;
 
 
 import android.os.Bundle;
@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.victor.androiddemos.R;
+import com.victor.androiddemos.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class SecondFragment extends Fragment {
 
 
