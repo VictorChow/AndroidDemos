@@ -5,6 +5,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -16,7 +17,13 @@ import demos.util.DisplayUtil;
 public class ViewDragGroup extends FrameLayout {
     private ViewDragHelper mViewDragHelper;
     private View mMainView, mMenuView;
-    private int mWidth;
+    private VelocityTracker mVelocityTracker;
+
+    private float mDownX;
+    private float mOffsetX;
+
+
+    public static boolean IS_SHOW_MENU;
 
     private ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
         @Override
@@ -43,11 +50,10 @@ public class ViewDragGroup extends FrameLayout {
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             super.onViewReleased(releasedChild, xvel, yvel);
             if (mMainView.getLeft() < DisplayUtil.dp2px(100)) {
-                mViewDragHelper.smoothSlideViewTo(mMainView, 0, 0);
-                ViewCompat.postInvalidateOnAnimation(ViewDragGroup.this);
+                hideMenu();
+
             } else {
-                mViewDragHelper.smoothSlideViewTo(mMainView, DisplayUtil.dp2px(200), 0);
-                ViewCompat.postInvalidateOnAnimation(ViewDragGroup.this);
+                showMenu();
             }
         }
     };
@@ -65,20 +71,59 @@ public class ViewDragGroup extends FrameLayout {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mWidth = getMeasuredWidth();
-    }
-
-    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return mViewDragHelper.shouldInterceptTouchEvent(ev);
+        boolean intercept = false;
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mDownX = ev.getX();
+                mOffsetX = 0;
+                intercept = false;
+                break;
+            case MotionEvent.ACTION_UP:
+                intercept = false;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                mOffsetX = ev.getX() - mDownX;
+                intercept = FriendlyViewPager.IS_FIRST_PAGER && mOffsetX > 0;
+                break;
+        }
+        return intercept;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mViewDragHelper.processTouchEvent(event);
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
+        mVelocityTracker.addMovement(event);
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                mVelocityTracker.computeCurrentVelocity(1000);
+                if (IS_SHOW_MENU) {
+                    if (mVelocityTracker.getXVelocity() < -1000) {
+                        hideMenu();
+                    }
+                } else {
+                    if (mVelocityTracker.getXVelocity() > 1000) {
+                        showMenu();
+                    }
+                }
+                break;
+        }
         return true;
+    }
+
+    private void showMenu() {
+        mViewDragHelper.smoothSlideViewTo(mMainView, DisplayUtil.dp2px(200), 0);
+        ViewCompat.postInvalidateOnAnimation(ViewDragGroup.this);
+        IS_SHOW_MENU = true;
+    }
+
+    private void hideMenu() {
+        mViewDragHelper.smoothSlideViewTo(mMainView, 0, 0);
+        ViewCompat.postInvalidateOnAnimation(ViewDragGroup.this);
+        IS_SHOW_MENU = false;
     }
 
     @Override
@@ -87,4 +132,5 @@ public class ViewDragGroup extends FrameLayout {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
+
 }

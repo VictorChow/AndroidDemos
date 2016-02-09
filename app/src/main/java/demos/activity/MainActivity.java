@@ -16,11 +16,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import demos.adapter.VpMainAdapter;
 import demos.util.ShowToast;
+import demos.view.FriendlyViewPager;
 
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
     @Bind(R.id.view_pager_main)
-    ViewPager viewPagerMain;
+    FriendlyViewPager viewPagerMain;
     @Bind(R.id.iv_btn_1)
     ImageView ivBtn1;
     @Bind(R.id.iv_btn_2)
