@@ -19,6 +19,12 @@
         <activity
             android:name="demos.activity.SlideToCloseActivity"
             android:theme="@style/SlideToCloseStyle" />
+        <activity android:name="demos.activity.ServiceActivity" />
+
+        <service
+            android:name="demos.service.CountService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

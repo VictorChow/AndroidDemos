@@ -12,17 +12,22 @@ import com.victor.androiddemos.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import demos.activity.ServiceActivity;
 import demos.activity.SlideToCloseActivity;
 
 
 public class SecondFragment extends Fragment {
 
-    @OnClick({R.id.btn_slide_close})
+    @OnClick({R.id.btn_slide_close, R.id.btn_service})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_slide_close:
                 startActivity(new Intent(getActivity(), SlideToCloseActivity.class));
                 break;
+            case R.id.btn_service:
+                startActivity(new Intent(getActivity(), ServiceActivity.class));
+                break;
+
         }
     }
 
