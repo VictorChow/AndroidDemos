@@ -11,15 +11,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="自定义View"
-            android:textColor="@color/black2"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="闪动的TextView" />
@@ -45,6 +36,7 @@
             android:layout_gravity="center" />
 
         <TextView
+            android:id="@+id/tv_auto_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -61,6 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/grey2"
                 app:loading_style="arc"
                 app:proportion_height="1"
                 app:proportion_width="1" />
@@ -71,11 +64,57 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
+                android:background="@color/grey2"
                 app:loading_style="sweep"
                 app:proportion_height="1"
                 app:proportion_width="1" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="波形" />
+
+        <demos.view.AudioRecView
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="倒计时" />
+
+        <demos.view.CountDownView
+            android:id="@+id/count_down_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="身高" />
+
+        <demos.view.SlideView
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="体重" />
+
+        <demos.view.CircleRulerView
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
 
     </LinearLayout>
 </ScrollView>

@@ -14,6 +14,7 @@ import demos.view.FriendlyViewPager;
 
 /**
  * Created by Victor on 16/2/9.
+ * 有侧栏的ViewGroup,模仿QQ侧栏
  */
 public class MenuLayout extends ViewGroup {
     private View mMenuView;

@@ -3,9 +3,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/btn_slide_close"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="第2个" />
+        android:layout_height="60dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_ripple"
+        android:text="滑动关闭的Activity" />
 
 </LinearLayout>

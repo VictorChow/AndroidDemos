@@ -4,11 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 import demos.fragment.FirstFragment;
 import demos.fragment.SecondFragment;
-import demos.fragment.ThirdFragment;
-
-import java.util.ArrayList;
+import demos.fragment.CustomViewFragment;
 
 /**
  * Created by Victor on 16/2/9.
@@ -21,7 +21,7 @@ public class VpMainAdapter extends FragmentPagerAdapter {
         this.fragments = new ArrayList<>();
         this.fragments.add(new FirstFragment());
         this.fragments.add(new SecondFragment());
-        this.fragments.add(new ThirdFragment());
+        this.fragments.add(new CustomViewFragment());
     }
 
     @Override
