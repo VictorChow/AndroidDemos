@@ -23,8 +23,10 @@
 
         <service
             android:name="demos.service.CountService"
-            android:enabled="true"
-            android:exported="true"></service>
+            android:enabled="true" />
+        <!--enabled这个属性用于指示该服务是否能够被实例化,默认为true-->
+
+        <activity android:name="demos.activity.RecyclerViewActivity"/>
     </application>
 
 </manifest>

@@ -3,9 +3,6 @@ package demos.util;
 import android.text.TextUtils;
 import android.util.Log;
 
-/**
- * Created by fionera on 15-12-6.
- */
 public class PrintLog {
 
     public static String customTagPrefix = "h_log";

@@ -74,6 +74,7 @@ public class ServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
         intent = new Intent(getApplicationContext(), CountService.class);
+        getSupportActionBar().setTitle("Service Demo");
         ButterKnife.bind(this);
     }
 }

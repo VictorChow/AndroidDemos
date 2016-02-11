@@ -12,13 +12,14 @@ import com.victor.androiddemos.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import demos.activity.RecyclerViewActivity;
 import demos.activity.ServiceActivity;
 import demos.activity.SlideToCloseActivity;
 
 
 public class SecondFragment extends Fragment {
 
-    @OnClick({R.id.btn_slide_close, R.id.btn_service})
+    @OnClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_slide_close:
@@ -26,6 +27,9 @@ public class SecondFragment extends Fragment {
                 break;
             case R.id.btn_service:
                 startActivity(new Intent(getActivity(), ServiceActivity.class));
+                break;
+            case R.id.btn_recycler_view:
+                startActivity(new Intent(getActivity(), RecyclerViewActivity.class));
                 break;
 
         }

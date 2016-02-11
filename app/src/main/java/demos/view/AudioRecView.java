@@ -27,8 +27,8 @@ public class AudioRecView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(int w, int h, int oldW, int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
         mWidth = getWidth();
         mRectHeight = getHeight();
         mRectWidth = (int) (mWidth * 0.6 / mRectCount);
