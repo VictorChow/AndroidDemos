@@ -28,7 +28,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/bg_ripple"
+            android:background="@drawable/bg_btn_ripple"
             android:text="滑动关闭的Activity" />
 
         <Button
@@ -38,7 +38,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_ripple"
+            android:background="@drawable/bg_btn_ripple"
             android:text="Service Demo" />
 
         <Button
@@ -48,7 +48,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_ripple"
+            android:background="@drawable/bg_btn_ripple"
             android:text="Different Span In Recycler View" />
 
         <Button
@@ -58,7 +58,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_ripple"
+            android:background="@drawable/bg_btn_ripple"
             android:text="新短信拦截" />
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_ripple"
+            android:background="@drawable/bg_btn_ripple"
             android:text="电话监听" />
 
         <Button
@@ -78,7 +78,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_ripple"
+            android:background="@drawable/bg_btn_ripple"
             android:text="已安装应用" />
 
         <View

@@ -42,4 +42,5 @@ public class VpAppFragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return title[position];
     }
+
 }

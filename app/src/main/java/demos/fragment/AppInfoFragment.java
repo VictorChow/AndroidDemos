@@ -17,13 +17,13 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import demos.adapter.InstalledAppAdapter;
+import demos.adapter.AppInstalledAdapter;
 import demos.module.AppModule;
 
 
 public class AppInfoFragment extends BaseFragment {
     private boolean isSystemApp;
-    private InstalledAppAdapter adapter;
+    private AppInstalledAdapter adapter;
 
     @Bind(R.id.rv_app_info)
     RecyclerView rvAppInfo;
@@ -56,7 +56,7 @@ public class AppInfoFragment extends BaseFragment {
             }
         }
 
-        adapter = new InstalledAppAdapter(mContext, appList);
+        adapter = new AppInstalledAdapter(mContext, appList, isSystemApp);
         rvAppInfo.setAdapter(adapter);
     }
 
