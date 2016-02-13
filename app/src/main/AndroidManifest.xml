@@ -15,12 +15,11 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.DELETE_PACKAGES" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:name="demos.AndroidDemos"
@@ -50,7 +49,8 @@
         <activity android:name="demos.activity.RecyclerViewActivity" />
         <activity android:name="demos.activity.SmsMonitorActivity" />
         <activity android:name="demos.activity.TelephonyActivity" />
-        <activity android:name="demos.activity.AppInfoActivity"></activity>
+        <activity android:name="demos.activity.AppInfoActivity" />
+        <activity android:name="demos.activity.ClearCacheActivity"></activity>
     </application>
 
 </manifest>

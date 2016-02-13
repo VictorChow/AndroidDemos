@@ -81,6 +81,16 @@
             android:background="@drawable/bg_btn_ripple"
             android:text="已安装应用" />
 
+        <Button
+            android:id="@+id/btn_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_btn_ripple"
+            android:text="清理缓存" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp" />

@@ -3,12 +3,14 @@ package demos.fragment;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.victor.androiddemos.R;
 
@@ -22,9 +24,8 @@ import demos.module.AppModule;
 
 
 public class AppInfoFragment extends BaseFragment {
-    private boolean isSystemApp;
-    private AppInstalledAdapter adapter;
-
+    @Bind(R.id.pb_app_info)
+    ProgressBar pbAppInfo;
     @Bind(R.id.rv_app_info)
     RecyclerView rvAppInfo;
 
@@ -34,12 +35,16 @@ public class AppInfoFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_app_info, container, false);
         ButterKnife.bind(this, view);
         rvAppInfo.setLayoutManager(new GridLayoutManager(mContext, 1));
-        getInstalledApp();
+        new GetAppInstalledTask().execute();
         return view;
     }
 
+    private boolean isSystemApp;
+    private AppInstalledAdapter adapter;
+    private List<AppModule> appList;
+
     private void getInstalledApp() {
-        List<AppModule> appList = new ArrayList<>(); //用来存储获取的应用信息数据
+        appList = new ArrayList<>(); //用来存储获取的应用信息数据
         List<PackageInfo> packages = getActivity().getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packages.size(); i++) {
             PackageInfo packageInfo = packages.get(i);
@@ -55,9 +60,6 @@ public class AppInfoFragment extends BaseFragment {
                 appList.add(tmpInfo);
             }
         }
-
-        adapter = new AppInstalledAdapter(mContext, appList, isSystemApp);
-        rvAppInfo.setAdapter(adapter);
     }
 
     @Override
@@ -69,6 +71,23 @@ public class AppInfoFragment extends BaseFragment {
     public AppInfoFragment setSystemApp(boolean systemApp) {
         isSystemApp = systemApp;
         return this;
+    }
+
+    private class GetAppInstalledTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            getInstalledApp();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            pbAppInfo.setVisibility(View.GONE);
+            rvAppInfo.setVisibility(View.VISIBLE);
+            adapter = new AppInstalledAdapter(mContext, appList, isSystemApp);
+            rvAppInfo.setAdapter(adapter);
+        }
     }
 
 }

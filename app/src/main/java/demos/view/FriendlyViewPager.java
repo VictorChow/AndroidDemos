@@ -10,10 +10,11 @@ import android.util.AttributeSet;
  */
 public class FriendlyViewPager extends ViewPager {
 
-    public static boolean IS_FIRST_PAGER = true;
+    public static boolean IS_FIRST_PAGER;
 
     public FriendlyViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        IS_FIRST_PAGER = true;
         addOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
