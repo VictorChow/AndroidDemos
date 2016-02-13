@@ -15,11 +15,12 @@ import butterknife.OnClick;
 import demos.activity.RecyclerViewActivity;
 import demos.activity.ServiceActivity;
 import demos.activity.SlideToCloseActivity;
+import demos.activity.SmsMonitorActivity;
 
 
-public class SecondFragment extends Fragment {
+public class FunctionFragment extends Fragment {
 
-    @OnClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view})
+    @OnClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_slide_close:
@@ -31,6 +32,9 @@ public class SecondFragment extends Fragment {
             case R.id.btn_recycler_view:
                 startActivity(new Intent(getActivity(), RecyclerViewActivity.class));
                 break;
+            case R.id.btn_sms_monitor:
+                startActivity(new Intent(getActivity(), SmsMonitorActivity.class));
+                break;
 
         }
     }
@@ -38,7 +42,7 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_second, container, false);
+        View view = inflater.inflate(R.layout.fragment_function, container, false);
         ButterKnife.bind(this, view);
         return view;
     }

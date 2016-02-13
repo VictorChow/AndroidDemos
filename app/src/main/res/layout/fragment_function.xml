@@ -47,4 +47,14 @@
         android:background="@drawable/bg_ripple"
         android:text="Different Span In Recycler View" />
 
+    <Button
+        android:id="@+id/btn_sms_monitor"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_ripple"
+        android:text="新短信拦截" />
+
 </LinearLayout>

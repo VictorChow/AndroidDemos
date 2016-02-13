@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.victor.androiddemos">
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
     <application
         android:name="demos.AndroidDemos"
         android:allowBackup="true"
@@ -9,6 +12,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name="demos.service.CountService"
+            android:enabled="true" />
+        <!-- enabled这个属性用于指示该服务是否能够被实例化,默认为true -->
+        <service android:name="demos.service.SmsService" />
+
         <activity android:name="demos.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +29,8 @@
             android:name="demos.activity.SlideToCloseActivity"
             android:theme="@style/SlideToCloseStyle" />
         <activity android:name="demos.activity.ServiceActivity" />
-
-        <service
-            android:name="demos.service.CountService"
-            android:enabled="true" />
-        <!--enabled这个属性用于指示该服务是否能够被实例化,默认为true-->
-
-        <activity android:name="demos.activity.RecyclerViewActivity"/>
+        <activity android:name="demos.activity.RecyclerViewActivity" />
+        <activity android:name="demos.activity.SmsMonitorActivity" />
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 import demos.fragment.FirstFragment;
-import demos.fragment.SecondFragment;
+import demos.fragment.FunctionFragment;
 import demos.fragment.CustomViewFragment;
 
 /**
@@ -20,7 +20,7 @@ public class VpMainAdapter extends FragmentPagerAdapter {
         super(fm);
         this.fragments = new ArrayList<>();
         this.fragments.add(new FirstFragment());
-        this.fragments.add(new SecondFragment());
+        this.fragments.add(new FunctionFragment());
         this.fragments.add(new CustomViewFragment());
     }
 
