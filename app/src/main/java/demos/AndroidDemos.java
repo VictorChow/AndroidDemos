@@ -1,7 +1,6 @@
 package demos;
 
 import android.app.Application;
-import android.content.Context;
 import android.os.StrictMode;
 import android.support.v4.BuildConfig;
 import android.util.DisplayMetrics;
@@ -12,7 +11,6 @@ import android.util.DisplayMetrics;
 public class AndroidDemos extends Application {
 
     private static AndroidDemos application;
-    private static Context context;
     /**
      * 屏幕宽度，屏幕高度，屏幕密度，字体缩放比
      */
@@ -39,7 +37,6 @@ public class AndroidDemos extends Application {
         }
 
         application = this;
-        context = getApplicationContext();
         getDisplayMetrics();
     }
 
@@ -56,9 +53,5 @@ public class AndroidDemos extends Application {
 
     public static AndroidDemos getInstance() {
         return application;
-    }
-
-    public static Context getContext() {
-        return context;
     }
 }
