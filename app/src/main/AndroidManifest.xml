@@ -30,14 +30,6 @@
         <service android:name="demos.service.SmsService" />
         <service android:name="demos.service.TelephonyService" />
 
-        <receiver android:name="demos.receiver.TelephonyReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-            </intent-filter>
-        </receiver>
-
         <activity android:name="demos.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +43,8 @@
         <activity android:name="demos.activity.ServiceActivity" />
         <activity android:name="demos.activity.RecyclerViewActivity" />
         <activity android:name="demos.activity.SmsMonitorActivity" />
-        <activity android:name="demos.activity.TelephonyActivity"></activity>
+        <activity android:name="demos.activity.TelephonyActivity" />
+        <activity android:name="demos.activity.AppInfoActivity"></activity>
     </application>
 
 </manifest>

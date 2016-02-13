@@ -1,56 +1,73 @@
 package demos.activity;
 
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import demos.AndroidDemos;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import demos.receiver.TelephonyReceiver;
+import demos.util.ShowToast;
 
 public class TelephonyActivity extends BaseActivity {
 
-    private Button btnSend = null; // 按钮
-    private EditText etTelNumber;//手机号输入框
-//	private TextView distxtView;
+//    <receiver android:name="demos.receiver.TelephonyReceiver">
+//    <intent-filter>
+//    <action android:name="android.intent.action.PHONE_STATE" />
+//    <action android:name="android.intent.action.BOOT_COMPLETED" />
+//    <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+//    </intent-filter>
+//    </receiver>
 
-    private static final String TAG = "MainActivity";
-    private String tTelNum = "";
+    private TelephonyReceiver telephonyReceiver;
+    private IntentFilter filter;
+    private boolean isRunning;
 
-    //利用sp全局保存手机号码
-    SharedPreferences sharedPreferences;
+    @Bind(R.id.tv_phone_status)
+    TextView tvPhoneStatus;
+
+    @OnClick({R.id.btn_start_watch, R.id.btn_stop_watch})
+    void onItemClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_start_watch:
+                if (!isRunning) {
+                    registerReceiver(telephonyReceiver, filter);
+                    isRunning = true;
+                    ShowToast.shortToast("已开启监听");
+                    tvPhoneStatus.setText("状态: 已开启");
+                } else {
+                    ShowToast.shortToast("已经在监听了");
+                }
+                break;
+            case R.id.btn_stop_watch:
+                if (isRunning) {
+                    unregisterReceiver(telephonyReceiver);
+                    isRunning = false;
+                    ShowToast.shortToast("已关闭监听");
+                    tvPhoneStatus.setText("状态: 未开启");
+                } else {
+                    ShowToast.shortToast("未开启监听");
+                }
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telephony);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(AndroidDemos.getInstance());
-
-        btnSend = (Button) super.findViewById(R.id.btn_startbroadcast);
-        etTelNumber = (EditText) findViewById(R.id.editTelNum);
-//		distxtView = (TextView) findViewById(R.id.textView2);
-
-
-        etTelNumber.setText(sharedPreferences.getString("phoneNum", ""));
-
-        btnSend.setOnClickListener(v -> {
-            //实例化广播接收器，原因是广播在Android4.0之后不能自启。
-            tTelNum = etTelNumber.getText().toString().trim();
-
-
-            if (tTelNum.length() < 9 || tTelNum.isEmpty()) {
-                Toast toast = Toast.makeText(mContext,"号码错误:不足9位", Toast.LENGTH_SHORT);
-                toast.show();
-            } else {
-                Log.i(TAG, "onStart BroadcastReceiverUtil");
-                Toast.makeText(mContext, "监听广播已经开启", Toast.LENGTH_SHORT).show();
-                sharedPreferences.edit().putString("phoneNum", tTelNum).commit();
-                Log.i(TAG, "onStart BroadcastReceiverUtil");
-            }
-        });
-
+        ButterKnife.bind(this);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("通话录音");
+        }
+        telephonyReceiver = new TelephonyReceiver();
+        filter = new IntentFilter();
+        filter.addAction("android.intent.action.PHONE_STATE");
+        filter.addAction("android.intent.action.BOOT_COMPLETED");
+        filter.addAction("android.intent.action.NEW_OUTGOING_CALL");
     }
 }

@@ -65,12 +65,25 @@
             android:id="@+id/btn_telephony_monitor"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_ripple"
             android:text="电话监听" />
+
+        <Button
+            android:id="@+id/btn_installed_app"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_ripple"
+            android:text="已安装应用" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
     </LinearLayout>
 </ScrollView>
