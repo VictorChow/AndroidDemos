@@ -12,6 +12,7 @@ public class AppModule {
     private int versionCode;
     private Drawable appIcon;
     private boolean isSystemApp;
+    private String[] appPermissions;
 
     public String getAppName() {
         return appName;
@@ -59,5 +60,13 @@ public class AppModule {
 
     public void setSystemApp(boolean systemApp) {
         isSystemApp = systemApp;
+    }
+
+    public String[] getAppPermissions() {
+        return appPermissions;
+    }
+
+    public void setAppPermissions(String[] appPermissions) {
+        this.appPermissions = appPermissions;
     }
 }

@@ -3,6 +3,7 @@ package demos.fragment;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -45,7 +46,7 @@ public class AppInfoFragment extends BaseFragment {
 
     private void getInstalledApp() {
         appList = new ArrayList<>(); //用来存储获取的应用信息数据
-        List<PackageInfo> packages = getActivity().getPackageManager().getInstalledPackages(0);
+        List<PackageInfo> packages = getActivity().getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
         for (int i = 0; i < packages.size(); i++) {
             PackageInfo packageInfo = packages.get(i);
             AppModule tmpInfo = new AppModule();
@@ -53,6 +54,7 @@ public class AppInfoFragment extends BaseFragment {
             tmpInfo.setPackageName(packageInfo.packageName);
             tmpInfo.setVersionName(packageInfo.versionName);
             tmpInfo.setVersionCode(packageInfo.versionCode);
+            tmpInfo.setAppPermissions(packageInfo.requestedPermissions);
             tmpInfo.setAppIcon(packageInfo.applicationInfo.loadIcon(getActivity().getPackageManager()));
 //            如果(packageInfo.applicationInfo.flags& ApplicationInfo.FLAG_SYSTEM)==0),则该应用是非系统应用
             tmpInfo.setSystemApp((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);

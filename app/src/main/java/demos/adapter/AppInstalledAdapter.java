@@ -57,6 +57,11 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
     public void onBindViewHolder(Holder holder, int position) {
         holder.ivAppIcon.setImageDrawable(appModules.get(position).getAppIcon());
         holder.tvAppName.setText(appModules.get(position).getAppName());
+        if (appModules.get(position).getAppPermissions() == null) {
+            holder.tvAppPermission.setText("0项权限");
+        } else {
+            holder.tvAppPermission.setText(appModules.get(position).getAppPermissions().length + "项权限");
+        }
         holder.tvAppPackage.setText("包名: " + appModules.get(position).getPackageName());
         holder.tvAppVersionName.setText("版本名: " + appModules.get(position).getVersionName());
         holder.tvAppVersionCode.setText("版本号: " + appModules.get(position).getVersionCode());
@@ -87,6 +92,8 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
         ImageView ivAppIcon;
         @Bind(R.id.tv_app_name)
         TextView tvAppName;
+        @Bind(R.id.tv_app_permission)
+        TextView tvAppPermission;
         @Bind(R.id.tv_app_package)
         TextView tvAppPackage;
         @Bind(R.id.tv_app_version_name)

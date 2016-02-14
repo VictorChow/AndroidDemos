@@ -52,7 +52,7 @@ public class ClearCacheActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("清理缓存");
+        getSupportActionBar().setTitle("扫描缓存");
 
         dirList = new ArrayList<>();
         dirList.add("/data/data/xxx/cache");
@@ -137,7 +137,7 @@ public class ClearCacheActivity extends BaseActivity {
     public static String formatCacheSize(double size) {
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
-            return size + "Byte(s)";
+            return size + "B";
         }
 
         double megaByte = kiloByte / 1024;
