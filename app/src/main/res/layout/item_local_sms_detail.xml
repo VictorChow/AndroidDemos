@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_chat_2"
         android:gravity="left|center_vertical"
-        android:text="+8613123456789"
+        android:text="13123456789"
         android:textColor="@color/black2"
         android:textSize="16sp" />
 
@@ -31,7 +31,7 @@
         android:layout_gravity="right"
         android:background="@drawable/bg_chat_1"
         android:gravity="left|center_vertical"
-        android:text="+8613123456789"
+        android:text="13123456789"
         android:textColor="@color/black2"
         android:textSize="16sp" />
 

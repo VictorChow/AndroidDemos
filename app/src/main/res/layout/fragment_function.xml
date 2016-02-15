@@ -101,6 +101,16 @@
             android:background="@drawable/bg_btn_ripple"
             android:text="扫描缓存" />
 
+        <Button
+            android:id="@+id/btn_all_contact"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_btn_ripple"
+            android:text="读取通讯录" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp" />

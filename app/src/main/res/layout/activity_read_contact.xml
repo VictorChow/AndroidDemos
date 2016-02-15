@@ -4,13 +4,13 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_app_info"
+        android:id="@+id/rv_contact_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
 
     <ProgressBar
-        android:id="@+id/pb_app_info"
+        android:id="@+id/pb_contact_list"
         style="?android:attr/progressBarStyle"
         android:layout_width="60dp"
         android:layout_height="60dp"

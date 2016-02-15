@@ -44,10 +44,12 @@ public class SmsLocalDetailAdapter extends RecyclerView.Adapter<SmsLocalDetailAd
     public void onBindViewHolder(Holder holder, int position) {
         if (types.get(position).equals(TYPE_RECEIVED)) {
             holder.tvSmsLeft.setText(bodies.get(position));
+            holder.tvSmsLeft.setVisibility(View.VISIBLE);
             holder.tvSmsRight.setVisibility(View.GONE);
         }
         if (types.get(position).equals(TYPE_SEND)) {
             holder.tvSmsRight.setText(bodies.get(position));
+            holder.tvSmsRight.setVisibility(View.VISIBLE);
             holder.tvSmsLeft.setVisibility(View.GONE);
         }
     }

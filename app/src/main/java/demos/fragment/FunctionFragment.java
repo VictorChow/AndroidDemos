@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import demos.activity.AppInfoActivity;
 import demos.activity.ClearCacheActivity;
+import demos.activity.ReadContactActivity;
 import demos.activity.RecyclerViewActivity;
 import demos.activity.ServiceActivity;
 import demos.activity.SlideToCloseActivity;
@@ -24,7 +25,8 @@ import demos.activity.TelephonyActivity;
 public class FunctionFragment extends BaseFragment {
 
     @OnClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
-            R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local})
+            R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
+            R.id.btn_all_contact})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_slide_close:
@@ -51,7 +53,9 @@ public class FunctionFragment extends BaseFragment {
             case R.id.btn_sms_local:
                 startActivity(new Intent(mContext, SmsLocalActivity.class));
                 break;
-
+            case R.id.btn_all_contact:
+                startActivity(new Intent(mContext, ReadContactActivity.class));
+                break;
         }
     }
 

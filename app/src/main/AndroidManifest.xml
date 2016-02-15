@@ -53,7 +53,8 @@
         <activity android:name="demos.activity.TelephonyActivity" />
         <activity android:name="demos.activity.AppInfoActivity" />
         <activity android:name="demos.activity.ClearCacheActivity" />
-        <activity android:name="demos.activity.SmsLocalActivity"></activity>
+        <activity android:name="demos.activity.SmsLocalActivity" />
+        <activity android:name="demos.activity.ReadContactActivity"></activity>
     </application>
 
 </manifest>
