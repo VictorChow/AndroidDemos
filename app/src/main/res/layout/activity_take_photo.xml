@@ -3,29 +3,28 @@
     android:id="@+id/buttonLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="visible">
+    android:visibility="invisible">
 
     <SurfaceView
         android:id="@+id/surfaceView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="1px"
+        android:layout_height="1px" />
 
     <FrameLayout
-        android:visibility="gone"
         android:id="@+id/fra_shade_top"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:background="#000000" />
-
+        android:background="#000000"
+        android:visibility="gone" />
 
     <FrameLayout
-        android:visibility="gone"
         android:id="@+id/fra_shade_bottom"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
-        android:background="#000000" />
+        android:background="#000000"
+        android:visibility="gone" />
 
     <TableLayout
         android:id="@+id/table1"

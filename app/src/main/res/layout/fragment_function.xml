@@ -119,7 +119,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_btn_ripple"
-            android:text="调用相机" />
+            android:text="无预览拍照" />
 
         <View
             android:layout_width="match_parent"

@@ -9,7 +9,6 @@ import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -33,7 +32,7 @@ import java.util.Date;
 
 import butterknife.ButterKnife;
 
-public class CameraActivity extends AppCompatActivity implements View.OnClickListener {
+public class TakePhotoActivity extends Activity implements View.OnClickListener {
     private Button bntTakePic;
     private Button bntEnter;
     private Button bntCancel;
@@ -52,7 +51,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_take_photo);
         ButterKnife.bind(this);
 
         init();
@@ -96,7 +95,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         surfaceView.getHolder().setFixedSize(150, 150); // 设置Surface分辨率
         surfaceView.getHolder().setKeepScreenOn(true);// 屏幕常亮
         surfaceView.getHolder().addCallback(new SurfaceCallback());// 为SurfaceView的句柄添加一个回调函数
-
     }
 
     /**
@@ -166,14 +164,12 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 bundle.putByteArray("bytes", data); //将图片字节数据保存在bundle当中，实现数据交换
 
                 //     saveToSDCard(data); // 保存图片到sd卡中
-                Toast.makeText(getApplicationContext(), "success",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
                 bntTakePic.setVisibility(View.INVISIBLE);
                 bntCancel.setVisibility(View.VISIBLE);
                 bntEnter.setVisibility(View.VISIBLE);
                 //  camera.startPreview(); // 拍完照后，重新开始预览
                 IS_TOOK = 1;
-
 
                 //照完自动保存
                 bntEnter.callOnClick();
@@ -296,15 +292,20 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
-            // TODO Auto-generated method stub
             try {
-                camera = Camera.open(); // 打开摄像头
-
+                Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+                int cameraCount = Camera.getNumberOfCameras(); // get cameras number
+                for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
+                    Camera.getCameraInfo(camIdx, cameraInfo); // get camerainfo
+                    if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) { // 代表摄像头的方位，目前有定义值两个分别为CAMERA_FACING_FRONT前置和CAMERA_FACING_BACK后置
+                        camera = Camera.open(camIdx);
+                    }
+                }
+//                camera = Camera.open(); // 打开摄像头
 //                自动对焦后拍照
                 camera.autoFocus((success, camera1) -> camera.takePicture(null, null, new MyPictureCallback()));
-
                 camera.setPreviewDisplay(holder); // 设置用于显示拍照影像的SurfaceHolder对象
-                camera.setDisplayOrientation(getPreviewDegree(CameraActivity.this));
+                camera.setDisplayOrientation(getPreviewDegree(TakePhotoActivity.this));
                 camera.startPreview(); // 开始预览
             } catch (Exception e) {
                 e.printStackTrace();

@@ -12,7 +12,7 @@ import com.victor.androiddemos.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import demos.activity.AppInfoActivity;
-import demos.activity.CameraActivity;
+import demos.activity.TakePhotoActivity;
 import demos.activity.ClearCacheActivity;
 import demos.activity.ReadContactActivity;
 import demos.activity.RecyclerViewActivity;
@@ -58,7 +58,7 @@ public class FunctionFragment extends BaseFragment {
                 startActivity(new Intent(mContext, ReadContactActivity.class));
                 break;
             case R.id.btn_open_camera:
-                startActivity(new Intent(mContext, CameraActivity.class));
+                startActivity(new Intent(mContext, TakePhotoActivity.class));
                 break;
         }
     }

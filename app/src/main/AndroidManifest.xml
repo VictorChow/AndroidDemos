@@ -60,7 +60,9 @@
         <activity android:name="demos.activity.ClearCacheActivity" />
         <activity android:name="demos.activity.SmsLocalActivity" />
         <activity android:name="demos.activity.ReadContactActivity" />
-        <activity android:name="demos.activity.CameraActivity"></activity>
+        <activity
+            android:name="demos.activity.TakePhotoActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>
