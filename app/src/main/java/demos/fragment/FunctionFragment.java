@@ -12,6 +12,7 @@ import com.victor.androiddemos.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import demos.activity.AppInfoActivity;
+import demos.activity.CameraActivity;
 import demos.activity.ClearCacheActivity;
 import demos.activity.ReadContactActivity;
 import demos.activity.RecyclerViewActivity;
@@ -26,7 +27,7 @@ public class FunctionFragment extends BaseFragment {
 
     @OnClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
             R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
-            R.id.btn_all_contact})
+            R.id.btn_all_contact, R.id.btn_open_camera})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_slide_close:
@@ -55,6 +56,9 @@ public class FunctionFragment extends BaseFragment {
                 break;
             case R.id.btn_all_contact:
                 startActivity(new Intent(mContext, ReadContactActivity.class));
+                break;
+            case R.id.btn_open_camera:
+                startActivity(new Intent(mContext, CameraActivity.class));
                 break;
         }
     }

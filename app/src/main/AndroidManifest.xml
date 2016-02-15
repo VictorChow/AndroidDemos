@@ -22,6 +22,11 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
 
     <application
         android:name="demos.AndroidDemos"
@@ -54,7 +59,8 @@
         <activity android:name="demos.activity.AppInfoActivity" />
         <activity android:name="demos.activity.ClearCacheActivity" />
         <activity android:name="demos.activity.SmsLocalActivity" />
-        <activity android:name="demos.activity.ReadContactActivity"></activity>
+        <activity android:name="demos.activity.ReadContactActivity" />
+        <activity android:name="demos.activity.CameraActivity"></activity>
     </application>
 
 </manifest>
