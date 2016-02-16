@@ -55,7 +55,7 @@ public class GetLocationActivity extends BaseActivity {
         if (location != null) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
-            tvGetLocation.setText("纬度:" + latitude + "\n  经度:" + longitude);
+            tvGetLocation.setText("纬度:" + latitude + "\n经度:" + longitude);
         } else {
             tvGetLocation.setText("未开启定位服务");
         }

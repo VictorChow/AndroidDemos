@@ -10,13 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
-import demos.view.FriendlyViewPager;
-
 /**
  * Created by Victor on 16/2/9.
  * 有侧栏的ViewGroup,模仿QQ侧栏
  */
 public class MenuLayout extends ViewGroup {
+    public interface InterceptListener {
+        boolean shouldInterceptTouchEvent();
+    }
+
+    private InterceptListener interceptListener;
     private View mMenuView;
     private View mContentView;
     private VelocityTracker mVelocityTracker;
@@ -67,7 +70,7 @@ public class MenuLayout extends ViewGroup {
             case MotionEvent.ACTION_DOWN:
                 mDownX = event.getX();
                 mDownY = event.getY();
-                intercept = false;
+                intercept = mIsShowMenu && mDownX > mMenuWidth;
                 break;
             case MotionEvent.ACTION_UP:
                 mOffsetX = mOffsetY = 0;
@@ -82,8 +85,8 @@ public class MenuLayout extends ViewGroup {
                     }
                 } else {
                     if (mOffsetX > 0 && Math.abs(mOffsetX) >= Math.abs(mOffsetY)) {
-                        if (FriendlyViewPager.IS_FIRST_PAGER) {
-                            intercept = true;
+                        if (interceptListener != null) {
+                            intercept = interceptListener.shouldInterceptTouchEvent();
                         }
                     }
                 }
@@ -181,6 +184,11 @@ public class MenuLayout extends ViewGroup {
         mIsShowMenu = endX != 0;
     }
 
+    public void shouldInterceptTouchEventToShowMenu(InterceptListener interceptListener) {
+        this.interceptListener = interceptListener;
+    }
+
+    // View包装类
     private class ViewWrapper {
         private View mTarget;
 

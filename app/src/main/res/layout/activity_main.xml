@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <demos.util.MenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/menu_layout"
     android:layout_height="match_parent"
     android:background="@drawable/bg_main">
 
@@ -94,7 +95,7 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <demos.view.FriendlyViewPager
+        <android.support.v4.view.ViewPager
             android:id="@+id/view_pager_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"

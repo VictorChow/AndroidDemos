@@ -83,7 +83,7 @@ public class ViewDragGroup extends FrameLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 mOffsetX = ev.getX() - mDownX;
-                intercept = FriendlyViewPager.IS_FIRST_PAGER && mOffsetX > 0;
+//                intercept = FriendlyViewPager.IS_FIRST_PAGER && mOffsetX > 0;
                 break;
         }
         return intercept;

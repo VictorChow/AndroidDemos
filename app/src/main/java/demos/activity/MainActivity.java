@@ -16,13 +16,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import demos.adapter.VpMainAdapter;
+import demos.util.MenuLayout;
 import demos.util.ShowToast;
-import demos.view.FriendlyViewPager;
 
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
     @Bind(R.id.view_pager_main)
-    FriendlyViewPager viewPagerMain;
+    ViewPager viewPagerMain;
     @Bind(R.id.iv_btn_1)
     ImageView ivBtn1;
     @Bind(R.id.iv_btn_2)
@@ -31,6 +31,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     ImageView ivBtn3;
     @Bind(R.id.ll_main)
     LinearLayout llMain;
+    @Bind(R.id.menu_layout)
+    MenuLayout menuLayout;
 
     @OnClick({R.id.iv_btn_1, R.id.iv_btn_2, R.id.iv_btn_3})
     void onItemClick(View v) {
@@ -76,6 +78,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         drawables.add(drawable3);
 
         setMenuItemClick();
+
+        menuLayout.shouldInterceptTouchEventToShowMenu(() -> viewPagerMain.getCurrentItem() == 0);
     }
 
     private void setMenuItemClick() {
@@ -128,6 +132,5 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
             finish();
         }
     }
-
 
 }
