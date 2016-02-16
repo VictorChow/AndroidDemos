@@ -121,6 +121,16 @@
             android:background="@drawable/bg_btn_ripple"
             android:text="无预览拍照" />
 
+        <Button
+            android:id="@+id/btn_get_location"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_btn_ripple"
+            android:text="获取经纬度" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp" />

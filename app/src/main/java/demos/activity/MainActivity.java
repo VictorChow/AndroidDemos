@@ -55,6 +55,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     }
 
     private void init() {
+        getWindow().setBackgroundDrawable(null);
         viewPagerMain.setAdapter(new VpMainAdapter(getSupportFragmentManager()));
         viewPagerMain.addOnPageChangeListener(this);
         ivBtn1.setBackgroundResource(R.drawable.bitmap_bg_1);
