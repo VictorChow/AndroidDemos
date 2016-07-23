@@ -39,7 +39,9 @@
         <service android:name="demos.service.SmsService" />
         <service android:name="demos.service.TelephonyService" />
 
-        <activity android:name="demos.activity.MainActivity">
+        <activity
+            android:name="demos.activity.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
