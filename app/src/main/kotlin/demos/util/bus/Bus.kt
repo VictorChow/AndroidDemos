@@ -1,4 +1,4 @@
-package demos.util
+package demos.util.bus
 
 
 /**
@@ -16,13 +16,13 @@ object Bus {
     }
 
     fun postAnnotation(o: Any) {
-        val time = System.currentTimeMillis()
         subscribers.forEach { subscriber ->
-            subscriber.javaClass.methods.forEach { method ->
+            subscriber.javaClass.declaredMethods.forEach { method ->
                 method.annotations.forEach { annotation ->
                     if (annotation.annotationClass == BusMethod::class) {
                         if (method.parameterTypes.size == 1) {
                             if (method.parameterTypes[0] == o.javaClass) {
+                                method.isAccessible = true
                                 method.invoke(subscriber, o)
                             }
                         }
@@ -30,19 +30,16 @@ object Bus {
                 }
             }
         }
-        println(System.currentTimeMillis() - time)
     }
 
     fun postReflect(o: Any) {
-        val time = System.currentTimeMillis()
         subscribers.forEach { subscriber ->
             try {
-                val method = subscriber.javaClass.getMethod("postReflect", o.javaClass)
+                val method = subscriber.javaClass.getDeclaredMethod("onPostReflect", o.javaClass)
                 method.isAccessible = true
                 method.invoke(subscriber, o)
             } catch (e: Exception) {
             }
         }
-        println(System.currentTimeMillis() - time)
     }
 }

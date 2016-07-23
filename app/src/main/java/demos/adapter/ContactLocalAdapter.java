@@ -53,13 +53,13 @@ public class ContactLocalAdapter extends RecyclerView.Adapter<ContactLocalAdapte
         return contactModules.size();
     }
 
-    public static class Holder extends RecyclerView.ViewHolder {
+    static class Holder extends RecyclerView.ViewHolder {
         @Bind(R.id.tv_contact_name)
         TextView tvContactName;
         @Bind(R.id.ll_contact_phones)
         LinearLayout llContactPhones;
 
-        public Holder(View itemView) {
+        Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

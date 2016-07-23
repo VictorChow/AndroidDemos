@@ -16,9 +16,10 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import demos.util.bind.BindClick;
+import demos.util.bind.BindUtil;
+import demos.util.bind.BindView;
+import demos.util.bus.Bus;
 import demos.view.AutoImageView;
 import demos.view.CountDownView;
 import demos.view.MarqueeView;
@@ -26,29 +27,16 @@ import demos.view.MarqueeView;
 
 public class CustomViewFragment extends Fragment implements Runnable {
 
-    @Bind(R.id.AutoImageView1)
+    @BindView(R.id.AutoImageView1)
     AutoImageView autoImageView1;
-    @Bind(R.id.AutoImageView2)
+    @BindView(R.id.AutoImageView2)
     AutoImageView autoImageView2;
-    @Bind(R.id.count_down_view)
+    @BindView(R.id.count_down_view)
     CountDownView countDownView;
-    @Bind(R.id.marquee_view)
+    @BindView(R.id.marquee_view)
     MarqueeView marqueeView;
-
-    @OnClick({R.id.tv_auto_image})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_auto_image:
-                if (!isThreadRun) {
-                    new Thread(this).start();
-                }
-                break;
-        }
-    }
-
     private float mProcess;
     private boolean isThreadRun;
-
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -62,20 +50,27 @@ public class CustomViewFragment extends Fragment implements Runnable {
         }
     };
 
-    public CustomViewFragment() {
+    @BindClick({R.id.tv_auto_image})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_auto_image:
+                if (!isThreadRun) {
+                    new Thread(this).start();
+                }
+                break;
+        }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_custom_view, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+        return inflater.inflate(R.layout.fragment_custom_view, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        BindUtil.bind(this);
+        Bus.INSTANCE.register(this);
         init();
     }
 
@@ -89,12 +84,6 @@ public class CustomViewFragment extends Fragment implements Runnable {
         data.add("五五五五五");
         data.add("六六六六六");
         marqueeView.setContentData(data);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

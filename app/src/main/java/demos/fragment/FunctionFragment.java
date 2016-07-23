@@ -3,6 +3,7 @@ package demos.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import demos.activity.SmsLocalActivity;
 import demos.activity.SmsMonitorActivity;
 import demos.activity.TakePhotoActivity;
 import demos.activity.TelephonyActivity;
+import demos.util.bind.BindUtil;
 
 
 public class FunctionFragment extends BaseFragment {
@@ -70,9 +72,12 @@ public class FunctionFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_function, container, false);
+        return inflater.inflate(R.layout.fragment_function, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
-        return view;
     }
 
     @Override
