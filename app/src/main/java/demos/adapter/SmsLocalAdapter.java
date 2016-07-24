@@ -13,9 +13,9 @@ import com.victor.androiddemos.R;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import demos.module.SmsLocalModule;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
 
 /**
  * Created by Victor on 16/2/14.
@@ -63,16 +63,16 @@ public class SmsLocalAdapter extends RecyclerView.Adapter<SmsLocalAdapter.Holder
     }
 
     public static class Holder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_sms_phone)
+        @BindView(R.id.tv_sms_phone)
         TextView tvSmsPhone;
-        @Bind(R.id.tv_sms_name)
+        @BindView(R.id.tv_sms_name)
         TextView tvSmsName;
-        @Bind(R.id.tv_sms_count)
+        @BindView(R.id.tv_sms_count)
         TextView tvSmsCount;
 
         public Holder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            Bind.bind(this, itemView);
         }
     }
 

@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
+
 
 /**
  * Created by Victor on 16/2/14.
@@ -60,14 +61,14 @@ public class SmsLocalDetailAdapter extends RecyclerView.Adapter<SmsLocalDetailAd
     }
 
     public static class Holder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_sms_left)
+        @BindView(R.id.tv_sms_left)
         TextView tvSmsLeft;
-        @Bind(R.id.tv_sms_right)
+        @BindView(R.id.tv_sms_right)
         TextView tvSmsRight;
 
         public Holder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            Bind.bind(this, itemView);
         }
     }
 

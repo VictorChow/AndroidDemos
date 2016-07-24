@@ -15,13 +15,13 @@ import com.victor.androiddemos.R;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import demos.activity.AppInfoActivity;
 import demos.module.AppModule;
 import demos.receiver.PackageMonitorReceiver;
 import demos.util.SharedPreferenceUtil;
 import demos.util.ShowToast;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
 
 /**
  * Created by Victor on 16/2/13.
@@ -87,26 +87,6 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
         return appModules.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder {
-        @Bind(R.id.iv_app_icon)
-        ImageView ivAppIcon;
-        @Bind(R.id.tv_app_name)
-        TextView tvAppName;
-        @Bind(R.id.tv_app_permission)
-        TextView tvAppPermission;
-        @Bind(R.id.tv_app_package)
-        TextView tvAppPackage;
-        @Bind(R.id.tv_app_version_name)
-        TextView tvAppVersionName;
-        @Bind(R.id.tv_app_version_code)
-        TextView tvAppVersionCode;
-
-        public Holder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-    }
-
     /* 安装apk */
     public void installApk(String fileName) {
         Intent intent = new Intent();
@@ -121,5 +101,25 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
         Uri uri = Uri.parse("package:" + packageName);
         Intent intent = new Intent(Intent.ACTION_DELETE, uri);
         context.startActivity(intent);
+    }
+
+    class Holder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_app_icon)
+        ImageView ivAppIcon;
+        @BindView(R.id.tv_app_name)
+        TextView tvAppName;
+        @BindView(R.id.tv_app_permission)
+        TextView tvAppPermission;
+        @BindView(R.id.tv_app_package)
+        TextView tvAppPackage;
+        @BindView(R.id.tv_app_version_name)
+        TextView tvAppVersionName;
+        @BindView(R.id.tv_app_version_code)
+        TextView tvAppVersionCode;
+
+        public Holder(View itemView) {
+            super(itemView);
+            Bind.bind(this, itemView);
+        }
     }
 }

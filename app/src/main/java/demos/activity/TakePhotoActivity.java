@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.ButterKnife;
 
 public class TakePhotoActivity extends Activity implements View.OnClickListener {
     private Button bntTakePic;
@@ -48,12 +47,76 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
     private Bundle bundle = null;// 声明一个Bundle对象，用来存储数据
     private int IS_TOOK = 0;//是否已经拍照 ,0为否
 
+    /**
+     * 检验是否有SD卡
+     *
+     * @true or false
+     */
+    public static boolean isHaveSDCard() {
+        return Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState());
+    }
+
+    // 提供一个静态方法，用于根据手机方向获得相机预览画面旋转的角度
+    public static int getPreviewDegree(Activity activity) {
+        // 获得手机的方向
+        int rotation = activity.getWindowManager().getDefaultDisplay()
+                .getRotation();
+        int degree = 0;
+        // 根据手机的方向计算相机预览画面应该选择的角度
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degree = 90;
+                break;
+            case Surface.ROTATION_90:
+                degree = 0;
+                break;
+            case Surface.ROTATION_180:
+                degree = 270;
+                break;
+            case Surface.ROTATION_270:
+                degree = 180;
+                break;
+        }
+        return degree;
+    }
+
+    /**
+     * 通过文件地址获取文件的bitmap
+     *
+     * @param path
+     * @return
+     * @throws IOException
+     */
+
+    public static Bitmap getBitmapByPath(String path) throws IOException {
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream(
+                new File(path)));
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(in, null, options);
+        in.close();
+        int i = 0;
+        Bitmap bitmap = null;
+        while (true) {
+            if ((options.outWidth >> i <= 1000)
+                    && (options.outHeight >> i <= 1000)) {
+                in = new BufferedInputStream(
+                        new FileInputStream(new File(path)));
+                options.inSampleSize = (int) Math.pow(2.0D, i);
+                options.inJustDecodeBounds = false;
+                bitmap = BitmapFactory.decodeStream(in, null, options);
+                break;
+            }
+            i += 1;
+        }
+        return bitmap;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo);
-        ButterKnife.bind(this);
-
         init();
     }
 
@@ -141,45 +204,6 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
     }
 
     /**
-     * 检验是否有SD卡
-     *
-     * @true or false
-     */
-    public static boolean isHaveSDCard() {
-        return Environment.MEDIA_MOUNTED.equals(Environment
-                .getExternalStorageState());
-    }
-
-    /**
-     * 重构照相类
-     *
-     * @author
-     */
-    private final class MyPictureCallback implements Camera.PictureCallback {
-
-        @Override
-        public void onPictureTaken(byte[] data, Camera camera) {
-            try {
-                bundle = new Bundle();
-                bundle.putByteArray("bytes", data); //将图片字节数据保存在bundle当中，实现数据交换
-
-                //     saveToSDCard(data); // 保存图片到sd卡中
-//                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-                bntTakePic.setVisibility(View.INVISIBLE);
-                bntCancel.setVisibility(View.VISIBLE);
-                bntEnter.setVisibility(View.VISIBLE);
-                //  camera.startPreview(); // 拍完照后，重新开始预览
-                IS_TOOK = 1;
-
-                //照完自动保存
-                bntEnter.callOnClick();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
      * 将拍下来的照片存放在SD卡中
      *
      * @param data
@@ -243,7 +267,6 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
         setResult(1, intent);
     }
 
-
     /**
      * 把图片byte流编程bitmap
      *
@@ -267,6 +290,65 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
         }
         return b;
 
+    }
+
+    /**
+     * 物理按键事件
+     */
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_CAMERA: // 按下拍照按钮
+                if (camera != null && event.getRepeatCount() == 0) {
+                    // 拍照
+                    //注：调用takePicture()方法进行拍照是传入了一个PictureCallback对象——当程序获取了拍照所得的图片数据之后
+                    //，PictureCallback对象将会被回调，该对象可以负责对相片进行保存或传入网络
+                    camera.takePicture(null, null, new MyPictureCallback());
+                }
+            case KeyEvent.KEYCODE_BACK:
+                if (IS_TOOK == 0)
+                    finish();
+                else {
+                    //	camera.startPreview();
+                    bntCancel.performClick();
+                    return false;
+                }
+
+                break;
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 重构照相类
+     *
+     * @author
+     */
+    private final class MyPictureCallback implements Camera.PictureCallback {
+
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            try {
+                bundle = new Bundle();
+                bundle.putByteArray("bytes", data); //将图片字节数据保存在bundle当中，实现数据交换
+
+                //     saveToSDCard(data); // 保存图片到sd卡中
+//                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                bntTakePic.setVisibility(View.INVISIBLE);
+                bntCancel.setVisibility(View.VISIBLE);
+                bntEnter.setVisibility(View.VISIBLE);
+                //  camera.startPreview(); // 拍完照后，重新开始预览
+                IS_TOOK = 1;
+
+                //照完自动保存
+                bntEnter.callOnClick();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -322,94 +404,6 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
         }
 
 
-    }
-
-
-    /**
-     * 物理按键事件
-     */
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_CAMERA: // 按下拍照按钮
-                if (camera != null && event.getRepeatCount() == 0) {
-                    // 拍照
-                    //注：调用takePicture()方法进行拍照是传入了一个PictureCallback对象——当程序获取了拍照所得的图片数据之后
-                    //，PictureCallback对象将会被回调，该对象可以负责对相片进行保存或传入网络
-                    camera.takePicture(null, null, new MyPictureCallback());
-                }
-            case KeyEvent.KEYCODE_BACK:
-                if (IS_TOOK == 0)
-                    finish();
-                else {
-                    //	camera.startPreview();
-                    bntCancel.performClick();
-                    return false;
-                }
-
-                break;
-
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
-    // 提供一个静态方法，用于根据手机方向获得相机预览画面旋转的角度
-    public static int getPreviewDegree(Activity activity) {
-        // 获得手机的方向
-        int rotation = activity.getWindowManager().getDefaultDisplay()
-                .getRotation();
-        int degree = 0;
-        // 根据手机的方向计算相机预览画面应该选择的角度
-        switch (rotation) {
-            case Surface.ROTATION_0:
-                degree = 90;
-                break;
-            case Surface.ROTATION_90:
-                degree = 0;
-                break;
-            case Surface.ROTATION_180:
-                degree = 270;
-                break;
-            case Surface.ROTATION_270:
-                degree = 180;
-                break;
-        }
-        return degree;
-    }
-
-
-    /**
-     * 通过文件地址获取文件的bitmap
-     *
-     * @param path
-     * @return
-     * @throws IOException
-     */
-
-    public static Bitmap getBitmapByPath(String path) throws IOException {
-        BufferedInputStream in = new BufferedInputStream(new FileInputStream(
-                new File(path)));
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(in, null, options);
-        in.close();
-        int i = 0;
-        Bitmap bitmap = null;
-        while (true) {
-            if ((options.outWidth >> i <= 1000)
-                    && (options.outHeight >> i <= 1000)) {
-                in = new BufferedInputStream(
-                        new FileInputStream(new File(path)));
-                options.inSampleSize = (int) Math.pow(2.0D, i);
-                options.inJustDecodeBounds = false;
-                bitmap = BitmapFactory.decodeStream(in, null, options);
-                break;
-            }
-            i += 1;
-        }
-        return bitmap;
     }
 
 

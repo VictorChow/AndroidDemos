@@ -24,9 +24,6 @@ public class CountService extends Service implements Runnable {
         }
     };
 
-    public CountService() {
-    }
-
     @Override
     public void onCreate() {
         new Thread(this).start();

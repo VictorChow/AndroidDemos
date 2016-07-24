@@ -10,17 +10,20 @@ import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import demos.service.SmsService;
 import demos.util.ShowToast;
+import demos.util.bind.Bind;
+import demos.util.bind.BindClick;
+import demos.util.bind.BindView;
 
 public class SmsMonitorActivity extends BaseActivity {
+    @BindView(R.id.tv_show_sms)
+    TextView tvShowSms;
+    @BindView(R.id.tv_sms_status)
+    TextView tvSmsStatus;
     private SmsService smsService;
     private Intent intent;
     private boolean isRunning;
-
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -34,13 +37,7 @@ public class SmsMonitorActivity extends BaseActivity {
         }
     };
 
-
-    @Bind(R.id.tv_show_sms)
-    TextView tvShowSms;
-    @Bind(R.id.tv_sms_status)
-    TextView tvSmsStatus;
-
-    @OnClick({R.id.btn_start_watch, R.id.btn_stop_watch})
+    @BindClick({R.id.btn_start_watch, R.id.btn_stop_watch})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_start_watch:
@@ -73,7 +70,7 @@ public class SmsMonitorActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("新短信监听");
         }
-        ButterKnife.bind(this);
+        Bind.bind(this);
         intent = new Intent(mContext, SmsService.class);
     }
 

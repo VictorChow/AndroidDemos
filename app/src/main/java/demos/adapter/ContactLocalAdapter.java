@@ -13,9 +13,9 @@ import com.victor.androiddemos.R;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import demos.module.ContactModule;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
 
 /**
  * Created by Victor on 16/2/15.
@@ -54,14 +54,14 @@ public class ContactLocalAdapter extends RecyclerView.Adapter<ContactLocalAdapte
     }
 
     static class Holder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_contact_name)
+        @BindView(R.id.tv_contact_name)
         TextView tvContactName;
-        @Bind(R.id.ll_contact_phones)
+        @BindView(R.id.ll_contact_phones)
         LinearLayout llContactPhones;
 
         Holder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            Bind.bind(this, itemView);
         }
     }
 

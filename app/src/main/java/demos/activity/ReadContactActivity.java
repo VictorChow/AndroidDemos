@@ -14,15 +14,15 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import demos.adapter.ContactLocalAdapter;
 import demos.module.ContactModule;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
 
 public class ReadContactActivity extends BaseActivity {
-    @Bind(R.id.rv_contact_list)
+    @BindView(R.id.rv_contact_list)
     RecyclerView rvContactList;
-    @Bind(R.id.pb_contact_list)
+    @BindView(R.id.pb_contact_list)
     ProgressBar pbContactList;
 
     private List<ContactModule> contactModules;
@@ -32,7 +32,7 @@ public class ReadContactActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_contact);
-        ButterKnife.bind(this);
+        Bind.bind(this);
         assert getSupportActionBar() != null;
         getSupportActionBar().setTitle("读取联系人");
 

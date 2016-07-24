@@ -12,29 +12,34 @@ import com.victor.androiddemos.R;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import demos.adapter.VpMainAdapter;
 import demos.util.MenuLayout;
 import demos.util.ShowToast;
+import demos.util.bind.Bind;
+import demos.util.bind.BindClick;
+import demos.util.bind.BindView;
 
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
-    @Bind(R.id.view_pager_main)
+    @BindView(R.id.view_pager_main)
     ViewPager viewPagerMain;
-    @Bind(R.id.iv_btn_1)
+    @BindView(R.id.iv_btn_1)
     ImageView ivBtn1;
-    @Bind(R.id.iv_btn_2)
+    @BindView(R.id.iv_btn_2)
     ImageView ivBtn2;
-    @Bind(R.id.iv_btn_3)
+    @BindView(R.id.iv_btn_3)
     ImageView ivBtn3;
-    @Bind(R.id.ll_main)
+    @BindView(R.id.ll_main)
     LinearLayout llMain;
-    @Bind(R.id.menu_layout)
+    @BindView(R.id.menu_layout)
     MenuLayout menuLayout;
+    private ArrayList<Drawable> drawables;
+    /**
+     * 设置双击退出
+     */
+    private long exitTime = 0L;
 
-    @OnClick({R.id.iv_btn_1, R.id.iv_btn_2, R.id.iv_btn_3})
+    @BindClick({R.id.iv_btn_1, R.id.iv_btn_2, R.id.iv_btn_3})
     void onItemClick(View v) {
         if (v == ivBtn1) {
             viewPagerMain.setCurrentItem(0, false);
@@ -46,13 +51,11 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
     }
 
-    private ArrayList<Drawable> drawables;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        Bind.bind(this);
         init();
     }
 
@@ -117,11 +120,6 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
             }
         }
     }
-
-    /**
-     * 设置双击退出
-     */
-    private long exitTime = 0L;
 
     @Override
     public void onBackPressed() {

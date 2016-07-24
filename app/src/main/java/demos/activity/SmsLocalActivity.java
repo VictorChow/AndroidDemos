@@ -12,13 +12,13 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import demos.adapter.SmsLocalAdapter;
 import demos.module.SmsLocalModule;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
 
 public class SmsLocalActivity extends BaseActivity {
-    @Bind(R.id.rv_sms_local)
+    @BindView(R.id.rv_sms_local)
     RecyclerView rvSmsLocal;
 
     private Uri SMS_INBOX = Uri.parse("content://sms/");
@@ -29,7 +29,7 @@ public class SmsLocalActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_local);
-        ButterKnife.bind(this);
+        Bind.bind(this);
         assert getSupportActionBar() != null;
         getSupportActionBar().setTitle("查看所有短信");
 

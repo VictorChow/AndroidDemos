@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import demos.module.AppModule;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
 
 public class ClearCacheActivity extends BaseActivity {
     /**
@@ -29,50 +29,21 @@ public class ClearCacheActivity extends BaseActivity {
      * /data/data/package_name/files（比较严格的清理策略时也可以选择清理）
      */
 
-    @Bind(R.id.tv_cache_app)
+    @BindView(R.id.tv_cache_app)
     TextView tvCacheApp;
-    @Bind(R.id.tv_cache_package)
+    @BindView(R.id.tv_cache_package)
     TextView tvCachePackage;
-    @Bind(R.id.btn_cache_scan)
+    @BindView(R.id.btn_cache_scan)
     Button btnCacheScan;
-    @Bind(R.id.tv_cache_size)
+    @BindView(R.id.tv_cache_size)
     TextView tvCacheSize;
-    @Bind(R.id.tv_cache_detail)
+    @BindView(R.id.tv_cache_detail)
     TextView tvCacheDetail;
 
     private List<AppModule> appList;
     private ClearCacheTask clearCacheTask;
     private List<String> dirList;
     private long cacheSize;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clear_cache);
-        ButterKnife.bind(this);
-
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("扫描缓存");
-
-        dirList = new ArrayList<>();
-        dirList.add("/data/data/xxx/cache");
-        dirList.add("/data/data/xxx/app_webview");
-        dirList.add("/mnt/sdcard/Android/data/xxx/cache");
-
-        clearCacheTask = new ClearCacheTask();
-        btnCacheScan.setOnClickListener(v -> {
-            clearCacheTask.execute(Boolean.TRUE);
-            btnCacheScan.setEnabled(false);
-        });
-
-//        /data/data/com.victor.androiddemos/files
-//        PrintLog.d("位置是  " + mContext.getFilesDir());
-//        PrintLog.d("位置是  " + mContext.getCacheDir());
-//
-//        File file = new File("/data/data/com.victor.androiddemos/cache");
-//        PrintLog.d("大小是  " + formatCacheSize(getFolderSize(file)));
-//        deleteFolderFile("/data/data/com.victor.androiddemos/shared_prefs", true);
-    }
 
     /**
      * 获取文件夹大小
@@ -98,6 +69,65 @@ public class ClearCacheActivity extends BaseActivity {
             e.printStackTrace();
         }
         return size;
+    }
+
+    /**
+     * 格式化单位
+     */
+    public static String formatCacheSize(double size) {
+        double kiloByte = size / 1024;
+        if (kiloByte < 1) {
+            return size + "B";
+        }
+
+        double megaByte = kiloByte / 1024;
+        if (megaByte < 1) {
+            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
+        }
+
+        double gigaByte = megaByte / 1024;
+        if (gigaByte < 1) {
+            BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB";
+        }
+
+        double teraBytes = gigaByte / 1024;
+        if (teraBytes < 1) {
+            BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
+        }
+        BigDecimal result4 = new BigDecimal(teraBytes);
+        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_clear_cache);
+        Bind.bind(this);
+
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setTitle("扫描缓存");
+
+        dirList = new ArrayList<>();
+        dirList.add("/data/data/xxx/cache");
+        dirList.add("/data/data/xxx/app_webview");
+        dirList.add("/mnt/sdcard/Android/data/xxx/cache");
+
+        clearCacheTask = new ClearCacheTask();
+        btnCacheScan.setOnClickListener(v -> {
+            clearCacheTask.execute(Boolean.TRUE);
+            btnCacheScan.setEnabled(false);
+        });
+
+//        /data/data/com.victor.androiddemos/files
+//        PrintLog.d("位置是  " + mContext.getFilesDir());
+//        PrintLog.d("位置是  " + mContext.getCacheDir());
+//
+//        File file = new File("/data/data/com.victor.androiddemos/cache");
+//        PrintLog.d("大小是  " + formatCacheSize(getFolderSize(file)));
+//        deleteFolderFile("/data/data/com.victor.androiddemos/shared_prefs", true);
     }
 
     /**
@@ -129,36 +159,6 @@ public class ClearCacheActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     * 格式化单位
-     */
-    public static String formatCacheSize(double size) {
-        double kiloByte = size / 1024;
-        if (kiloByte < 1) {
-            return size + "B";
-        }
-
-        double megaByte = kiloByte / 1024;
-        if (megaByte < 1) {
-            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
-            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
-        }
-
-        double gigaByte = megaByte / 1024;
-        if (gigaByte < 1) {
-            BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
-            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB";
-        }
-
-        double teraBytes = gigaByte / 1024;
-        if (teraBytes < 1) {
-            BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
-            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
-        }
-        BigDecimal result4 = new BigDecimal(teraBytes);
-        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
 
     private void getPackages() {

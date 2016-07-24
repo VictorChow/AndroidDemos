@@ -14,23 +14,23 @@ import com.victor.androiddemos.R;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
+
 
 public class RecyclerViewActivity extends AppCompatActivity {
+    @BindView(R.id.recycle_view)
+    RecyclerView recycleView;
     private Context context;
     private ArrayList<String> items1;
     private ArrayList<String> items2;
     private ArrayList<String> items3;
 
-    @Bind(R.id.recycle_view)
-    RecyclerView recycleView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
-        ButterKnife.bind(this);
+        Bind.bind(this);
         context = getApplicationContext();
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Different Span In RecyclerView ");

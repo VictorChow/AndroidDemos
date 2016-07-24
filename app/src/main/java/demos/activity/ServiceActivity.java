@@ -11,18 +11,33 @@ import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import demos.service.CountService;
 import demos.util.ShowToast;
+import demos.util.bind.Bind;
+import demos.util.bind.BindClick;
+import demos.util.bind.BindView;
 
 public class ServiceActivity extends AppCompatActivity {
 
-    @Bind(R.id.tv_show)
+    @BindView(R.id.tv_show)
     TextView tvShow;
+    private boolean isBound;
+    private CountService service;
+    private Intent intent;
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            ServiceActivity.this.service = ((CountService.ServiceBinder) service).getService();
+            ServiceActivity.this.service.setTextView(tvShow);
+        }
 
-    @OnClick({R.id.btn_on, R.id.btn_off, R.id.btn_bind, R.id.btn_unbind, R.id.btn_show})
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            service = null;
+        }
+    };
+
+    @BindClick({R.id.btn_on, R.id.btn_off, R.id.btn_bind, R.id.btn_unbind, R.id.btn_show})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_on:
@@ -53,28 +68,12 @@ public class ServiceActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isBound;
-    private CountService service;
-    private Intent intent;
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            ServiceActivity.this.service = ((CountService.ServiceBinder) service).getService();
-            ServiceActivity.this.service.setTextView(tvShow);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            service = null;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
         intent = new Intent(getApplicationContext(), CountService.class);
         getSupportActionBar().setTitle("Service Demo");
-        ButterKnife.bind(this);
+        Bind.bind(this);
     }
 }

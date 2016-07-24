@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 import com.victor.androiddemos.R;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import demos.activity.AppInfoActivity;
 import demos.activity.ClearCacheActivity;
 import demos.activity.GetLocationActivity;
@@ -23,12 +21,13 @@ import demos.activity.SmsLocalActivity;
 import demos.activity.SmsMonitorActivity;
 import demos.activity.TakePhotoActivity;
 import demos.activity.TelephonyActivity;
-import demos.util.bind.BindUtil;
+import demos.util.bind.Bind;
+import demos.util.bind.BindClick;
 
 
 public class FunctionFragment extends BaseFragment {
 
-    @OnClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
+    @BindClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
             R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
             R.id.btn_all_contact, R.id.btn_open_camera, R.id.btn_get_location})
     void onItemClick(View v) {
@@ -77,12 +76,6 @@ public class FunctionFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+        Bind.bind(this, view);
     }
 }

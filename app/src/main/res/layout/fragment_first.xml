@@ -15,7 +15,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="事件总线" />
+            android:text="自定义事件总线" />
 
         <LinearLayout
             android:layout_width="match_parent"

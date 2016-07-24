@@ -7,11 +7,11 @@ import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import demos.receiver.TelephonyReceiver;
 import demos.util.ShowToast;
+import demos.util.bind.Bind;
+import demos.util.bind.BindClick;
+import demos.util.bind.BindView;
 
 public class TelephonyActivity extends BaseActivity {
 
@@ -23,14 +23,13 @@ public class TelephonyActivity extends BaseActivity {
 //    </intent-filter>
 //    </receiver>
 
+    @BindView(R.id.tv_phone_status)
+    TextView tvPhoneStatus;
     private TelephonyReceiver telephonyReceiver;
     private IntentFilter filter;
     private boolean isRunning;
 
-    @Bind(R.id.tv_phone_status)
-    TextView tvPhoneStatus;
-
-    @OnClick({R.id.btn_start_watch, R.id.btn_stop_watch})
+    @BindClick({R.id.btn_start_watch, R.id.btn_stop_watch})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_start_watch:
@@ -60,7 +59,7 @@ public class TelephonyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telephony);
-        ButterKnife.bind(this);
+        Bind.bind(this);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("通话录音");
         }

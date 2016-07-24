@@ -2,8 +2,6 @@ package demos.fragment;
 
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -16,10 +14,12 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import demos.util.MsgEvent;
+import demos.util.bind.Bind;
 import demos.util.bind.BindClick;
-import demos.util.bind.BindUtil;
 import demos.util.bind.BindView;
 import demos.util.bus.Bus;
+import demos.util.bus.BusMethod;
 import demos.view.AutoImageView;
 import demos.view.CountDownView;
 import demos.view.MarqueeView;
@@ -35,20 +35,30 @@ public class CustomViewFragment extends Fragment implements Runnable {
     CountDownView countDownView;
     @BindView(R.id.marquee_view)
     MarqueeView marqueeView;
-    private float mProcess;
     private boolean isThreadRun;
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.arg1 == 0) {
-                autoImageView1.setProcess(mProcess);
-                autoImageView2.setProcess(mProcess);
-            } else {
-                autoImageView1.setLoadedDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.iv_scratch_card));
-                autoImageView2.setLoadedDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.iv_scratch_card));
-            }
+//    private Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            if (msg.arg1 == 0) {
+//                autoImageView1.setProcess(mProcess);
+//                autoImageView2.setProcess(mProcess);
+//            } else {
+//                autoImageView1.setLoadedDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.iv_scratch_card));
+//                autoImageView2.setLoadedDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.iv_scratch_card));
+//            }
+//        }
+//    };
+
+    @BusMethod
+    private void updateAutoImageViewProcess(MsgEvent.AutoImageViewProcess e) {
+        if (e.getType() == 0) {
+            autoImageView1.setProcess(e.getProcess());
+            autoImageView2.setProcess(e.getProcess());
+        } else {
+            autoImageView1.setLoadedDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.iv_scratch_card));
+            autoImageView2.setLoadedDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.iv_scratch_card));
         }
-    };
+    }
 
     @BindClick({R.id.tv_auto_image})
     void onClick(View v) {
@@ -69,9 +79,15 @@ public class CustomViewFragment extends Fragment implements Runnable {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        BindUtil.bind(this);
-        Bus.INSTANCE.register(this);
+        Bind.bind(this);
+        Bus.register(this);
         init();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Bus.unregister(this);
+        super.onDestroyView();
     }
 
     private void init() {
@@ -88,19 +104,16 @@ public class CustomViewFragment extends Fragment implements Runnable {
 
     @Override
     public void run() {
+        float process = 0f;
         isThreadRun = true;
         while (true) {
             try {
-                mProcess += 0.01;
-                Message msg1 = new Message();
-                msg1.arg1 = 0;
-                handler.sendMessage(msg1);
+                process += 0.01;
+                Bus.postAnnotation(new MsgEvent.AutoImageViewProcess(0, process));
                 Thread.sleep(30);
-                if (mProcess >= 1.00f) {
-                    Message msg2 = new Message();
-                    msg2.arg1 = 1;
-                    handler.sendMessage(msg2);
-                    mProcess = 0;
+                if (process >= 1.00f) {
+                    Bus.postAnnotation(new MsgEvent.AutoImageViewProcess(1, process));
+                    process = 0;
                     isThreadRun = false;
                     break;
                 }

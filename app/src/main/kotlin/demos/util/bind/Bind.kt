@@ -7,7 +7,7 @@ import android.view.View
 /**
  * Created by victor on 16-7-23.
  */
-object BindUtil {
+object Bind {
 
     @JvmStatic fun bind(o: Any) {
         when (o) {
@@ -16,7 +16,7 @@ object BindUtil {
         }
     }
 
-    private fun bind(o: Any, view: View) {
+    @JvmStatic fun bind(o: Any, view: View) {
         //bind view
         o.javaClass.declaredFields.forEach { field ->
             field.annotations.forEach { annotation ->

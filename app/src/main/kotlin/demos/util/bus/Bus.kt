@@ -1,21 +1,25 @@
 package demos.util.bus
 
+import android.os.Handler
+import android.os.Looper
+
 
 /**
  * Created by victor on 16-7-23.
  */
 object Bus {
     private val subscribers = arrayListOf<Any>()
+    private val handler = Handler(Looper.getMainLooper())
 
-    fun register(o: Any) {
+    @JvmStatic fun register(o: Any) {
         subscribers.add(o)
     }
 
-    fun unregister(o: Any) {
+    @JvmStatic fun unregister(o: Any) {
         subscribers.remove(o)
     }
 
-    fun postAnnotation(o: Any) {
+    @JvmStatic fun postAnnotation(o: Any) {
         subscribers.forEach { subscriber ->
             subscriber.javaClass.declaredMethods.forEach { method ->
                 method.annotations.forEach { annotation ->
@@ -23,7 +27,10 @@ object Bus {
                         if (method.parameterTypes.size == 1) {
                             if (method.parameterTypes[0] == o.javaClass) {
                                 method.isAccessible = true
-                                method.invoke(subscriber, o)
+//                                if (Looper.myLooper() == Looper.getMainLooper())
+//                                    method.invoke(subscriber, o)
+//                                else
+                                handler.post { method.invoke(subscriber, o) }
                             }
                         }
                     }
@@ -32,7 +39,7 @@ object Bus {
         }
     }
 
-    fun postReflect(o: Any) {
+    @JvmStatic fun postReflect(o: Any) {
         subscribers.forEach { subscriber ->
             try {
                 val method = subscriber.javaClass.getDeclaredMethod("onPostReflect", o.javaClass)

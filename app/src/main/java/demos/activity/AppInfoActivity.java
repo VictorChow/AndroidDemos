@@ -7,16 +7,16 @@ import android.support.v4.view.ViewPager;
 
 import com.victor.androiddemos.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import demos.adapter.VpAppFragmentAdapter;
 import demos.receiver.PackageMonitorReceiver;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
 
 public class AppInfoActivity extends BaseActivity {
 
-    @Bind(R.id.tab_app)
+    @BindView(R.id.tab_app)
     TabLayout tabApp;
-    @Bind(R.id.vp_app)
+    @BindView(R.id.vp_app)
     ViewPager vpApp;
 
     private PackageMonitorReceiver receiver;
@@ -25,7 +25,7 @@ public class AppInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_info);
-        ButterKnife.bind(this);
+        Bind.bind(this);
         receiver = new PackageMonitorReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.PACKAGE_ADDED");

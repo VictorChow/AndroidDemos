@@ -12,20 +12,41 @@ import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import demos.util.bind.Bind;
+import demos.util.bind.BindView;
+
 
 public class GetLocationActivity extends BaseActivity {
-    @Bind(R.id.tv_get_location)
+    @BindView(R.id.tv_get_location)
     TextView tvGetLocation;
-    private Location location;
+    private final LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
 
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            updateToNewLocation(null);
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            updateToNewLocation(null);
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {
+            updateToNewLocation(location);
+        }
+    };
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_location);
-        ButterKnife.bind(this);
+        Bind.bind(this);
         assert getSupportActionBar() != null;
         getSupportActionBar().setTitle("定位");
 
@@ -60,26 +81,4 @@ public class GetLocationActivity extends BaseActivity {
             tvGetLocation.setText("未开启定位服务");
         }
     }
-
-    private final LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            updateToNewLocation(null);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            updateToNewLocation(null);
-        }
-
-        @Override
-        public void onLocationChanged(Location location) {
-            updateToNewLocation(location);
-        }
-    };
 }
