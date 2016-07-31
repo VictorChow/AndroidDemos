@@ -13,9 +13,9 @@ import com.victor.androiddemos.R;
 
 import demos.service.CountService;
 import demos.util.ShowToast;
-import demos.util.bind.Bind;
-import demos.util.bind.BindClick;
-import demos.util.bind.BindView;
+import demos.util.annotations.bind.Bind;
+import demos.util.annotations.bind.BindClick;
+import demos.util.annotations.bind.BindView;
 
 public class ServiceActivity extends AppCompatActivity {
 

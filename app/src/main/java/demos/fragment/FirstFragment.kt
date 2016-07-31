@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.victor.androiddemos.R
-import demos.util.bind.Bind
-import demos.util.bind.BindView
-import demos.util.bus.Bus
-import demos.util.bus.BusMethod
+import demos.util.annotations.bind.Bind
+import demos.util.annotations.bind.BindView
+import demos.util.annotations.bus.Bus
+import demos.util.annotations.bus.BusMethod
 import kotlinx.android.synthetic.main.fragment_first.*
 
 

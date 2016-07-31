@@ -1,4 +1,4 @@
-package demos.util.bus
+package demos.util.annotations.bus
 
 import android.os.Handler
 import android.os.Looper

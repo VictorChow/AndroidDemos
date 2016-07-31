@@ -14,8 +14,8 @@ import com.victor.androiddemos.R;
 import java.util.List;
 
 import demos.module.ContactModule;
-import demos.util.bind.Bind;
-import demos.util.bind.BindView;
+import demos.util.annotations.bind.Bind;
+import demos.util.annotations.bind.BindView;
 
 /**
  * Created by Victor on 16/2/15.

@@ -21,8 +21,8 @@ import java.util.List;
 
 import demos.adapter.AppInstalledAdapter;
 import demos.module.AppModule;
-import demos.util.bind.Bind;
-import demos.util.bind.BindView;
+import demos.util.annotations.bind.Bind;
+import demos.util.annotations.bind.BindView;
 
 
 public class AppInfoFragment extends BaseFragment {

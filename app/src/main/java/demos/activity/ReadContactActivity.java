@@ -16,8 +16,8 @@ import java.util.List;
 
 import demos.adapter.ContactLocalAdapter;
 import demos.module.ContactModule;
-import demos.util.bind.Bind;
-import demos.util.bind.BindView;
+import demos.util.annotations.bind.Bind;
+import demos.util.annotations.bind.BindView;
 
 public class ReadContactActivity extends BaseActivity {
     @BindView(R.id.rv_contact_list)

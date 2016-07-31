@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import demos.util.bind.Bind;
-import demos.util.bind.BindView;
+import demos.util.annotations.bind.Bind;
+import demos.util.annotations.bind.BindView;
 
 
 public class GetLocationActivity extends BaseActivity {

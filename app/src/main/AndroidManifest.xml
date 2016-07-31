@@ -62,7 +62,8 @@
         <activity
             android:name="demos.activity.TakePhotoActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name="demos.activity.GetLocationActivity"></activity>
+        <activity android:name="demos.activity.GetLocationActivity" />
+        <activity android:name="demos.drag_recycleview.DragRecycleViewActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package demos.util.bind
+package demos.util.annotations.bind
 
 import android.app.Activity
 import android.support.v4.app.Fragment
