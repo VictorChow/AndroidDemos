@@ -20,8 +20,8 @@ import demos.module.AppModule;
 import demos.receiver.PackageMonitorReceiver;
 import demos.util.SharedPreferenceUtil;
 import demos.util.ShowToast;
-import demos.util.annotations.bind.Bind;
-import demos.util.annotations.bind.BindView;
+import demos.annotations.bind.Bind;
+import demos.annotations.bind.BindView;
 
 /**
  * Created by Victor on 16/2/13.

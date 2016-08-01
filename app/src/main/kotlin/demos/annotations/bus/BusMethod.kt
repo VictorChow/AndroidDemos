@@ -1,4 +1,4 @@
-package demos.util.annotations.bus
+package demos.annotations.bus
 
 /**
  * Created by victor on 16-7-23.

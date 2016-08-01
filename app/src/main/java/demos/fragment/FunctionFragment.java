@@ -21,16 +21,18 @@ import demos.activity.SmsLocalActivity;
 import demos.activity.SmsMonitorActivity;
 import demos.activity.TakePhotoActivity;
 import demos.activity.TelephonyActivity;
+import demos.annotations.bind.Bind;
+import demos.annotations.bind.BindClick;
 import demos.drag_recycleview.DragRecycleViewActivity;
-import demos.util.annotations.bind.Bind;
-import demos.util.annotations.bind.BindClick;
+import demos.vertical_menu.VerticalMenuActivity;
 
 
 public class FunctionFragment extends BaseFragment {
 
     @BindClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
             R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
-            R.id.btn_all_contact, R.id.btn_open_camera, R.id.btn_get_location, R.id.btn_drag_recycler_view})
+            R.id.btn_all_contact, R.id.btn_open_camera, R.id.btn_get_location, R.id.btn_drag_recycler_view,
+            R.id.btn_vertical_menu})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_slide_close:
@@ -68,6 +70,9 @@ public class FunctionFragment extends BaseFragment {
                 break;
             case R.id.btn_drag_recycler_view:
                 startActivity(new Intent(mContext, DragRecycleViewActivity.class));
+                break;
+            case R.id.btn_vertical_menu:
+                startActivity(new Intent(mContext, VerticalMenuActivity.class));
                 break;
         }
     }

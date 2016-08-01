@@ -36,7 +36,6 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.3"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.0.3"
     }
 }
@@ -47,6 +46,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:design:23.4.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.3"
-    compile "org.jetbrains.kotlin:kotlin-reflect:1.0.3"
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.3'
+    compile 'org.jetbrains.kotlin:kotlin-reflect:1.0.3'
+    compile 'com.orhanobut:logger:1.15'
 }

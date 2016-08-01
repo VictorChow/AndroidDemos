@@ -1,4 +1,4 @@
-package demos.util.annotations.bind
+package demos.annotations.bind
 
 /**
  * Created by victor on 16-7-23.

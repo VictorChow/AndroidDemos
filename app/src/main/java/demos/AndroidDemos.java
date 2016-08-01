@@ -5,12 +5,13 @@ import android.os.StrictMode;
 import android.support.v4.BuildConfig;
 import android.util.DisplayMetrics;
 
+import com.orhanobut.logger.Logger;
+
 /**
  * Created by Victor on 16/2/9.
  */
 public class AndroidDemos extends Application {
 
-    private static AndroidDemos application;
     /**
      * 屏幕宽度，屏幕高度，屏幕密度，字体缩放比
      */
@@ -19,6 +20,11 @@ public class AndroidDemos extends Application {
     public static int screenHeight;
     public static float screenDensity;
     public static float scaledDensity;
+    private static AndroidDemos application;
+
+    public static AndroidDemos getInstance() {
+        return application;
+    }
 
     @Override
     public void onCreate() {
@@ -38,6 +44,7 @@ public class AndroidDemos extends Application {
 
         application = this;
         getDisplayMetrics();
+        Logger.init("demos").hideThreadInfo().methodCount(0);
     }
 
     /**
@@ -49,9 +56,5 @@ public class AndroidDemos extends Application {
         screenHeight = metric.heightPixels;
         screenDensity = metric.density;
         scaledDensity = metric.scaledDensity;
-    }
-
-    public static AndroidDemos getInstance() {
-        return application;
     }
 }

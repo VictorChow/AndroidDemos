@@ -64,6 +64,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name="demos.activity.GetLocationActivity" />
         <activity android:name="demos.drag_recycleview.DragRecycleViewActivity" />
+        <activity android:name="demos.vertical_menu.VerticalMenuActivity" />
     </application>
 
 </manifest>

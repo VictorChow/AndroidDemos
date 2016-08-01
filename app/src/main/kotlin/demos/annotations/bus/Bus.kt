@@ -1,7 +1,8 @@
-package demos.util.annotations.bus
+package demos.annotations.bus
 
 import android.os.Handler
 import android.os.Looper
+import demos.annotations.bus.BusMethod
 
 
 /**

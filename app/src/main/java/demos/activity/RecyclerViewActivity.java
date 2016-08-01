@@ -14,8 +14,8 @@ import com.victor.androiddemos.R;
 
 import java.util.ArrayList;
 
-import demos.util.annotations.bind.Bind;
-import demos.util.annotations.bind.BindView;
+import demos.annotations.bind.Bind;
+import demos.annotations.bind.BindView;
 
 
 public class RecyclerViewActivity extends AppCompatActivity {

@@ -9,8 +9,8 @@ import com.victor.androiddemos.R;
 
 import demos.adapter.VpAppFragmentAdapter;
 import demos.receiver.PackageMonitorReceiver;
-import demos.util.annotations.bind.Bind;
-import demos.util.annotations.bind.BindView;
+import demos.annotations.bind.Bind;
+import demos.annotations.bind.BindView;
 
 public class AppInfoActivity extends BaseActivity {
 

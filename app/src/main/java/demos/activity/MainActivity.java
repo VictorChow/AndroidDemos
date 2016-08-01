@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import demos.adapter.VpMainAdapter;
 import demos.util.MenuLayout;
 import demos.util.ShowToast;
-import demos.util.annotations.bind.Bind;
-import demos.util.annotations.bind.BindClick;
-import demos.util.annotations.bind.BindView;
+import demos.annotations.bind.Bind;
+import demos.annotations.bind.BindClick;
+import demos.annotations.bind.BindView;
 
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
