@@ -1,4 +1,4 @@
-package demos.util;
+package demos.view;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;

@@ -24,7 +24,7 @@ import demos.activity.TelephonyActivity;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
 import demos.drag_recycleview.DragRecycleViewActivity;
-import demos.vertical_menu.VerticalMenuActivity;
+import demos.activity.VerticalMenuActivity;
 
 
 public class FunctionFragment extends BaseFragment {

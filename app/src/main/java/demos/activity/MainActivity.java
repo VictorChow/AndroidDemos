@@ -13,7 +13,7 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 
 import demos.adapter.VpMainAdapter;
-import demos.util.MenuLayout;
+import demos.view.MenuLayout;
 import demos.util.ShowToast;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
