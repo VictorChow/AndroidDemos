@@ -2,7 +2,6 @@ package demos.annotations.bus
 
 import android.os.Handler
 import android.os.Looper
-import demos.annotations.bus.BusMethod
 
 
 /**
@@ -23,17 +22,11 @@ object Bus {
     @JvmStatic fun postAnnotation(o: Any) {
         subscribers.forEach { subscriber ->
             subscriber.javaClass.declaredMethods.forEach { method ->
-                method.annotations.forEach { annotation ->
-                    if (annotation.annotationClass == BusMethod::class) {
-                        if (method.parameterTypes.size == 1) {
-                            if (method.parameterTypes[0] == o.javaClass) {
-                                method.isAccessible = true
-//                                if (Looper.myLooper() == Looper.getMainLooper())
-//                                    method.invoke(subscriber, o)
-//                                else
-                                handler.post { method.invoke(subscriber, o) }
-                            }
-                        }
+                method.isAccessible = true
+                if (method.getAnnotation(BusMethod::class.java) != null && method.parameterTypes.size == 1 && method.parameterTypes[0] == o.javaClass) {
+                    try {
+                        handler.post { method.invoke(subscriber, o) }
+                    } catch (e: Exception) {
                     }
                 }
             }

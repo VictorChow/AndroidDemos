@@ -13,6 +13,7 @@ import com.victor.androiddemos.R;
 import demos.activity.AppInfoActivity;
 import demos.activity.ClearCacheActivity;
 import demos.activity.GetLocationActivity;
+import demos.activity.PTIRecyclerViewActivity;
 import demos.activity.ReadContactActivity;
 import demos.activity.RecyclerViewActivity;
 import demos.activity.ServiceActivity;
@@ -21,10 +22,10 @@ import demos.activity.SmsLocalActivity;
 import demos.activity.SmsMonitorActivity;
 import demos.activity.TakePhotoActivity;
 import demos.activity.TelephonyActivity;
+import demos.activity.VerticalMenuActivity;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
 import demos.drag_recycleview.DragRecycleViewActivity;
-import demos.activity.VerticalMenuActivity;
 
 
 public class FunctionFragment extends BaseFragment {
@@ -32,9 +33,12 @@ public class FunctionFragment extends BaseFragment {
     @BindClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
             R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
             R.id.btn_all_contact, R.id.btn_open_camera, R.id.btn_get_location, R.id.btn_drag_recycler_view,
-            R.id.btn_vertical_menu})
+            R.id.btn_vertical_menu, R.id.btn_pti_recycler})
     void onItemClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_pti_recycler:
+                startActivity(new Intent(mContext, PTIRecyclerViewActivity.class));
+                break;
             case R.id.btn_slide_close:
                 startActivity(new Intent(mContext, SlideToCloseActivity.class));
                 break;

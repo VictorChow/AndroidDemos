@@ -1,0 +1,71 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="4dp"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_address_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="伞雨"
+                android:textColor="#333333"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_address_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="[默认]"
+                android:textSize="15sp"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eeeeee" />
+
+        <TextView
+            android:id="@+id/tv_address_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:lineSpacingExtra="4dp"
+            android:text="山东省青岛市崂山区阿三大赛大赛大赛大赛大赛的萨达是 1234"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_address_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="13312345678"
+            android:textSize="18sp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

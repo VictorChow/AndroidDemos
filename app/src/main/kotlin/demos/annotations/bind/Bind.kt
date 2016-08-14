@@ -3,8 +3,6 @@ package demos.annotations.bind
 import android.app.Activity
 import android.support.v4.app.Fragment
 import android.view.View
-import demos.annotations.bind.BindClick
-import demos.annotations.bind.BindView
 
 /**
  * Created by victor on 16-7-23.
