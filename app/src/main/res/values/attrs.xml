@@ -23,4 +23,13 @@
         <attr name="citv_text_padding" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="CycleViewPagerParent">
+        <attr name="proportionHeight" format="integer" />
+        <attr name="proportionWidth" format="integer" />
+        <attr name="slideCycle" format="boolean" />
+        <attr name="slideAutomatic" format="boolean" />
+        <attr name="slideCycleTime" format="integer" />
+        <attr name="showIndicator" format="boolean" />
+        <attr name="indicatorMarginBottom" format="dimension" />
+    </declare-styleable>
 </resources>

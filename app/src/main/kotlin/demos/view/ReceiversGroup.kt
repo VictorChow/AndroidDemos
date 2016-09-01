@@ -2,7 +2,7 @@ package demos.view
 
 import android.app.Activity
 import android.content.Context
-import android.support.v4.content.ContextCompat
+import android.graphics.Color
 import android.support.v7.app.AlertDialog
 import android.text.InputFilter
 import android.text.InputType
@@ -14,7 +14,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
-import com.victor.androiddemos.R
 import demos.util.DisplayUtil
 
 /**
@@ -22,57 +21,67 @@ import demos.util.DisplayUtil
  */
 class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(context, attributeSet) {
 
-    private val items = arrayListOf<Receiver>()
-    private val textViews = arrayListOf<TextView>()
-    private lateinit var editText: EditText
-    private lateinit var alertDialog: AlertDialog.Builder
-    private var isDeleting = false
+    class Contact(mobile: String, name: String = "") {
+        val mobile = if (mobile.startsWith("+86")) mobile.substring(3) else mobile
+        val name = if (name.contentEquals("")) mobile else name
+    }
 
-    private val childHeight = DisplayUtil.dp2px(30f)
-    private val verSpacing = DisplayUtil.dp2px(5f)
-    private val horSpacing = DisplayUtil.dp2px(10f)
-    private val leftPadding = DisplayUtil.dp2px(10f)
-    private val rightPadding = DisplayUtil.dp2px(10f)
+    private class ReceiverItem(val itemView: TextView, val contact: Contact)
+
+    private val showTitle = false
+    private val textSize = 16f
+
+    private val childHeight = LayoutParams.WRAP_CONTENT
+    private val receiverItems = arrayListOf<ReceiverItem>()
+    private lateinit var editText: EditText
+    private lateinit var titleText: TextView
+    private val inputManager: InputMethodManager
+    private val alertDialog: AlertDialog.Builder
+    private var isDeleting = false
+    private val verSpacing = DisplayUtil.dp2px(0f)
+    private val horSpacing = DisplayUtil.dp2px(0f)
+
+    init {
+        alertDialog = AlertDialog.Builder(context as Activity)
+        inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        alertDialog = AlertDialog.Builder(context)
-        initEditText()
+        addTitleText()
+        addEditText()
+        setOnClickListener { inputManager.showSoftInput(editText, 0) }
     }
 
-    fun addTextViews(items: List<Receiver>) {
-        this.items.addAll(items)
-        items.forEach { addTextView(it.name) }
+    fun addContacts(items: List<Contact>) = items.forEach { addContact(it) }
+
+    private fun addTitleText() {
+        titleText = TextView(context)
+        titleText.text = "收件人："
+        titleText.gravity = Gravity.CENTER
+        titleText.textSize = textSize
+        titleText.setTextColor(Color.CYAN)
+//        titleText.setPadding(0, 0, DisplayUtil.dp2px(10f), 0)
+        addView(titleText, childCount - 1, LayoutParams(LayoutParams.WRAP_CONTENT, childHeight))
     }
 
-    fun addTextView(text: String) {
-        val textView = TextView(context)
-        textView.text = text
-        textView.gravity = Gravity.CENTER
-        textView.textSize = 15f
-        textView.setTextColor(ContextCompat.getColor(context, R.color.white1))
-        textView.setBackgroundResource(R.drawable.bg_blue_corner5)
-        textView.setPadding(DisplayUtil.dp2px(10f), 0, DisplayUtil.dp2px(10f), 0)
-        textViews.add(textView)
-        addView(textView, childCount - 1, ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, childHeight))
-    }
-
-    private fun initEditText() {
+    private fun addEditText() {
         editText = EditText(context)
         editText.background = null
         editText.maxLines = 1
         editText.hint = "..."
-        editText.textSize = 15f
-        editText.setTextColor(ContextCompat.getColor(context, R.color.blue2))
+        editText.textSize = textSize
+        editText.setTextColor(Color.CYAN)
+        editText.setHintTextColor(Color.CYAN)
         editText.minWidth = editText.paint.measureText("123456789012").toInt()
         editText.setPadding(0, 0, 0, 0)
-        editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(11))
+        editText.filters = arrayOf<InputFilter>(android.text.InputFilter.LengthFilter(11))
         editText.inputType = InputType.TYPE_CLASS_NUMBER
         editText.imeOptions = EditorInfo.IME_ACTION_DONE
         editText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (!v.text.toString().contentEquals("")) {
-                    items.addItem(Receiver(v.text.toString()))
+                    addContact(Contact(v.text.toString()))
                     v.text = ""
                 }
             }
@@ -80,99 +89,116 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
         }
         editText.setOnKeyListener { v, keyCode, event ->
             if (!isDeleting && event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && editText.text.toString().contentEquals("")) {
-                if (items.size > 0) {
+                if (receiverItems.size > 0) {
                     val child = getChildAt(childCount - 2) as TextView
-                    deleteItem(child.text.toString(), items.lastIndex)
+                    deleteItem(child, receiverItems.lastIndex)
                 }
             }
             false
         }
-        addView(editText, ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, childHeight))
+        addView(editText, LayoutParams(LayoutParams.WRAP_CONTENT, childHeight))
     }
 
+    fun addContact(contact: Contact) {
+        val textView = TextView(context)
+        textView.text = "${contact.name}、"
+        if (contact.mobile.contentEquals(contact.name)) {
+            textView.tag = null
+        } else {
+            textView.tag = contact.mobile
+        }
+        textView.gravity = Gravity.CENTER
+        textView.textSize = textSize
+        textView.setTextColor(Color.CYAN)
+//        textView.setPadding(DisplayUtil.dp2px(10f), 0, DisplayUtil.dp2px(10f), 0)
+        addView(textView, childCount - 1, LayoutParams(LayoutParams.WRAP_CONTENT, childHeight))
+        receiverItems.add(ReceiverItem(textView, contact))
+    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        if (childCount > 0)
+        if (isInEditMode)
+            return
+        if (childCount > 0) {
             measureChildren(widthMeasureSpec, heightMeasureSpec)
-        val maxWidth = MeasureSpec.getSize(widthMeasureSpec) - rightPadding
-        var tempWidth = leftPadding
-        var tempHeight = getChildAt(0).measuredHeight
-        textViews.forEach {
-            if (tempWidth + it.measuredWidth > maxWidth) {
-                tempWidth = leftPadding
-                tempHeight += (it.measuredHeight + verSpacing)
+        }
+        val maxWidth = MeasureSpec.getSize(widthMeasureSpec) - paddingRight
+        var tempWidth = paddingLeft
+        var tempHeight = getChildAt(0).measuredHeight + paddingTop
+        if (showTitle) {
+            tempWidth += titleText.measuredWidth
+        }
+        receiverItems.forEach {
+            if (tempWidth + it.itemView.measuredWidth > maxWidth) {
+                tempWidth = paddingLeft
+                tempHeight += (it.itemView.measuredHeight + verSpacing)
             }
-            tempWidth += (it.measuredWidth + horSpacing)
+            tempWidth += (it.itemView.measuredWidth + horSpacing)
         }
         if (tempWidth + editText.measuredWidth > maxWidth) {
-            tempHeight += editText.measuredHeight
+            tempHeight += editText.measuredHeight + verSpacing
         }
+        tempHeight += paddingBottom
         setMeasuredDimension(widthMeasureSpec, tempHeight)
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        var tempWidth = leftPadding
-        var tempHeight = 0
-        textViews.forEach {
-            if (tempWidth + it.measuredWidth > measuredWidth - rightPadding) {
-                tempWidth = leftPadding
-                tempHeight += (it.measuredHeight + verSpacing)
-            }
-            it.layout(tempWidth, tempHeight, tempWidth + it.measuredWidth, tempHeight + it.measuredHeight)
-            tempWidth += (it.measuredWidth + horSpacing)
+        if (isInEditMode)
+            return
+        var tempWidth = paddingLeft
+        var tempHeight = paddingTop
+        if (showTitle) {
+            titleText.layout(tempWidth, tempHeight, tempWidth + titleText.measuredWidth, tempWidth + titleText.measuredHeight)
+            tempWidth += titleText.measuredWidth
         }
-        if (tempWidth + editText.measuredWidth > measuredWidth - rightPadding) {
-            tempWidth = leftPadding
-            tempHeight += editText.measuredHeight
+        receiverItems.forEach {
+            if (tempWidth + it.itemView.measuredWidth > measuredWidth - paddingRight) {
+                tempWidth = paddingLeft
+                tempHeight += (it.itemView.measuredHeight + verSpacing)
+            }
+            it.itemView.layout(tempWidth, tempHeight, tempWidth + it.itemView.measuredWidth, tempHeight + it.itemView.measuredHeight)
+            tempWidth += (it.itemView.measuredWidth + horSpacing)
+        }
+        if (tempWidth + editText.measuredWidth > measuredWidth - paddingRight) {
+            tempWidth = paddingLeft
+            tempHeight += editText.measuredHeight + verSpacing
         }
         editText.layout(tempWidth, tempHeight, tempWidth + editText.measuredWidth, tempHeight + editText.measuredHeight)
 
-        if (childCount > 1) {
+        if (receiverItems.size > 0) {
             //有至少一个联系人
-            for (pos in 0..childCount - 2) {
+            for (pos in 1..childCount - 2) {
                 getChildAt(pos).setOnClickListener {
                     val child = getChildAt(pos) as TextView
-                    deleteItem(child.text.toString(), pos)
+                    //有个TitleTextView在位置0，跟receiverItems对应位置时要-1
+                    deleteItem(child, pos - 1)
                 }
             }
         }
     }
 
-    private fun deleteItem(text: String, pos: Int) {
+    private fun deleteItem(tv: TextView, pos: Int) {
         hideInputMethod()
         isDeleting = true
-        alertDialog.setTitle("提示").setMessage("确定删除 $text 么？")
+        var msg = if (tv.tag == null) tv.text else "${tv.text}(${tv.tag})"
+        if ("、" in msg) {
+            msg = msg.replace("、".toRegex(), "")
+        }
+        alertDialog.setTitle("提示").setMessage("确定删除 $msg 么？")
                 .setNegativeButton("不", { p0, p1 -> isDeleting = false })
                 .setPositiveButton("嗯", { p0, p1 ->
-                    items.removeItem(pos)
+                    receiverItems.removeAt(pos)
+                    //有个TitleTextView在位置0，但是receiverItems不包含这个，要+1
+                    removeViewAt(pos + 1)
                     isDeleting = false
                 })
                 .setCancelable(false)
                 .show()
     }
 
-    private fun MutableList<Receiver>.addItem(receiver: Receiver) {
-        this.add(receiver)
-        addTextView(receiver.name)
-    }
-
-    private fun MutableList<Receiver>.removeItem(position: Int) {
-        this.removeAt(position)
-        removeView(textViews[position])
-        textViews.removeAt(position)
-    }
-
-    class Receiver(val mobile: String, name: String = "") {
-        val name = if (name.contentEquals("")) mobile else name
-    }
-
-    fun getMobileNumber(): String {
-        if (items.size == 0)
-            return ""
+    fun getMobileNumbers(): String {
+        if (receiverItems.size == 0) return ""
         val sb = StringBuilder()
-        items.forEach {
-            sb.append(",").append(it.mobile)
-        }
+        receiverItems.forEach { sb.append(",").append(it.contact.mobile) }
         return sb.substring(1, sb.length)
     }
 
@@ -183,4 +209,6 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
             inputManger.hideSoftInputFromWindow(activity.window.peekDecorView().windowToken, 0)
         }
     }
+
+    fun getEditText() = editText
 }

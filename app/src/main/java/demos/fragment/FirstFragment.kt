@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.victor.androiddemos.R
 import demos.annotations.bind.Bind
 import demos.annotations.bind.BindView
@@ -35,18 +34,16 @@ class FirstFragment : Fragment() {
     }
 
     private fun initReceiversGroup() {
-        val list = arrayListOf<ReceiversGroup.Receiver>()
-        list.add(ReceiversGroup.Receiver("11111111111"))
-        list.add(ReceiversGroup.Receiver("22222222222"))
-        list.add(ReceiversGroup.Receiver("33333333333", "张三"))
-        list.add(ReceiversGroup.Receiver("44444444444", "李四"))
-        list.add(ReceiversGroup.Receiver("55555555555", "王二麻子"))
-        list.add(ReceiversGroup.Receiver("66666666666"))
-        list.add(ReceiversGroup.Receiver("77777777777"))
-        list.add(ReceiversGroup.Receiver("88888888888"))
-        receivers_group.addTextViews(list)
-        receivers_group.addTextViews(list)
-        println(receivers_group.getMobileNumber())
+        val list = arrayListOf<ReceiversGroup.Contact>()
+        list.add(ReceiversGroup.Contact("11111111111"))
+        list.add(ReceiversGroup.Contact("22222222222"))
+        list.add(ReceiversGroup.Contact("33333333333", "张三"))
+        list.add(ReceiversGroup.Contact("44444444444", "李四"))
+        list.add(ReceiversGroup.Contact("55555555555", "王二麻子"))
+        list.add(ReceiversGroup.Contact("66666666666"))
+        list.add(ReceiversGroup.Contact("77777777777"))
+        list.add(ReceiversGroup.Contact("88888888888"))
+        receivers_group.addContacts(list)
     }
 
     override fun onDestroyView() {

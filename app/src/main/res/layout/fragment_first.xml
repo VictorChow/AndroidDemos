@@ -105,7 +105,9 @@
                 android:id="@+id/receivers_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp" />
 
         </LinearLayout>
     </ScrollView>
