@@ -22,7 +22,7 @@ class CycleViewPagerParent(context: Context, attributeSet: AttributeSet) : ViewG
     private var isAutomaticSlide: Boolean
     private var showIndicator: Boolean
     private val cycleViewPager: CycleViewPager
-    private val indicatorContainer: LinearLayout
+    private lateinit var indicatorContainer: RelativeLayout
 
     init {
         val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.CycleViewPagerParent)
@@ -36,11 +36,19 @@ class CycleViewPagerParent(context: Context, attributeSet: AttributeSet) : ViewG
         typedArray.recycle()
         cycleViewPager = CycleViewPager(context, attributeSet)
         addView(cycleViewPager, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
-        indicatorContainer = LinearLayout(context, attributeSet)
-        indicatorContainer.gravity = Gravity.CENTER
-        indicatorContainer.orientation = LinearLayout.HORIZONTAL
+        initContainer(context, attributeSet)
         addView(indicatorContainer, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         indicatorContainer.visibility = if (showIndicator) View.VISIBLE else View.GONE
+    }
+
+    private fun initContainer(context: Context, attributeSet: AttributeSet) {
+        indicatorContainer = RelativeLayout(context, attributeSet)
+        val linerLayout = LinearLayout(context, attributeSet)
+        linerLayout.gravity = Gravity.CENTER
+        linerLayout.orientation = LinearLayout.HORIZONTAL
+        val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+        lp.addRule(RelativeLayout.CENTER_IN_PARENT)
+        indicatorContainer.addView(linerLayout, lp)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

@@ -40,6 +40,7 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
     private var isDeleting = false
     private val verSpacing = DisplayUtil.dp2px(0f)
     private val horSpacing = DisplayUtil.dp2px(0f)
+    private val color = Color.MAGENTA
 
     init {
         alertDialog = AlertDialog.Builder(context as Activity)
@@ -60,7 +61,7 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
         titleText.text = "收件人："
         titleText.gravity = Gravity.CENTER
         titleText.textSize = textSize
-        titleText.setTextColor(Color.CYAN)
+        titleText.setTextColor(color)
 //        titleText.setPadding(0, 0, DisplayUtil.dp2px(10f), 0)
         addView(titleText, childCount - 1, LayoutParams(LayoutParams.WRAP_CONTENT, childHeight))
     }
@@ -71,8 +72,8 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
         editText.maxLines = 1
         editText.hint = "..."
         editText.textSize = textSize
-        editText.setTextColor(Color.CYAN)
-        editText.setHintTextColor(Color.CYAN)
+        editText.setTextColor(color)
+        editText.setHintTextColor(color)
         editText.minWidth = editText.paint.measureText("123456789012").toInt()
         editText.setPadding(0, 0, 0, 0)
         editText.filters = arrayOf<InputFilter>(android.text.InputFilter.LengthFilter(11))
@@ -109,7 +110,7 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
         }
         textView.gravity = Gravity.CENTER
         textView.textSize = textSize
-        textView.setTextColor(Color.CYAN)
+        textView.setTextColor(color)
 //        textView.setPadding(DisplayUtil.dp2px(10f), 0, DisplayUtil.dp2px(10f), 0)
         addView(textView, childCount - 1, LayoutParams(LayoutParams.WRAP_CONTENT, childHeight))
         receiverItems.add(ReceiverItem(textView, contact))

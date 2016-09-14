@@ -66,6 +66,7 @@
         <activity android:name="demos.drag_recycleview.DragRecycleViewActivity" />
         <activity android:name="demos.activity.VerticalMenuActivity" />
         <activity android:name="demos.activity.PTIRecyclerViewActivity" />
+        <activity android:name="demos.activity.A2048Activity" />
     </application>
 
 </manifest>

@@ -31,6 +31,7 @@ class FirstFragment : Fragment() {
             Bus.postAnnotation(et_msg_send.text.toString())
         }
         initReceiversGroup()
+        cycle_view_pager.setUp(intArrayOf(R.drawable.bg_main, R.drawable.ic_launcher, R.drawable.iv_myself))
     }
 
     private fun initReceiversGroup() {
@@ -42,7 +43,7 @@ class FirstFragment : Fragment() {
         list.add(ReceiversGroup.Contact("55555555555", "王二麻子"))
         list.add(ReceiversGroup.Contact("66666666666"))
         list.add(ReceiversGroup.Contact("77777777777"))
-        list.add(ReceiversGroup.Contact("88888888888"))
+//        list.add(ReceiversGroup.Contact("88888888888"))
         receivers_group.addContacts(list)
     }
 

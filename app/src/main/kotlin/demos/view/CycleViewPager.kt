@@ -1,5 +1,6 @@
 package demos.view
 
+import android.animation.IntEvaluator
 import android.content.Context
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.victor.androiddemos.R
 import demos.util.DisplayUtil
 import demos.util.ImageUtil
@@ -31,7 +33,7 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
 
     private var mTimer: Timer? = null
     private var mTask: TimerTask? = null
-    private var container: LinearLayout? = null     // indicator容器
+    private var containerView: RelativeLayout? = null     // indicator容器
     private val imageViews: MutableList<ImageView> = arrayListOf()
     private val indicators: MutableList<ImageView> = arrayListOf()
 
@@ -43,6 +45,8 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
 
     private var onPagerItemClick: ((Int) -> Unit)? = null
 
+    private var startX = 0f
+
     private fun setAdapter(adapter: CycleViewPagerAdapter) {
         super.setAdapter(adapter)
         shouldDestroy = true
@@ -52,6 +56,11 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
         currentItem = if (isCycle) 1 else 0
         addIndicator()
         addOnPageChangeListener(object : OnPageChangeListener {
+            private val ev = IntEvaluator()
+            private var dis = 0
+            private val tar by lazy { containerView!!.getChildAt(1) }
+            private val indiNum = (containerView!!.getChildAt(0) as LinearLayout).childCount
+
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -76,6 +85,21 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
                         }
                     }
                 }
+
+                if (containerView != null && (containerView!!.getChildAt(0) as LinearLayout).childCount > 1) {
+                    if (isCycle) {
+                        if (position == 0 || (position >= indiNum && positionOffset != 0f))
+                            return
+                    }
+                    if (dis == 0) {
+                        val container = containerView!!.getChildAt(0) as LinearLayout
+                        dis = (container.getChildAt(1).x - container.getChildAt(0).x).toInt()
+                    }
+                    val realPos = if (isCycle) {
+                        if (position > indiNum) 0 else (position - 1)
+                    } else position
+                    tar.x = startX + (realPos * DisplayUtil.dp2px(9f + 3f + 3f)) + ev.evaluate(positionOffset, 0, dis).toFloat()
+                }
             }
 
             override fun onPageSelected(position: Int) {
@@ -87,7 +111,7 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
                         index = 1
                     }
                 }
-                if (container != null) {
+                if (containerView != null) {
                     setIndicatorResource(index)
                 }
             }
@@ -115,23 +139,27 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
      * CycleViewPager添加indicator
      */
     private fun addIndicator() {
-        if (container == null) {
+        if (containerView == null) {
             return
         }
-        if (container!!.childCount > 0) {
-            container!!.removeAllViews()
+        if (containerView!!.childCount == 0) {
+            return
+        }
+        val container = containerView!!.getChildAt(0) as LinearLayout
+        if (container.childCount > 0) {
+            container.removeAllViews()
         }
         for (i in 0..(mCount - 2) - 1) {
             val imageView = ImageView(context)
             indicators.add(imageView)
             imageView.isSelected = i == 0
             if (this.selectorId == 0) {
-                imageView.setImageResource(R.drawable.indicator_circle_selector)
+                imageView.setImageResource(R.drawable.indicator_circle_unselected)
                 val px = DisplayUtil.dp2px(9f)
                 val params = LinearLayout.LayoutParams(px, px)
                 val margin = DisplayUtil.dp2px(3f)
                 params.setMargins(margin, 0, margin, 0)
-                container!!.addView(imageView, params)
+                container.addView(imageView, params)
             } else {
                 imageView.setImageResource(this.selectorId)
                 val height = DisplayUtil.dp2px(this.indicatorHeight.toFloat())
@@ -139,8 +167,17 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
                 val margin = DisplayUtil.dp2px(this.spacingDip.toFloat())
                 val params = LinearLayout.LayoutParams(width, height)
                 params.setMargins(margin, 0, margin, 0)
-                container!!.addView(imageView, params)
+                container.addView(imageView, params)
             }
+        }
+        val imageView = ImageView(context)
+        imageView.setImageResource(R.drawable.indicator_circle_selected)
+        val px = DisplayUtil.dp2px(9f)
+        val params = LinearLayout.LayoutParams(px, px)
+        containerView!!.addView(imageView, params)
+        post {
+            imageView.x = container.x + container.getChildAt(0).x
+            startX = container.x + DisplayUtil.dp2px(3f)
         }
     }
 
@@ -150,21 +187,26 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
      */
     private fun setIndicatorResource(pos: Int) {
         var position = pos
-        if (container == null) {
+        if (containerView == null) {
+            return
+        }
+        if (containerView!!.childCount == 0) {
             return
         }
         if (position == 0 && isCycle) {
             return
         }
+        val container = containerView!!.getChildAt(0) as LinearLayout
+
         if (!isCycle) {
             position++
         }
-        if (container!!.childCount > 1) {
+        if (container.childCount > 1) {
             post {
-                container!!.getChildAt(position - 1).isSelected = true
+                container.getChildAt(position - 1).isSelected = true
                 for (i in 0..(mCount - 2) - 1) {
                     if (i != position - 1) {
-                        container!!.getChildAt(i).isSelected = false
+                        container.getChildAt(i).isSelected = false
                     }
                 }
             }
@@ -175,7 +217,7 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
      * 开启定时任务
      */
     private fun startTask() {
-        if (container == null) {
+        if (containerView == null) {
             return
         }
         if (isTaskRunning) {
@@ -301,16 +343,16 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
         super.setCurrentItem(index)
     }
 
-    fun setUp(resource: IntArray, isCycle: Boolean, container: LinearLayout?) {
+    fun setUp(resource: IntArray, isCycle: Boolean, container: RelativeLayout?) {
         this.isCycle = isCycle
-        this.container = container
+        this.containerView = container
         val cycleViewPagerAdapter = CycleViewPagerAdapter(resource)
         setAdapter(cycleViewPagerAdapter)
     }
 
-    fun setUp(imageUrl: MutableList<String>, isCycle: Boolean, container: LinearLayout?) {
+    fun setUp(imageUrl: MutableList<String>, isCycle: Boolean, container: RelativeLayout?) {
         this.isCycle = isCycle
-        this.container = container
+        this.containerView = container
         val cycleViewPagerAdapter = CycleViewPagerAdapter(imageUrl)
         setAdapter(cycleViewPagerAdapter)
     }
@@ -331,7 +373,7 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
             }
             if (resource.size == 1) {
                 isCycle = false
-                container!!.visibility = View.INVISIBLE
+                containerView!!.visibility = View.INVISIBLE
             }
         }
 
@@ -346,9 +388,9 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
             }
             if (imageUrl.size == 1) {
                 isCycle = false
-                container!!.visibility = View.INVISIBLE
+                containerView!!.visibility = View.INVISIBLE
             } else {
-                container!!.visibility = View.VISIBLE
+                containerView!!.visibility = View.VISIBLE
             }
         }
 
@@ -361,7 +403,7 @@ class CycleViewPager(context: Context, attrs: AttributeSet) : ViewPager(context,
             view.iv_pager_item.setOnClickListener { onPagerItemClick?.invoke(if (isCycle) position - 1 else position) }
             imageViews.add(view.iv_pager_item)
             if (resource != null) {
-                view.iv_pager_item.setImageResource(resource!![position])
+                post { view.iv_pager_item.setImageResource(resource!![position]) }
             } else {
                 post { ImageUtil.bind(view.iv_pager_item, imageUrl!![position]) }
             }

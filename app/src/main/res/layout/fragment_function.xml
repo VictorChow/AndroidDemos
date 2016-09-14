@@ -32,6 +32,16 @@
             android:text="下拉添加的RecyclerView" />
 
         <Button
+            android:id="@+id/btn_2048"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_btn_ripple"
+            android:text="2048 DEMO" />
+
+        <Button
             android:id="@+id/btn_slide_close"
             android:layout_width="match_parent"
             android:layout_height="60dp"

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.victor.androiddemos.R;
 
+import demos.activity.A2048Activity;
 import demos.activity.AppInfoActivity;
 import demos.activity.ClearCacheActivity;
 import demos.activity.GetLocationActivity;
@@ -33,7 +34,7 @@ public class FunctionFragment extends BaseFragment {
     @BindClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
             R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
             R.id.btn_all_contact, R.id.btn_open_camera, R.id.btn_get_location, R.id.btn_drag_recycler_view,
-            R.id.btn_vertical_menu, R.id.btn_pti_recycler})
+            R.id.btn_vertical_menu, R.id.btn_pti_recycler, R.id.btn_2048})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pti_recycler:
@@ -77,6 +78,9 @@ public class FunctionFragment extends BaseFragment {
                 break;
             case R.id.btn_vertical_menu:
                 startActivity(new Intent(mContext, VerticalMenuActivity.class));
+                break;
+            case R.id.btn_2048:
+                startActivity(new Intent(mContext, A2048Activity.class));
                 break;
         }
     }
