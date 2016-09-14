@@ -30,7 +30,7 @@ android {
 }
 
 buildscript {
-    ext.kotlin_version = '1.0.4-eap-114'
+    ext.kotlin_version = '1.0.4-eap-118'
     repositories {
         maven {
             url 'http://dl.bintray.com/kotlin/kotlin-eap'
