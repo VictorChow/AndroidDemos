@@ -14,15 +14,18 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import demos.annotations.bus.MsgEvent;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
 import demos.annotations.bind.BindView;
 import demos.annotations.bus.Bus;
 import demos.annotations.bus.BusMethod;
+import demos.annotations.bus.MsgEvent;
 import demos.view.AutoImageView;
 import demos.view.CountDownView;
+import demos.view.DownloadProgressView;
 import demos.view.MarqueeView;
+
+import static com.victor.androiddemos.R.id.download_progress;
 
 
 public class CustomViewFragment extends Fragment implements Runnable {
@@ -35,6 +38,8 @@ public class CustomViewFragment extends Fragment implements Runnable {
     CountDownView countDownView;
     @BindView(R.id.marquee_view)
     MarqueeView marqueeView;
+    @BindView(download_progress)
+    DownloadProgressView downloadProgressView;
     private boolean isThreadRun;
 //    private Handler handler = new Handler() {
 //        @Override
@@ -100,6 +105,19 @@ public class CustomViewFragment extends Fragment implements Runnable {
         data.add("五五五五五");
         data.add("六六六六六");
         marqueeView.setContentData(data);
+
+        downloadProgressView.setOnClickListener(v -> new Thread(() -> {
+            float p = 0f;
+            while (p <= 101f) {
+                downloadProgressView.setProgress(p);
+                p += 0.1f;
+                try {
+                    Thread.sleep(8);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start());
     }
 
     @Override

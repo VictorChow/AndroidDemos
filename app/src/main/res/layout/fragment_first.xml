@@ -92,15 +92,6 @@
                 android:layout_height="1px"
                 android:background="#757575" />
 
-            <demos.view.DownloadProgressView
-                android:id="@+id/download_progress"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"

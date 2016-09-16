@@ -32,17 +32,6 @@ class FirstFragment : Fragment() {
         }
         initReceiversGroup()
         cycle_view_pager.setUp(intArrayOf(R.drawable.bg_main, R.drawable.ic_launcher, R.drawable.iv_myself))
-
-        download_progress.setOnClickListener {
-            Thread({
-                var p = 0f
-                while (p <= 101f) {
-                    download_progress.setProgress(p.toFloat())
-                    p += 0.1f
-                    Thread.sleep(10)
-                }
-            }).start()
-        }
     }
 
     private fun initReceiversGroup() {

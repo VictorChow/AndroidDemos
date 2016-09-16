@@ -67,6 +67,7 @@
         <activity android:name="demos.activity.VerticalMenuActivity" />
         <activity android:name="demos.activity.PTIRecyclerViewActivity" />
         <activity android:name="demos.activity.A2048Activity" />
+        <activity android:name="demos.activity.PayPassWordActivity" />
     </application>
 
 </manifest>
