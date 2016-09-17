@@ -21,11 +21,10 @@ import demos.annotations.bus.Bus;
 import demos.annotations.bus.BusMethod;
 import demos.annotations.bus.MsgEvent;
 import demos.view.AutoImageView;
+import demos.view.CircleRevealView;
 import demos.view.CountDownView;
 import demos.view.DownloadProgressView;
 import demos.view.MarqueeView;
-
-import static com.victor.androiddemos.R.id.download_progress;
 
 
 public class CustomViewFragment extends Fragment implements Runnable {
@@ -38,7 +37,9 @@ public class CustomViewFragment extends Fragment implements Runnable {
     CountDownView countDownView;
     @BindView(R.id.marquee_view)
     MarqueeView marqueeView;
-    @BindView(download_progress)
+    @BindView(R.id.circle_reveal)
+    CircleRevealView circleReveal;
+    @BindView(R.id.download_progress)
     DownloadProgressView downloadProgressView;
     private boolean isThreadRun;
 //    private Handler handler = new Handler() {
@@ -118,6 +119,9 @@ public class CustomViewFragment extends Fragment implements Runnable {
                 }
             }
         }).start());
+
+        circleReveal.setImageResource(R.drawable.iv_scratch_card);
+        circleReveal.setOnClickListener(v -> circleReveal.circleReveal());
     }
 
     @Override
