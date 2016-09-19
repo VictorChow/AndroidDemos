@@ -129,6 +129,7 @@ class PTIRecyclerView(context: Context, attributeSet: AttributeSet) : ViewGroup(
     }
 
 
+    @Suppress("UNCHECKED_CAST")
     abstract class Adapter<T : Any>(val context: Context, val layoutId: Int, val data: MutableList<T>) : RecyclerView.Adapter<Adapter.Holder>() {
         private val clazz: Class<T>
 
