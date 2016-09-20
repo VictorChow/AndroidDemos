@@ -11,8 +11,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 
+import java.util.Locale;
+
 /**
- * Created by Victor on 15/12/4.
+ * Author : Victor
+ * Time : 15/12/4
  */
 public class RotateView extends View {
     private Paint mPaint;
@@ -128,7 +131,7 @@ public class RotateView extends View {
             }
             mPaint.setColor(Color.parseColor("#ff444444"));
             mPaint.setTextSize(120);
-            mValue = String.format("%.1f", (mDx / mScale) + mMiddleValue) + " kg";
+            mValue = String.format(Locale.CHINA, "%.1f", (mDx / mScale) + mMiddleValue) + " kg";
             canvas.drawText(mValue, mHalfLength, mLength / 3, mPaint);
         }
     }

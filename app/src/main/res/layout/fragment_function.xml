@@ -1,199 +1,227 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="手势" />
+            android:orientation="vertical">
 
-        <demos.view.GestureVelocityView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/blue2" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="手势" />
 
-        <Button
-            android:id="@+id/btn_pti_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="下拉添加的RecyclerView" />
+            <demos.view.GestureVelocityView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/blue2" />
 
-        <Button
-            android:id="@+id/btn_click_zoom"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="点击放大悬浮" />
+            <Button
+                android:id="@+id/btn_pti_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="下拉添加的RecyclerView" />
 
-        <Button
-            android:id="@+id/btn_2048"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="2048 DEMO" />
+            <Button
+                android:id="@+id/btn_click_zoom"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="点击放大悬浮" />
 
-        <Button
-            android:id="@+id/btn_pay_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="支付界面" />
+            <Button
+                android:id="@+id/btn_2048"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="2048 DEMO" />
 
-        <Button
-            android:id="@+id/btn_slide_close"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="滑动关闭的Activity" />
+            <Button
+                android:id="@+id/btn_pay_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="支付界面" />
 
-        <Button
-            android:id="@+id/btn_service"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="Service Demo" />
+            <Button
+                android:id="@+id/btn_slide_close"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="滑动关闭的Activity" />
 
-        <Button
-            android:id="@+id/btn_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="Different Span In Recycler View" />
+            <Button
+                android:id="@+id/btn_five_star"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="爱国润" />
 
-        <Button
-            android:id="@+id/btn_drag_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="Drag RecyclerView" />
+            <Button
+                android:id="@+id/btn_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="Different Span In Recycler View" />
 
-        <Button
-            android:id="@+id/btn_vertical_menu"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="Vertical Menu" />
+            <Button
+                android:id="@+id/btn_drag_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="Drag RecyclerView" />
 
-        <Button
-            android:id="@+id/btn_sms_monitor"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="新短信监听" />
+            <Button
+                android:id="@+id/btn_vertical_menu"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="Vertical Menu" />
 
-        <Button
-            android:id="@+id/btn_sms_local"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="查看所有短信" />
+            <Button
+                android:id="@+id/btn_service"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="Service Demo" />
 
-        <Button
-            android:id="@+id/btn_telephony_monitor"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="电话监听" />
+            <Button
+                android:id="@+id/btn_sms_monitor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="新短信监听" />
 
-        <Button
-            android:id="@+id/btn_installed_app"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="已安装应用" />
+            <Button
+                android:id="@+id/btn_sms_local"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="查看所有短信" />
 
-        <Button
-            android:id="@+id/btn_clear_cache"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="扫描缓存" />
+            <Button
+                android:id="@+id/btn_telephony_monitor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="电话监听" />
 
-        <Button
-            android:id="@+id/btn_all_contact"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="读取通讯录" />
+            <Button
+                android:id="@+id/btn_installed_app"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="已安装应用" />
 
-        <Button
-            android:id="@+id/btn_open_camera"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="无预览拍照" />
+            <Button
+                android:id="@+id/btn_clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="扫描缓存" />
 
-        <Button
-            android:id="@+id/btn_get_location"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_btn_ripple"
-            android:text="获取经纬度" />
+            <Button
+                android:id="@+id/btn_all_contact"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="读取通讯录" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            <Button
+                android:id="@+id/btn_open_camera"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="无预览拍照" />
 
-    </LinearLayout>
-</ScrollView>
+            <Button
+                android:id="@+id/btn_get_location"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="获取经纬度" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/float_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        app:fabSize="normal"
+        app:layout_behavior="demos.util.behavior.CustomBehavior" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -122,6 +122,51 @@
                 app:proportionHeight="1"
                 app:proportionWidth="2" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="等宽间距TextView" />
+
+            <LinearLayout
+                android:id="@+id/fit_text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:orientation="vertical">
+
+                <demos.view.FitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一二"
+                    android:textColor="@color/black2"
+                    android:textSize="15sp" />
+
+                <demos.view.FitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一二三"
+                    android:textColor="@color/black2"
+                    android:textSize="15sp" />
+
+                <demos.view.FitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一二三四"
+                    android:textColor="@color/black2"
+                    android:textSize="15sp" />
+
+                <demos.view.FitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一二三四五"
+                    android:textColor="@color/black2"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

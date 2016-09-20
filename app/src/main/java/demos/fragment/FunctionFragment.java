@@ -4,6 +4,7 @@ package demos.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import demos.activity.A2048Activity;
 import demos.activity.AppInfoActivity;
 import demos.activity.ClearCacheActivity;
 import demos.activity.ClickZoomActivity;
+import demos.activity.FiveStarActivity;
 import demos.activity.GetLocationActivity;
 import demos.activity.PTIRecyclerViewActivity;
 import demos.activity.PayPassWordActivity;
@@ -29,6 +31,7 @@ import demos.activity.VerticalMenuActivity;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
 import demos.drag_recycleview.DragRecycleViewActivity;
+import demos.util.ShowToast;
 
 
 public class FunctionFragment extends BaseFragment {
@@ -36,7 +39,8 @@ public class FunctionFragment extends BaseFragment {
     @BindClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
             R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
             R.id.btn_all_contact, R.id.btn_open_camera, R.id.btn_get_location, R.id.btn_drag_recycler_view,
-            R.id.btn_vertical_menu, R.id.btn_pti_recycler, R.id.btn_2048, R.id.btn_pay_pwd, R.id.btn_click_zoom})
+            R.id.btn_vertical_menu, R.id.btn_pti_recycler, R.id.btn_2048, R.id.btn_pay_pwd, R.id.btn_click_zoom,
+            R.id.btn_five_star, R.id.float_btn})
     void onItemClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pti_recycler:
@@ -89,6 +93,12 @@ public class FunctionFragment extends BaseFragment {
                 break;
             case R.id.btn_click_zoom:
                 startActivity(new Intent(mContext, ClickZoomActivity.class));
+                break;
+            case R.id.btn_five_star:
+                startActivity(new Intent(mContext, FiveStarActivity.class));
+                break;
+            case R.id.float_btn:
+                ShowToast.shortToast("哦？");
                 break;
         }
     }

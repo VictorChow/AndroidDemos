@@ -28,26 +28,26 @@ class DownloadProgressView(context: Context, attributeSet: AttributeSet) : View(
     private val textClipRect = Rect()
     private val progressArcClipRectF = RectF()
 
-    private var bgColor = Color.parseColor("#0074e1")
+    private var progressColor = Color.parseColor("#0074e1")
 
     init {
         textPaint = Paint()
         textPaint.isAntiAlias = true
         textPaint.textSize = textSize
         textPaint.textAlign = Paint.Align.LEFT
-        textPaint.color = bgColor
+        textPaint.color = progressColor
         textPaint.style = Paint.Style.STROKE
 
         bgPaint = Paint()
         bgPaint.isAntiAlias = true
         bgPaint.style = Paint.Style.FILL
-        bgPaint.color = bgColor
+        bgPaint.color = progressColor
 
         borderPaint = Paint()
         borderPaint.isAntiAlias = true
         borderPaint.style = Paint.Style.STROKE
         borderPaint.strokeWidth = borderWidth
-        borderPaint.color = bgColor
+        borderPaint.color = progressColor
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -95,7 +95,7 @@ class DownloadProgressView(context: Context, attributeSet: AttributeSet) : View(
         textY = ((height - (textBounds.bottom - textBounds.top)) / 2 + (textBounds.bottom - textBounds.top).toFloat())
 
         if (progressX <= textX + (textBounds.right - textBounds.left)) {
-            textPaint.color = bgColor
+            textPaint.color = progressColor
             canvas.drawText(text, textX, textY, textPaint)
         }
         if (progressX >= textX) {

@@ -46,4 +46,7 @@
         <attr name="showIndicator" format="boolean" />
         <attr name="indicatorMarginBottom" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="FiveStarView">
+        <attr name="color" format="color" />
+    </declare-styleable>
 </resources>

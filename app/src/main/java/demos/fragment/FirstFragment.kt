@@ -12,6 +12,7 @@ import demos.annotations.bind.Bind
 import demos.annotations.bind.BindView
 import demos.annotations.bus.Bus
 import demos.annotations.bus.BusMethod
+import demos.view.FitTextView
 import demos.view.ReceiversGroup
 import kotlinx.android.synthetic.main.fragment_first.*
 
@@ -31,6 +32,7 @@ class FirstFragment : Fragment() {
             Bus.postAnnotation(et_msg_send.text.toString())
         }
         initReceiversGroup()
+        initFitTextViews()
         cycle_view_pager.setUp(intArrayOf(R.drawable.bg_main, R.drawable.ic_launcher, R.drawable.iv_myself))
     }
 
@@ -45,6 +47,14 @@ class FirstFragment : Fragment() {
         list.add(ReceiversGroup.Contact("77777777777"))
 //        list.add(ReceiversGroup.Contact("88888888888"))
         receivers_group.addContacts(list)
+    }
+
+    private fun initFitTextViews() {
+        val l = arrayListOf<FitTextView>()
+        for (i in 0..fit_text_container.childCount - 1) {
+            l.add(fit_text_container.getChildAt(i) as FitTextView)
+        }
+        FitTextView.adjustTextViewsWidth(l)
     }
 
     override fun onDestroyView() {

@@ -69,6 +69,7 @@
         <activity android:name="demos.activity.A2048Activity" />
         <activity android:name="demos.activity.PayPassWordActivity" />
         <activity android:name="demos.activity.ClickZoomActivity" />
+        <activity android:name="demos.activity.FiveStarActivity" />
     </application>
 
 </manifest>

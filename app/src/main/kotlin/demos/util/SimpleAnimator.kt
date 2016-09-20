@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
 
 /**
@@ -12,19 +13,13 @@ import android.view.animation.Interpolator
 class SimpleAnimator(private val targetView: View?) {
     private var duration = 300L
     private var property = ""
-    private var floatValues: FloatArray = floatArrayOf()
-    private var intValues: IntArray = intArrayOf()
-    private var interpolator: Interpolator? = null
-    private var listener: Animator.AnimatorListener? = null
+    private var values: Array<out Number> = arrayOf()
+    private var interpolator: Interpolator = AccelerateDecelerateInterpolator()
+    private var listener: AnimatorListener? = null
     private var updateListener: ValueAnimator.AnimatorUpdateListener? = null
 
-    fun floatValues(vararg values: Float): SimpleAnimator {
-        this.floatValues = values
-        return this
-    }
-
-    fun intValues(vararg values: Int): SimpleAnimator {
-        this.intValues = values
+    fun values(vararg values: Number): SimpleAnimator {
+        this.values = values
         return this
     }
 
@@ -43,7 +38,7 @@ class SimpleAnimator(private val targetView: View?) {
         return this
     }
 
-    fun listener(listener: Animator.AnimatorListener): SimpleAnimator {
+    fun listener(listener: AnimatorListener): SimpleAnimator {
         this.listener = listener
         return this
     }
@@ -56,11 +51,16 @@ class SimpleAnimator(private val targetView: View?) {
     fun go() {
         if (targetView == null)
             return
+        if (values.size < 2) {
+            throw IllegalArgumentException("values起码得两个值啊！")
+        }
+        val animator: ValueAnimator
         if (property.contentEquals("height") || property.contentEquals("width")) {
+            val intValues = arrayListOf<Int>()
+            this.values.forEach { intValues.add(it.toInt()) }
             val lp = targetView.layoutParams
-            val animator = ValueAnimator()
-            animator.duration = duration
-            animator.setIntValues(*intValues)
+            animator = ValueAnimator()
+            animator.setIntValues(*(intValues.toIntArray()))
             animator.addUpdateListener {
                 when (property) {
                     "width" -> lp.width = it.animatedValue as Int
@@ -68,51 +68,51 @@ class SimpleAnimator(private val targetView: View?) {
                 }
                 targetView.layoutParams = lp
             }
-            animator.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(animation: Animator?) {
-                }
-
+            animator.addListener(object : AnimatorListener() {
                 override fun onAnimationEnd(animation: Animator?) {
                     if (intValues[intValues.lastIndex] == 0) {
                         targetView.visibility = View.INVISIBLE
                     }
                 }
 
-                override fun onAnimationCancel(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator?) {
+                    targetView.visibility = View.VISIBLE
+                }
+            })
+        } else {
+            val floatValues = arrayListOf<Float>()
+            this.values.forEach { floatValues.add(it.toFloat()) }
+            animator = ObjectAnimator.ofFloat(this.targetView, property, *(floatValues.toFloatArray()))
+            animator.addListener(object : AnimatorListener() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    if (property.contentEquals("alpha") && floatValues[floatValues.lastIndex] == 0f) {
+                        targetView.visibility = View.INVISIBLE
+                    }
                 }
 
                 override fun onAnimationStart(animation: Animator?) {
                     targetView.visibility = View.VISIBLE
                 }
             })
-            interpolator?.let { animator.interpolator = interpolator }
-            listener?.let { animator.addListener(listener) }
-            updateListener?.let { animator.addUpdateListener(updateListener) }
-            animator.start()
-        } else {
-            val animator = ObjectAnimator.ofFloat(this.targetView, property, *floatValues)
-            animator.duration = duration
-            animator.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(p0: Animator?) {
-                }
+        }
+        animator.duration = duration
+        animator.interpolator = interpolator
+        listener?.let { animator.addListener(listener) }
+        updateListener?.let { animator.addUpdateListener(updateListener) }
+        animator.start()
+    }
 
-                override fun onAnimationEnd(p0: Animator?) {
-                    if (property.contentEquals("alpha") && floatValues[floatValues.lastIndex] == 0f) {
-                        targetView.visibility = View.INVISIBLE
-                    }
-                }
+    open class AnimatorListener : Animator.AnimatorListener {
+        override fun onAnimationRepeat(animation: Animator?) {
+        }
 
-                override fun onAnimationCancel(p0: Animator?) {
-                }
+        override fun onAnimationEnd(animation: Animator?) {
+        }
 
-                override fun onAnimationStart(p0: Animator?) {
-                    targetView.visibility = View.VISIBLE
-                }
-            })
-            interpolator?.let { animator.interpolator = interpolator }
-            listener?.let { animator.addListener(listener) }
-            updateListener?.let { animator.addUpdateListener(updateListener) }
-            animator.start()
+        override fun onAnimationCancel(animation: Animator?) {
+        }
+
+        override fun onAnimationStart(animation: Animator?) {
         }
     }
 }
