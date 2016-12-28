@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.victor.androiddemos"
         minSdkVersion 21
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -30,14 +30,12 @@ android {
 }
 
 buildscript {
-    ext.kotlin_version = '1.0.4-eap-118'
-    ext.android_support = '24.2.1'
+    ext.kotlin_version = '1.0.6'
+    ext.android_support = '25.1.0'
 
     repositories {
-        mavenCentral()
-        maven {
-            url 'http://dl.bintray.com/kotlin/kotlin-eap'
-        }
+        jcenter()
+
     }
 
     dependencies {
@@ -47,10 +45,7 @@ buildscript {
 }
 
 repositories {
-    mavenCentral()
-    maven {
-        url 'http://dl.bintray.com/kotlin/kotlin-eap'
-    }
+   jcenter()
 }
 
 dependencies {
