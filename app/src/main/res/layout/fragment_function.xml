@@ -29,6 +29,16 @@
                 android:background="@color/blue2" />
 
             <Button
+                android:id="@+id/btn_share_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_btn_ripple"
+                android:text="股票联动" />
+
+            <Button
                 android:id="@+id/btn_pti_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

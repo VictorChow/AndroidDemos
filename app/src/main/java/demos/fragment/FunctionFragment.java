@@ -4,7 +4,6 @@ package demos.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import demos.activity.PayPassWordActivity;
 import demos.activity.ReadContactActivity;
 import demos.activity.RecyclerViewActivity;
 import demos.activity.ServiceActivity;
+import demos.activity.ShareSheetActivity;
 import demos.activity.SlideToCloseActivity;
 import demos.activity.SmsLocalActivity;
 import demos.activity.SmsMonitorActivity;
@@ -36,13 +36,16 @@ import demos.util.ShowToast;
 
 public class FunctionFragment extends BaseFragment {
 
-    @BindClick({R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
+    @BindClick({R.id.btn_share_sheet, R.id.btn_slide_close, R.id.btn_service, R.id.btn_recycler_view, R.id.btn_sms_monitor,
             R.id.btn_telephony_monitor, R.id.btn_installed_app, R.id.btn_clear_cache, R.id.btn_sms_local,
             R.id.btn_all_contact, R.id.btn_open_camera, R.id.btn_get_location, R.id.btn_drag_recycler_view,
             R.id.btn_vertical_menu, R.id.btn_pti_recycler, R.id.btn_2048, R.id.btn_pay_pwd, R.id.btn_click_zoom,
             R.id.btn_five_star, R.id.float_btn})
     void onItemClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_share_sheet:
+                startActivity(new Intent(mContext, ShareSheetActivity.class));
+                break;
             case R.id.btn_pti_recycler:
                 startActivity(new Intent(mContext, PTIRecyclerViewActivity.class));
                 break;

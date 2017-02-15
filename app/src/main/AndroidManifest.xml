@@ -70,6 +70,7 @@
         <activity android:name="demos.activity.PayPassWordActivity" />
         <activity android:name="demos.activity.ClickZoomActivity" />
         <activity android:name="demos.activity.FiveStarActivity" />
+        <activity android:name="demos.activity.ShareSheetActivity"></activity>
     </application>
 
 </manifest>

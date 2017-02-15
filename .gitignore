@@ -4,4 +4,4 @@
 /.idea
 /build
 /app/build
-.idea
+.DS_Store

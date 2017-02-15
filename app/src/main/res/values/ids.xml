@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="name" type="id" />
+    <item name="scrollView" type="id" />
+    <item name="left_container" type="id" />
+    <item name="right_container" type="id" />
+    <item name="progress" type="id" />
+    <item name="foot_text" type="id" />
+</resources>
