@@ -3,6 +3,7 @@ package demos.activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,11 +14,12 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 
 import demos.adapter.VpMainAdapter;
-import demos.view.MenuLayout;
-import demos.util.ShowToast;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
 import demos.annotations.bind.BindView;
+import demos.util.DisplayUtil;
+import demos.util.ShowToast;
+import demos.view.MenuLayout;
 
 public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
@@ -33,6 +35,9 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     LinearLayout llMain;
     @BindView(R.id.menu_layout)
     MenuLayout menuLayout;
+    @BindView(R.id.ll_main_tab)
+    LinearLayout llTab;
+
     private ArrayList<Drawable> drawables;
     /**
      * 设置双击退出
@@ -60,6 +65,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     }
 
     private void init() {
+        ViewCompat.setElevation(llTab, DisplayUtil.dp2px(8));
+
         getWindow().setBackgroundDrawable(null);
         viewPagerMain.setAdapter(new VpMainAdapter(getSupportFragmentManager()));
         viewPagerMain.addOnPageChangeListener(this);

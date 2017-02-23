@@ -56,7 +56,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_btn_ripple"
-                android:text="点击放大悬浮" />
+                android:text="Fixed Flow Layout" />
 
             <Button
                 android:id="@+id/btn_2048"

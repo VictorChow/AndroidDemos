@@ -17,41 +17,41 @@ class ClickZoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_click_zoom)
 
-
-        for (i in 0..flow_layout.childCount - 1) {
-            flow_layout.getChildAt(i).setOnClickListener {
-                if (i == lastViewPos) return@setOnClickListener
-                flow_layout.bringChildToFront(flow_layout.childList[i].child)
-                SimpleAnimator(it)
-                        .duration(200)
-                        .values(1f, 1.5f)
-                        .interpolator(AccelerateDecelerateInterpolator())
-                        .property("scaleX")
-                        .go()
-                SimpleAnimator(it)
-                        .duration(200)
-                        .values(1f, 1.5f)
-                        .interpolator(AccelerateDecelerateInterpolator())
-                        .property("scaleY")
-                        .go()
-                if (lastViewPos != -1) {
-                    val lastView = flow_layout.childList[lastViewPos].child
-                    SimpleAnimator(lastView)
-                            .duration(200)
-                            .values(1.5f, 1f)
-                            .interpolator(AccelerateDecelerateInterpolator())
-                            .property("scaleX")
-                            .go()
-                    SimpleAnimator(lastView)
-                            .duration(200)
-                            .values(1.5f, 1f)
-                            .interpolator(AccelerateDecelerateInterpolator())
-                            .property("scaleY")
-                            .go()
-                }
-                lastViewPos = i
-            }
-
-        }
+//
+//        for (i in 0..flow_layout.childCount - 1) {
+//            flow_layout.getChildAt(i).setOnClickListener {
+//                if (i == lastViewPos) return@setOnClickListener
+//                flow_layout.bringChildToFront(flow_layout.getChildAt(i))
+//                SimpleAnimator(it)
+//                        .duration(200)
+//                        .values(1f, 1.5f)
+//                        .interpolator(AccelerateDecelerateInterpolator())
+//                        .property("scaleX")
+//                        .go()
+//                SimpleAnimator(it)
+//                        .duration(200)
+//                        .values(1f, 1.5f)
+//                        .interpolator(AccelerateDecelerateInterpolator())
+//                        .property("scaleY")
+//                        .go()
+//                if (lastViewPos != -1) {
+//                    val lastView = flow_layout.getChildAt(lastViewPos)
+//                    SimpleAnimator(lastView)
+//                            .duration(200)
+//                            .values(1.5f, 1f)
+//                            .interpolator(AccelerateDecelerateInterpolator())
+//                            .property("scaleX")
+//                            .go()
+//                    SimpleAnimator(lastView)
+//                            .duration(200)
+//                            .values(1.5f, 1f)
+//                            .interpolator(AccelerateDecelerateInterpolator())
+//                            .property("scaleY")
+//                            .go()
+//                }
+//                lastViewPos = i
+//            }
+//
+//        }
     }
 }

@@ -24,6 +24,10 @@
             <flag name="center_horizontal" value="1" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="FixedFlowLayout_Layout">
+        <attr name="span_column" format="integer" />
+    </declare-styleable>
     <!--圆形图片文字增强-->
     <declare-styleable name="CircleTextImageView">
         <attr name="citv_border_width" format="dimension" />
