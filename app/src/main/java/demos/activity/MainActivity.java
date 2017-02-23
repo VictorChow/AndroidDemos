@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +22,7 @@ import demos.util.DisplayUtil;
 import demos.util.ShowToast;
 import demos.view.MenuLayout;
 
-public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @BindView(R.id.view_pager_main)
     ViewPager viewPagerMain;
@@ -65,7 +66,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     }
 
     private void init() {
-        ViewCompat.setElevation(llTab, DisplayUtil.dp2px(8));
+        ViewCompat.setElevation(llTab, DisplayUtil.dp2px(10));
 
         getWindow().setBackgroundDrawable(null);
         viewPagerMain.setAdapter(new VpMainAdapter(getSupportFragmentManager()));

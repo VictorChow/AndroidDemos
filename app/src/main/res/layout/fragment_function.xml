@@ -49,7 +49,7 @@
                 android:text="下拉添加的RecyclerView" />
 
             <Button
-                android:id="@+id/btn_click_zoom"
+                android:id="@+id/btn_fixed_flow"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="16dp"

@@ -67,22 +67,8 @@ public class FixedFlowLayout extends ViewGroup implements View.OnClickListener {
         if (getChildCount() == 0)
             return;
         measureChildren(widthMeasureSpec, heightMeasureSpec);
-        if (eachHeight == 0 || eachWidth == 0) {
-            eachHeight = getChildAt(0).getMeasuredHeight();
-            eachWidth = (MeasureSpec.getSize(widthMeasureSpec) - getPaddingStart() - getPaddingEnd() - (columns - 1) * horizontalSpacing) / columns;
-        }
-//        for (int i = 0; i < getChildCount(); i++) {
-//            LayoutParams lp = (LayoutParams) getChildAt(i).getLayoutParams();
-//            lp.width = eachWidth;
-//            lp.height = eachHeight;
-//            getChildAt(i).setLayoutParams(lp);
-//        }
-//        int height = getPaddingTop() + getPaddingBottom();
-//        if (getChildCount() % columns != 0) {
-//            height += ((getChildCount() / columns + 1) * eachHeight + (getChildCount() / columns) * verticalSpacing);
-//        } else {
-//            height += ((getChildCount() / columns) * eachHeight + (getChildCount() / columns - 1) * verticalSpacing);
-//        }
+        eachHeight = getChildAt(0).getMeasuredHeight();
+        eachWidth = (MeasureSpec.getSize(widthMeasureSpec) - getPaddingStart() - getPaddingEnd() - (columns - 1) * horizontalSpacing) / columns;
         int curColumn = 0, curRow = 1;
         for (int i = 0; i < getChildCount(); i++) {
             if (curColumn == columns) {
