@@ -34,6 +34,8 @@ class FirstFragment : Fragment() {
         initReceiversGroup()
         initFitTextViews()
         cycle_view_pager.setUp(intArrayOf(R.drawable.bg_main, R.drawable.ic_launcher, R.drawable.iv_myself))
+
+        iv_ripple_tap.setOnClickListener({ ripple_view.startAnimation() })
     }
 
     private fun initReceiversGroup() {
@@ -50,10 +52,7 @@ class FirstFragment : Fragment() {
     }
 
     private fun initFitTextViews() {
-        val l = arrayListOf<FitTextView>()
-        for (i in 0..fit_text_container.childCount - 1) {
-            l.add(fit_text_container.getChildAt(i) as FitTextView)
-        }
+        val l = (0..fit_text_container.childCount - 1).map { fit_text_container.getChildAt(it) as FitTextView }
         FitTextView.adjustTextViewsWidth(l)
     }
 
