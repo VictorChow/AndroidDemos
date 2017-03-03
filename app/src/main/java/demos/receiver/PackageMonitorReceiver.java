@@ -13,18 +13,6 @@ import demos.util.PrintLog;
  * Created by Victor on 16/2/13.
  */
 public class PackageMonitorReceiver extends BroadcastReceiver {
-    public interface ActionDoneCallback {
-        void onRemoved();
-
-        default void onAdded() {
-
-        }
-
-        default void onReplaced() {
-
-        }
-    }
-
     private List<ActionDoneCallback> callbacks;
 
     @Override
@@ -66,5 +54,13 @@ public class PackageMonitorReceiver extends BroadcastReceiver {
             callbacks = new ArrayList<>();
         }
         callbacks.add(callback);
+    }
+
+    public interface ActionDoneCallback {
+        void onRemoved();
+
+        void onAdded();
+
+        void onReplaced();
     }
 }

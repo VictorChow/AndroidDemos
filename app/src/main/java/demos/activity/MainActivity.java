@@ -88,15 +88,24 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         drawables.add(drawable3);
 
         setMenuItemClick();
-
-        menuLayout.shouldInterceptTouchEventToShowMenu(() -> viewPagerMain.getCurrentItem() == 0);
+        menuLayout.shouldInterceptTouchEventToShowMenu(new MenuLayout.InterceptListener() {
+            @Override
+            public boolean shouldInterceptTouchEvent() {
+                return viewPagerMain.getCurrentItem() == 0;
+            }
+        });
     }
 
     private void setMenuItemClick() {
         int count = llMain.getChildCount();
         for (int i = 0; i < count; i++) {
             final int finalI = i;
-            llMain.getChildAt(i).setOnClickListener(v -> ShowToast.shortToast("第" + finalI + "项"));
+            llMain.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShowToast.shortToast("第" + finalI + "项");
+                }
+            });
         }
     }
 

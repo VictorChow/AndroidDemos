@@ -47,8 +47,6 @@ public class GetLocationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_location);
         Bind.bind(this);
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("定位");
 
         String provider = LocationManager.GPS_PROVIDER;
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

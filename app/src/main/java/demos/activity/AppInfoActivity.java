@@ -37,8 +37,6 @@ public class AppInfoActivity extends BaseActivity {
         VpAppFragmentAdapter appAdapter = new VpAppFragmentAdapter(getSupportFragmentManager());
         vpApp.setAdapter(appAdapter);
         tabApp.setupWithViewPager(vpApp);
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("已安装应用");
     }
 
     @Override

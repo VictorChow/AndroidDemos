@@ -60,9 +60,6 @@ public class TelephonyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telephony);
         Bind.bind(this);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("通话录音");
-        }
         telephonyReceiver = new TelephonyReceiver();
         filter = new IntentFilter();
         filter.addAction("android.intent.action.PHONE_STATE");

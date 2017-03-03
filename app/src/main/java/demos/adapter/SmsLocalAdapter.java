@@ -13,9 +13,9 @@ import com.victor.androiddemos.R;
 
 import java.util.List;
 
-import demos.module.SmsLocalModule;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
+import demos.module.SmsLocalModule;
 
 /**
  * Created by Victor on 16/2/14.
@@ -38,22 +38,24 @@ public class SmsLocalAdapter extends RecyclerView.Adapter<SmsLocalAdapter.Holder
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(Holder holder, final int position) {
         holder.tvSmsCount.setText(modules.get(position).getBodies().size() + "项记录");
         holder.tvSmsName.setText(modules.get(position).getName());
         holder.tvSmsPhone.setText(modules.get(position).getNumber());
-        holder.itemView.setOnClickListener(v -> {
-            if (recyclerView.getParent() != null) {
-                ((ViewGroup) recyclerView.getParent()).removeView(recyclerView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (recyclerView.getParent() != null) {
+                    ((ViewGroup) recyclerView.getParent()).removeView(recyclerView);
+                }
+                SmsLocalDetailAdapter adapter = new SmsLocalDetailAdapter(context, modules.get(position).getBodies(), modules.get(position).getTypes());
+                recyclerView.setAdapter(adapter);
+                new AlertDialog.Builder(context)
+                        .setTitle(modules.get(position).getNumber() + "(" + modules.get(position).getName() + ")")
+                        .setView(recyclerView)
+                        .setPositiveButton("好", null)
+                        .show();
             }
-            SmsLocalDetailAdapter adapter = new SmsLocalDetailAdapter(context, modules.get(position).getBodies(), modules.get(position).getTypes());
-            recyclerView.setAdapter(adapter);
-            new AlertDialog.Builder(context)
-                    .setTitle(modules.get(position).getNumber() + "(" + modules.get(position).getName() + ")")
-                    .setView(recyclerView)
-                    .setPositiveButton("好", (dialog, which) -> {
-                    })
-                    .show();
         });
     }
 

@@ -385,7 +385,12 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
                 }
 //                camera = Camera.open(); // 打开摄像头
 //                自动对焦后拍照
-                camera.autoFocus((success, camera1) -> camera.takePicture(null, null, new MyPictureCallback()));
+                camera.autoFocus(new Camera.AutoFocusCallback() {
+                    @Override
+                    public void onAutoFocus(boolean success, Camera camera) {
+                        camera.takePicture(null, null, new MyPictureCallback());
+                    }
+                });
                 camera.setPreviewDisplay(holder); // 设置用于显示拍照影像的SurfaceHolder对象
                 camera.setDisplayOrientation(getPreviewDegree(TakePhotoActivity.this));
                 camera.startPreview(); // 开始预览

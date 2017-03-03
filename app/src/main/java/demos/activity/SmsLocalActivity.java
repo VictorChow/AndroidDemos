@@ -30,8 +30,6 @@ public class SmsLocalActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_local);
         Bind.bind(this);
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("查看所有短信");
 
         smsLocalModules = new ArrayList<>();
         getLocalSms();

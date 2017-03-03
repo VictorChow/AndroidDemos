@@ -107,21 +107,34 @@ public class CustomViewFragment extends Fragment implements Runnable {
         data.add("六六六六六");
         marqueeView.setContentData(data);
 
-        downloadProgressView.setOnClickListener(v -> new Thread(() -> {
-            float p = 0f;
-            while (p <= 101f) {
-                downloadProgressView.setProgress(p);
-                p += 0.1f;
-                try {
-                    Thread.sleep(8);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        downloadProgressView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        float p = 0f;
+                        while (p <= 101f) {
+                            downloadProgressView.setProgress(p);
+                            p += 0.1f;
+                            try {
+                                Thread.sleep(8);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
             }
-        }).start());
+        });
 
         circleReveal.setImageResource(R.drawable.iv_scratch_card);
-        circleReveal.setOnClickListener(v -> circleReveal.circleReveal());
+        circleReveal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                circleReveal.circleReveal();
+            }
+        });
     }
 
     @Override

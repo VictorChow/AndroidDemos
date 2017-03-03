@@ -34,31 +34,38 @@ public class SlideToCloseActivity extends Activity {
         animator = new ValueAnimator();
         animator.setDuration(300);
         animator.setTarget(decorView);
-        animator.addUpdateListener(animation -> {
-            int value = (int) animation.getAnimatedValue();
-            decorView.setX(value);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int) animation.getAnimatedValue();
+                decorView.setX(value);
+            }
         });
 
         relativeLayout = (RelativeLayout) findViewById(R.id.rl);
         textView = (TextView) findViewById(R.id.txt);
-        relativeLayout.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                x = event.getX();
-            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                dx = event.getX() - x;
-                if (dx < 0) {
-                    return true;
+        relativeLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    x = event.getX();
+                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    dx = event.getX() - x;
+                    if (dx < 0) {
+                        return true;
+                    }
+                    tag = dx > width / 3;
+                    textView.setText(tag ? "松开关闭" : "你好啊");
+                    decorView.setX(dx);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (dx > 0) {
+                        startAnim(tag ? width : 0);
+                    }
+                    dx = 0;
                 }
-                tag = dx > width / 3;
-                textView.setText(tag ? "松开关闭" : "你好啊");
-                decorView.setX(dx);
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (dx > 0) {
-                    startAnim(tag ? width : 0);
-                }
-                dx = 0;
+                return true;
             }
-            return true;
         });
 
 

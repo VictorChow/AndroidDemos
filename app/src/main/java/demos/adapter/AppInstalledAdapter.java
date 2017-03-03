@@ -16,12 +16,12 @@ import com.victor.androiddemos.R;
 import java.util.List;
 
 import demos.activity.AppInfoActivity;
+import demos.annotations.bind.Bind;
+import demos.annotations.bind.BindView;
 import demos.module.AppModule;
 import demos.receiver.PackageMonitorReceiver;
 import demos.util.SharedPreferenceUtil;
 import demos.util.ShowToast;
-import demos.annotations.bind.Bind;
-import demos.annotations.bind.BindView;
 
 /**
  * Created by Victor on 16/2/13.
@@ -32,18 +32,29 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
     private PackageMonitorReceiver receiver;
     private boolean isSystemApp;
 
-    public AppInstalledAdapter(Context context, List<AppModule> appModules, boolean isSystemApp) {
+    public AppInstalledAdapter(final Context context, final List<AppModule> appModules, final boolean isSystemApp) {
         this.appModules = appModules;
         this.context = context;
         this.receiver = ((AppInfoActivity) context).getReceiver();
         this.isSystemApp = isSystemApp;
-        this.receiver.addCallback(() -> {
-            int pos = SharedPreferenceUtil.getInt(context, "APP_POS", -1);
-            boolean isSysApp = SharedPreferenceUtil.getBoolean(context, "IS_SYSTEM_APP", false);
-            if (isSystemApp == isSysApp) {
-                ShowToast.shortToast("成功卸载" + appModules.get(pos).getAppName());
-                appModules.remove(pos);
-                notifyDataSetChanged();
+        this.receiver.addCallback(new PackageMonitorReceiver.ActionDoneCallback() {
+            @Override
+            public void onRemoved() {
+                int pos = SharedPreferenceUtil.getInt(context, "APP_POS", -1);
+                boolean isSysApp = SharedPreferenceUtil.getBoolean(context, "IS_SYSTEM_APP", false);
+                if (isSystemApp == isSysApp) {
+                    ShowToast.shortToast("成功卸载" + appModules.get(pos).getAppName());
+                    appModules.remove(pos);
+                    notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onAdded() {
+            }
+
+            @Override
+            public void onReplaced() {
             }
         });
     }
@@ -54,7 +65,7 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(Holder holder, final int position) {
         holder.ivAppIcon.setImageDrawable(appModules.get(position).getAppIcon());
         holder.tvAppName.setText(appModules.get(position).getAppName());
         if (appModules.get(position).getAppPermissions() == null) {
@@ -65,20 +76,22 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
         holder.tvAppPackage.setText("包名: " + appModules.get(position).getPackageName());
         holder.tvAppVersionName.setText("版本名: " + appModules.get(position).getVersionName());
         holder.tvAppVersionCode.setText("版本号: " + appModules.get(position).getVersionCode());
-        holder.itemView.setOnLongClickListener(v -> {
-            if (isSystemApp) {
-                new AlertDialog.Builder(context)
-                        .setTitle("禁止卸载系统应用")
-                        .setMessage("卸载系统应用可能会导致系统不稳定!")
-                        .setPositiveButton("OK", (dialog, which) -> {
-                        })
-                        .show();
-            } else {
-                SharedPreferenceUtil.setBoolean(context, "IS_SYSTEM_APP", isSystemApp);
-                SharedPreferenceUtil.setInt(context, "APP_POS", position);
-                uninstallApk(appModules.get(position).getPackageName());
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (isSystemApp) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("禁止卸载系统应用")
+                            .setMessage("卸载系统应用可能会导致系统不稳定!")
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else {
+                    SharedPreferenceUtil.setBoolean(context, "IS_SYSTEM_APP", isSystemApp);
+                    SharedPreferenceUtil.setInt(context, "APP_POS", position);
+                    uninstallApk(appModules.get(position).getPackageName());
+                }
+                return true;
             }
-            return true;
         });
     }
 

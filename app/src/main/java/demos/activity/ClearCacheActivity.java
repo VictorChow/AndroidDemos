@@ -4,6 +4,7 @@ import android.content.pm.PackageInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -107,18 +108,19 @@ public class ClearCacheActivity extends BaseActivity {
         setContentView(R.layout.activity_clear_cache);
         Bind.bind(this);
 
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("扫描缓存");
-
         dirList = new ArrayList<>();
         dirList.add("/data/data/xxx/cache");
         dirList.add("/data/data/xxx/app_webview");
         dirList.add("/mnt/sdcard/Android/data/xxx/cache");
 
         clearCacheTask = new ClearCacheTask();
-        btnCacheScan.setOnClickListener(v -> {
-            clearCacheTask.execute(Boolean.TRUE);
-            btnCacheScan.setEnabled(false);
+
+        btnCacheScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCacheTask.execute(Boolean.TRUE);
+                btnCacheScan.setEnabled(false);
+            }
         });
 
 //        /data/data/com.victor.androiddemos/files

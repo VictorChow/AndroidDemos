@@ -32,17 +32,13 @@ public class RecyclerViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view);
         Bind.bind(this);
         context = getApplicationContext();
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Different Span In RecyclerView ");
-        }
+
         items1 = new ArrayList<>();
         items2 = new ArrayList<>();
         items3 = new ArrayList<>();
 
         items1.add("");
-
         items2.add("");
-
         items3.add("");
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);

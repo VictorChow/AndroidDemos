@@ -33,8 +33,6 @@ public class ReadContactActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_contact);
         Bind.bind(this);
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("读取联系人");
 
         new ReadContactTask().execute();
     }

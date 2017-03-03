@@ -22,7 +22,47 @@ public class GestureVelocityView extends View {
         super(context, attrs);
         gestureDetector = new GestureDetector(context, new MyGesture());
         setLongClickable(true);
-        setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int pointId = event.getPointerId(0);
+        int mMaxFlingVelocity = ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity();
+        if (null == velocityTracker) {
+            velocityTracker = VelocityTracker.obtain();
+        }
+        velocityTracker.addMovement(event);
+        ViewParent parent;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+//                velocityTracker.computeCurrentVelocity(1000, mMaxFlingVelocity);
+//                ShowToast.shortToast("x速度: " + velocityTracker.getXVelocity(pointId) + "  y速度: " + velocityTracker.getYVelocity(pointId));
+//                if (velocityTracker != null) {
+//                    velocityTracker.clear();
+//                    velocityTracker.recycle();
+//                    velocityTracker = null;
+//                }
+                parent = getParent();
+                while (parent != null) {
+                    parent.requestDisallowInterceptTouchEvent(false);
+                    parent = parent.getParent();
+                }
+                break;
+            case MotionEvent.ACTION_DOWN:
+                parent = getParent();
+                while (parent != null) {
+                    parent.requestDisallowInterceptTouchEvent(true);
+                    parent = parent.getParent();
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
     private class MyGesture extends GestureDetector.SimpleOnGestureListener {
@@ -86,40 +126,5 @@ public class GestureVelocityView extends View {
             System.out.println("onContextClick");
             return super.onContextClick(e);
         }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int pointId = event.getPointerId(0);
-        int mMaxFlingVelocity = ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity();
-        if (null == velocityTracker) {
-            velocityTracker = VelocityTracker.obtain();
-        }
-        velocityTracker.addMovement(event);
-        ViewParent parent;
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_UP:
-//                velocityTracker.computeCurrentVelocity(1000, mMaxFlingVelocity);
-//                ShowToast.shortToast("x速度: " + velocityTracker.getXVelocity(pointId) + "  y速度: " + velocityTracker.getYVelocity(pointId));
-//                if (velocityTracker != null) {
-//                    velocityTracker.clear();
-//                    velocityTracker.recycle();
-//                    velocityTracker = null;
-//                }
-                parent = getParent();
-                while (parent != null) {
-                    parent.requestDisallowInterceptTouchEvent(false);
-                    parent = parent.getParent();
-                }
-                break;
-            case MotionEvent.ACTION_DOWN:
-                parent = getParent();
-                while (parent != null) {
-                    parent.requestDisallowInterceptTouchEvent(true);
-                    parent = parent.getParent();
-                }
-                break;
-        }
-        return super.onTouchEvent(event);
     }
 }

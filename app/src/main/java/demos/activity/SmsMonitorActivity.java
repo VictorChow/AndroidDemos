@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import demos.service.SmsService;
-import demos.util.ShowToast;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
 import demos.annotations.bind.BindView;
+import demos.receiver.SmsReceiver;
+import demos.service.SmsService;
+import demos.util.ShowToast;
 
 public class SmsMonitorActivity extends BaseActivity {
     @BindView(R.id.tv_show_sms)
@@ -28,7 +29,12 @@ public class SmsMonitorActivity extends BaseActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             smsService = ((SmsService.SmsBinder) service).getService();
-            smsService.getSmsReceiver().setOnReceivedListener(sms -> tvShowSms.setText(sms));
+            smsService.getSmsReceiver().setOnReceivedListener(new SmsReceiver.OnReceivedListener() {
+                @Override
+                public void onReceived(String sms) {
+                    tvShowSms.setText(sms);
+                }
+            });
         }
 
         @Override
@@ -67,9 +73,6 @@ public class SmsMonitorActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_monitor);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("新短信监听");
-        }
         Bind.bind(this);
         intent = new Intent(mContext, SmsService.class);
     }
