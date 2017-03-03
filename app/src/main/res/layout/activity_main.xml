@@ -106,6 +106,7 @@
             android:id="@+id/ll_main_tab"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:background="#fff"
             android:gravity="center"
             android:orientation="horizontal">
 
