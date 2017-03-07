@@ -1,7 +1,5 @@
 package demos.activity
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.TextView
@@ -9,14 +7,8 @@ import com.victor.androiddemos.R
 import kotlinx.android.synthetic.main.activity_2048.*
 import java.util.*
 
-class A2048Activity : AppCompatActivity() {
-
-    private var downX = 0f
-    private var downY = 0f
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_2048)
+class A2048Activity : ToolbarActivity() {
+    override fun initView() {
 
         val model = Model()
         model.setRefreshViewListener {
@@ -34,7 +26,7 @@ class A2048Activity : AppCompatActivity() {
         }
         model.setFinishListener { text_score.text = "游戏结束: " + text_score.text }
 
-        container.setOnTouchListener { view, event ->
+        container.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     downX = event.x
@@ -70,8 +62,12 @@ class A2048Activity : AppCompatActivity() {
             true
         }
 
-
     }
+
+    override fun bindLayout() = R.layout.activity_2048
+
+    private var downX = 0f
+    private var downY = 0f
 
     class Model {
 
@@ -176,11 +172,9 @@ class A2048Activity : AppCompatActivity() {
 
 
         private fun moveRowElements(elements: MutableList<Int>, direction: SwipeDirection) {
-            for (i in elements.lastIndex downTo 0) {
-                if (elements[i] == 0) {
-                    elements.removeAt(i)
-                }
-            }
+            (elements.lastIndex downTo 0)
+                    .filter { elements[it] == 0 }
+                    .forEach { elements.removeAt(it) }
             while (elements.size < size) {
                 if (direction == SwipeDirection.START) {
                     elements.add(0)

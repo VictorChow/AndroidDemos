@@ -1,41 +1,43 @@
 package demos.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
-import demos.fragment.CustomViewFragment;
-import demos.fragment.FirstFragment;
-import demos.fragment.FunctionFragment;
+import demos.fragment.ViewFragment;
 
 /**
  * Created by Victor on 16/2/9.
  */
 public class VpMainAdapter extends FragmentPagerAdapter {
-    private ArrayList<Fragment> fragments;
+    private String[] titles = new String[]{"自定义View", "其它"};
 
     public VpMainAdapter(FragmentManager fm) {
         super(fm);
-        this.fragments = new ArrayList<>();
-        this.fragments.add(new CustomViewFragment());
-        this.fragments.add(new FunctionFragment());
-        this.fragments.add(new FirstFragment());
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragments.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", position == 0 ? ViewFragment.LAYOUT_VIEW : ViewFragment.LAYOUT_FUNCTION);
+        Fragment fragment = new ViewFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
     public int getCount() {
-        return fragments.size();
+        return 2;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titles[position];
     }
 }

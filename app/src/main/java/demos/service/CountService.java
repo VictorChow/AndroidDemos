@@ -6,12 +6,15 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.RemoteException;
 import android.widget.TextView;
+
+import com.victor.androiddemos.IMyActivity;
+import com.victor.androiddemos.IMyService;
 
 import demos.util.PrintLog;
 
 public class CountService extends Service implements Runnable {
-    private ServiceBinder binder;
     private TextView textView;
     private boolean threadDisable;
     private int count;
@@ -24,6 +27,21 @@ public class CountService extends Service implements Runnable {
         }
     };
 
+    private IMyActivity iMyActivity;
+    private IBinder iMyService = new IMyService.Stub() {
+
+        @Override
+        public int getNumber() throws RemoteException {
+            return getCount();
+        }
+
+        @Override
+        public void registerActivity(IMyActivity iActivity) throws RemoteException {
+            iMyActivity = iActivity;
+        }
+    };
+    private ServiceBinder binder;
+
     @Override
     public void onCreate() {
         new Thread(this).start();
@@ -31,12 +49,12 @@ public class CountService extends Service implements Runnable {
 
     @Override
     public IBinder onBind(Intent intent) {
-        if (binder == null) {
-            binder = new ServiceBinder();
-        }
-        return binder;
+//        if (binder == null) {
+//            binder = new ServiceBinder();
+//        }
+//        return binder;
+        return iMyService;
     }
-
 
     @Override
     public void onDestroy() {
@@ -58,6 +76,13 @@ public class CountService extends Service implements Runnable {
     }
 
     public int getCount() {
+        if (iMyActivity != null) {
+            try {
+                iMyActivity.showToast("远端: " + count);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
         return count;
     }
 

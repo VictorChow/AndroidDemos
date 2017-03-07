@@ -1,15 +1,17 @@
 package demos.drag_recycleview
 
-import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import com.victor.androiddemos.R
-import demos.drag_recycleview.RecycleViewFragment
-import demos.drag_recycleview.OnListItemClickListener
-import demos.drag_recycleview.RecyclerGridFragment
-import demos.drag_recycleview.RecyclerListFragment
+import demos.activity.ToolbarActivity
 
-class DragRecycleViewActivity : AppCompatActivity(), OnListItemClickListener {
+class DragRecycleViewActivity : ToolbarActivity(), OnListItemClickListener {
+    override fun bindLayout() = R.layout.activity_recyclerview
+
+    override fun initView() {
+        val fragment = RecycleViewFragment()
+        //用add将MainFragment添加到framelayout上
+        supportFragmentManager.beginTransaction().add(R.id.activity_main, fragment).commit()
+    }
 
     override fun onListItemClick(pos: Int) {
         //当MainFragment的Item被点击后，就会回调此方法
@@ -26,16 +28,5 @@ class DragRecycleViewActivity : AppCompatActivity(), OnListItemClickListener {
         }
         //这次用replace，替换framelayout的布局，也就是MainFragment
         supportFragmentManager.beginTransaction().replace(R.id.activity_main, fragment).addToBackStack(null).commit()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recyclerview)
-
-        if (savedInstanceState == null) {
-            val fragment = RecycleViewFragment()
-            //用add将MainFragment添加到framelayout上
-            supportFragmentManager.beginTransaction().add(R.id.activity_main, fragment).commit()
-        }
     }
 }

@@ -26,7 +26,7 @@ public class ShareSheetView extends ViewGroup {
     private final int HEIGHT = 50;
     private final int NAME_WIDTH = 75;
     private final int ITEM_WIDTH = 75;
-    private final int backgroundColor = Color.parseColor("#393939");
+    private final int backgroundColor = Color.parseColor("#00000000");
     private final int titleColor = Color.parseColor("#f1f1f1");
     private final int itemLeftColor = Color.parseColor("#fbce41");
     private final int itemRightColor = Color.parseColor("#e35152");

@@ -113,7 +113,7 @@ public class LotteryDrawView extends View implements View.OnClickListener {
         for (int i = 0; i < 8; i++) {
             ItemEntity item = new ItemEntity();
             item.setRate(i);
-            item.setName("项目" + i);
+            item.setName("奖项" + i);
             item.start = curStart;
             item.end = curStart + item.rate;
             items.add(item);

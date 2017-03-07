@@ -15,10 +15,6 @@ import android.view.animation.DecelerateInterpolator;
  * 有侧栏的ViewGroup,模仿QQ侧栏
  */
 public class MenuLayout extends ViewGroup {
-    public interface InterceptListener {
-        boolean shouldInterceptTouchEvent();
-    }
-
     private InterceptListener interceptListener;
     private View mMenuView;
     private View mContentView;
@@ -168,7 +164,6 @@ public class MenuLayout extends ViewGroup {
         return true;
     }
 
-
     private void startAnimator(float endX, int duration) {
         ObjectAnimator contentAnimator = ObjectAnimator.ofFloat(mContentWrapper, "left", endX);
         contentAnimator.setDuration(duration);
@@ -184,24 +179,44 @@ public class MenuLayout extends ViewGroup {
         mIsShowMenu = endX != 0;
     }
 
+    public void close() {
+        if (mIsShowMenu) {
+            startAnimator(0, 350);
+        }
+    }
+
+    public void open() {
+        if (!mIsShowMenu) {
+            startAnimator(mMenuWidth, 350);
+        }
+    }
+
+    public boolean isOpen() {
+        return mIsShowMenu;
+    }
+
     public void shouldInterceptTouchEventToShowMenu(InterceptListener interceptListener) {
         this.interceptListener = interceptListener;
+    }
+
+    public interface InterceptListener {
+        boolean shouldInterceptTouchEvent();
     }
 
     // View包装类
     private class ViewWrapper {
         private View mTarget;
 
-        public ViewWrapper(@NonNull View mTarget) {
+        ViewWrapper(@NonNull View mTarget) {
             this.mTarget = mTarget;
-        }
-
-        public void setLeft(float left) {
-            mTarget.setX(left);
         }
 
         public float getLeft() {
             return mTarget.getX();
+        }
+
+        public void setLeft(float left) {
+            mTarget.setX(left);
         }
     }
 }

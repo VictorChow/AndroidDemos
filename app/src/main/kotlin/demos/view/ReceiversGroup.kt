@@ -29,7 +29,7 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
     private class ReceiverItem(val itemView: TextView, val contact: Contact)
 
     private val showTitle = false
-    private val textSize = 16f
+    private val textSize = 20f
 
     private val childHeight = LayoutParams.WRAP_CONTENT
     private val receiverItems = arrayListOf<ReceiverItem>()
@@ -40,7 +40,7 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
     private var isDeleting = false
     private val verSpacing = DisplayUtil.dp2px(0f)
     private val horSpacing = DisplayUtil.dp2px(0f)
-    private val color = Color.MAGENTA
+    private val color = Color.parseColor("#f8f8f8")
 
     init {
         alertDialog = AlertDialog.Builder(context as Activity)

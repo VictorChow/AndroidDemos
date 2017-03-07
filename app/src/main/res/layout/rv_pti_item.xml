@@ -27,7 +27,7 @@
                 android:id="@+id/tv_address_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="伞雨"
+                android:text="Victor"
                 android:textColor="#333333"
                 android:textSize="18sp" />
 
@@ -40,7 +40,7 @@
                 android:id="@+id/tv_address_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:text="[默认]"
                 android:textSize="15sp"
                 android:visibility="visible" />
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:lineSpacingExtra="4dp"
-            android:text="山东省青岛市崂山区阿三大赛大赛大赛大赛大赛的萨达是 1234"
+            android:text="山东省青岛市崂山区二木林"
             android:textSize="15sp" />
 
         <TextView

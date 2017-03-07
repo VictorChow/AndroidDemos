@@ -2,7 +2,6 @@ package demos.activity;
 
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demos.adapter.ContactLocalAdapter;
-import demos.module.ContactModule;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
+import demos.module.ContactModule;
 
-public class ReadContactActivity extends BaseActivity {
+public class ReadContactActivity extends ToolbarActivity {
     @BindView(R.id.rv_contact_list)
     RecyclerView rvContactList;
     @BindView(R.id.pb_contact_list)
@@ -29,11 +28,13 @@ public class ReadContactActivity extends BaseActivity {
     private ContactLocalAdapter contactLocalAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_read_contact);
-        Bind.bind(this);
+    public int bindLayout() {
+        return R.layout.activity_read_contact;
+    }
 
+    @Override
+    public void initView() {
+        Bind.bind(this);
         new ReadContactTask().execute();
     }
 
@@ -82,7 +83,7 @@ public class ReadContactActivity extends BaseActivity {
     private class ReadContactTask extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
-            rvContactList.setLayoutManager(new GridLayoutManager(mContext, 1));
+            rvContactList.setLayoutManager(new GridLayoutManager(ReadContactActivity.this, 1));
             contactModules = new ArrayList<>();
         }
 
@@ -97,7 +98,7 @@ public class ReadContactActivity extends BaseActivity {
             pbContactList.setVisibility(View.GONE);
             rvContactList.setVisibility(View.VISIBLE);
 
-            contactLocalAdapter = new ContactLocalAdapter(mContext, contactModules);
+            contactLocalAdapter = new ContactLocalAdapter(ReadContactActivity.this, contactModules);
             rvContactList.setAdapter(contactLocalAdapter);
         }
     }

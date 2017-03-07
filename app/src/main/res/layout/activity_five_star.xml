@@ -72,5 +72,70 @@
             android:paddingEnd="20dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#ff0000"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tv_g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="0"
+            android:textColor="#00ff00"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tv_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="0"
+            android:textColor="#0000ff"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_r_hex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#ff0000"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tv_g_hex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="0"
+            android:textColor="#00ff00"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tv_b_hex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="0"
+            android:textColor="#0000ff"
+            android:textSize="25sp" />
+    </LinearLayout>
 
 </LinearLayout>

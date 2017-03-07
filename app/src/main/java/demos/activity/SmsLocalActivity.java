@@ -3,7 +3,8 @@ package demos.activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Bundle;
+import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -13,29 +14,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demos.adapter.SmsLocalAdapter;
-import demos.module.SmsLocalModule;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
+import demos.module.SmsLocalModule;
 
-public class SmsLocalActivity extends BaseActivity {
+public class SmsLocalActivity extends ToolbarActivity {
     @BindView(R.id.rv_sms_local)
     RecyclerView rvSmsLocal;
 
     private Uri SMS_INBOX = Uri.parse("content://sms/");
-    private List<SmsLocalModule> smsLocalModules;
+    private List<SmsLocalModule> smsLocalModules = new ArrayList<>();
     private SmsLocalAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sms_local);
+    public int bindLayout() {
+        return R.layout.activity_sms_local;
+    }
+
+    @Override
+    public void initView() {
         Bind.bind(this);
 
-        smsLocalModules = new ArrayList<>();
-        getLocalSms();
-        adapter = new SmsLocalAdapter(mContext, smsLocalModules);
-        rvSmsLocal.setLayoutManager(new GridLayoutManager(mContext, 1));
-        rvSmsLocal.setAdapter(adapter);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                getLocalSms();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                adapter = new SmsLocalAdapter(SmsLocalActivity.this, smsLocalModules);
+                rvSmsLocal.setLayoutManager(new GridLayoutManager(SmsLocalActivity.this, 1));
+                rvSmsLocal.setAdapter(adapter);
+            }
+        }.execute();
+
     }
 
     public void getLocalSms() {
@@ -47,7 +61,7 @@ public class SmsLocalActivity extends BaseActivity {
         }
         while (cur.moveToNext()) {
             String number = cur.getString(cur.getColumnIndex("address"));//手机号
-            String name = cur.getString(cur.getColumnIndex("person"));//联系人姓名列表
+            String name = getContactNameByAddress(number);
             String body = cur.getString(cur.getColumnIndex("body"));
             String type = cur.getString(cur.getColumnIndex("type"));
             if (number.contains("+86")) {
@@ -70,6 +84,21 @@ public class SmsLocalActivity extends BaseActivity {
             }
         }
         cur.close();
+    }
+
+    // 根据手机号得到名字
+    private String getContactNameByAddress(String phoneNumber) {
+        Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+        Cursor cur = getContentResolver().query(personUri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+        if (cur != null) {
+            if (cur.moveToFirst()) {
+                int nameIdx = cur.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME);
+                String name = cur.getString(nameIdx);
+                cur.close();
+                return name;
+            }
+        }
+        return "未知";
     }
 
 }

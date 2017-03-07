@@ -1,19 +1,18 @@
 package demos.activity;
 
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.victor.androiddemos.R;
 
-import demos.receiver.TelephonyReceiver;
-import demos.util.ShowToast;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindClick;
 import demos.annotations.bind.BindView;
+import demos.receiver.TelephonyReceiver;
+import demos.util.ShowToast;
 
-public class TelephonyActivity extends BaseActivity {
+public class TelephonyActivity extends ToolbarActivity {
 
 //    <receiver android:name="demos.receiver.TelephonyReceiver">
 //    <intent-filter>
@@ -56,9 +55,12 @@ public class TelephonyActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_telephony);
+    public int bindLayout() {
+        return R.layout.activity_telephony;
+    }
+
+    @Override
+    public void initView() {
         Bind.bind(this);
         telephonyReceiver = new TelephonyReceiver();
         filter = new IntentFilter();

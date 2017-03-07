@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_fit_text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:background="@color/black2">
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+
+    <demos.view.FitTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+        android:textColor="@color/white1"
+        android:textSize="20sp" />
+</LinearLayout>

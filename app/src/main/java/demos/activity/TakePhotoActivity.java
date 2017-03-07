@@ -42,7 +42,7 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
     private Camera.Parameters parameters = null;
     private WindowManager mWindowManager;
     private int windowWidth;//获取手机屏幕宽度
-    private int windowHight;//获取手机屏幕高度
+    private int windowHeight;//获取手机屏幕高度
     private String savePath = "/aaaaaaaaaa/";
     private Bundle bundle = null;// 声明一个Bundle对象，用来存储数据
     private int IS_TOOK = 0;//是否已经拍照 ,0为否
@@ -53,15 +53,13 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
      * @true or false
      */
     public static boolean isHaveSDCard() {
-        return Environment.MEDIA_MOUNTED.equals(Environment
-                .getExternalStorageState());
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
     // 提供一个静态方法，用于根据手机方向获得相机预览画面旋转的角度
     public static int getPreviewDegree(Activity activity) {
         // 获得手机的方向
-        int rotation = activity.getWindowManager().getDefaultDisplay()
-                .getRotation();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         int degree = 0;
         // 根据手机的方向计算相机预览画面应该选择的角度
         switch (rotation) {
@@ -123,18 +121,18 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
     private void init() {
         mWindowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         windowWidth = mWindowManager.getDefaultDisplay().getWidth();
-        windowHight = mWindowManager.getDefaultDisplay().getHeight();
+        windowHeight = mWindowManager.getDefaultDisplay().getHeight();
         fraShadeTop = (FrameLayout) findViewById(R.id.fra_shade_top);
         fraShadeBottom = (FrameLayout) findViewById(R.id.fra_shade_bottom);
         RelativeLayout.LayoutParams topParams = (RelativeLayout.LayoutParams) fraShadeTop.getLayoutParams();
         topParams.width = windowWidth;
-        topParams.height = (windowHight - windowWidth) / 2;
+        topParams.height = (windowHeight - windowWidth) / 2;
         fraShadeTop.setLayoutParams(topParams);
         fraShadeTop.getBackground().setAlpha(200);
 
         RelativeLayout.LayoutParams bottomParams = (RelativeLayout.LayoutParams) fraShadeBottom.getLayoutParams();
         bottomParams.width = windowWidth;
-        bottomParams.height = (windowHight - windowWidth) / 2;
+        bottomParams.height = (windowHeight - windowWidth) / 2;
         fraShadeBottom.setLayoutParams(bottomParams);
         fraShadeBottom.getBackground().setAlpha(200);
 
@@ -151,13 +149,12 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
         bntCancel.setOnClickListener(this);
 
         //照相机预览的空间
-        surfaceView = (SurfaceView) this
-                .findViewById(R.id.surfaceView);
-        surfaceView.getHolder()
-                .setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        surfaceView = (SurfaceView) this.findViewById(R.id.surfaceView);
+        surfaceView.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         surfaceView.getHolder().setFixedSize(150, 150); // 设置Surface分辨率
         surfaceView.getHolder().setKeepScreenOn(true);// 屏幕常亮
         surfaceView.getHolder().addCallback(new SurfaceCallback());// 为SurfaceView的句柄添加一个回调函数
+
     }
 
     /**
@@ -184,7 +181,6 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
                         else
                             saveToRoot(bundle.getByteArray("bytes"));
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
 
@@ -210,10 +206,12 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
      * @throws IOException
      */
     public void saveToSDCard(byte[] data) throws IOException {
+        System.out.println("saveToSDCard");
+
         //剪切为正方形
         Bitmap b = byteToBitmap(data);
-//        Bitmap bitmap = Bitmap.createBitmap(b, 0, 0, windowWidth, windowHight);
-        Bitmap bitmap = Bitmap.createScaledBitmap(b, windowHight, windowWidth, true);
+//        Bitmap bitmap = Bitmap.createBitmap(b, 0, 0, windowWidth, windowHeight);
+        Bitmap bitmap = Bitmap.createScaledBitmap(b, windowHeight, windowWidth, true);
         //生成文件
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss"); // 格式化时间
@@ -331,6 +329,7 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
 
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
+            System.out.println("onPictureTaken");
             try {
                 bundle = new Bundle();
                 bundle.putByteArray("bytes", data); //将图片字节数据保存在bundle当中，实现数据交换
@@ -360,9 +359,9 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
 
         @SuppressWarnings("deprecation")
         @Override
-        public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                                   int height) {
-            // TODO Auto-generated method stub
+        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            System.out.println("surfaceChanged");
+
             parameters = camera.getParameters(); // 获取各项参数
             parameters.setPictureFormat(PixelFormat.JPEG); // 设置图片格式
             parameters.setPreviewSize(width, height); // 设置预览大小
@@ -374,6 +373,8 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
 
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
+            System.out.println("surfaceCreated");
+
             try {
                 Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                 int cameraCount = Camera.getNumberOfCameras(); // get cameras number
@@ -385,15 +386,22 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
                 }
 //                camera = Camera.open(); // 打开摄像头
 //                自动对焦后拍照
-                camera.autoFocus(new Camera.AutoFocusCallback() {
-                    @Override
-                    public void onAutoFocus(boolean success, Camera camera) {
-                        camera.takePicture(null, null, new MyPictureCallback());
-                    }
-                });
+
                 camera.setPreviewDisplay(holder); // 设置用于显示拍照影像的SurfaceHolder对象
                 camera.setDisplayOrientation(getPreviewDegree(TakePhotoActivity.this));
-                camera.startPreview(); // 开始预览
+                camera.setPreviewCallback(new Camera.PreviewCallback() {
+                    @Override
+                    public void onPreviewFrame(byte[] data, Camera camera) {
+                        camera.autoFocus(new Camera.AutoFocusCallback() {
+                            @Override
+                            public void onAutoFocus(boolean success, final Camera camera) {
+                                System.out.println("onAutoFocus");
+                                camera.takePicture(null, null, new MyPictureCallback());
+                            }
+                        });
+                    }
+                });
+                camera.startPreview();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -401,14 +409,13 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
 
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
-            // TODO Auto-generated method stub
+            System.out.println("surfaceDestroyed");
+
             if (camera != null) {
                 camera.release(); // 释放照相机
                 camera = null;
             }
         }
-
-
     }
 
 

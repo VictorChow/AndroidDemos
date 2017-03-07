@@ -14,13 +14,10 @@ import android.view.View;
  * 模拟音乐播放器的波形
  */
 public class AudioRecView extends View {
-    private int mRectCount = 15;
-    private int mWidth;
+    private int mRectCount = 25;
     private int mRectHeight;
     private int mRectWidth;
-    private int offset = 1;
     private Paint mPaint;
-    private LinearGradient mLinearGradient;
 
     public AudioRecView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -29,11 +26,11 @@ public class AudioRecView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldW, int oldH) {
         super.onSizeChanged(w, h, oldW, oldH);
-        mWidth = getWidth();
+        int mWidth = getWidth();
         mRectHeight = getHeight();
-        mRectWidth = (int) (mWidth * 0.6 / mRectCount);
+        mRectWidth = mWidth / mRectCount;
         mPaint = new Paint();
-        mLinearGradient = new LinearGradient(0, 0, mRectWidth, mRectHeight, Color.YELLOW, Color.BLUE, Shader.TileMode.CLAMP);
+        LinearGradient mLinearGradient = new LinearGradient(0, 0, mRectWidth, mRectHeight, Color.parseColor("#e9d47b"), Color.parseColor("#8558d3"), Shader.TileMode.CLAMP);
         mPaint.setShader(mLinearGradient);
         mPaint.setColor(Color.DKGRAY);
     }
@@ -42,12 +39,13 @@ public class AudioRecView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for (int i = 0; i < mRectCount; i++) {
-            canvas.drawRect((float) (mWidth * 0.4 / 2 + mRectWidth * i + offset),
+            int offset = 1;
+            canvas.drawRect((float) (mRectWidth * i + offset),
                     (float) (mRectHeight * Math.random()),
-                    (float) (mWidth * 0.4 / 2 + mRectWidth * (i + 1)),
+                    (float) (mRectWidth * (i + 1)),
                     (float) mRectHeight,
                     mPaint);
         }
-        postInvalidateDelayed(300);
+        postInvalidateDelayed(250);
     }
 }

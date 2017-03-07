@@ -1,8 +1,6 @@
 package demos.activity
 
 import android.content.Context
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -16,14 +14,17 @@ import kotlinx.android.synthetic.main.activity_pay_password.*
  * Author : victor
  * Time : 16-9-16 20:17
  */
-class PayPassWordActivity : AppCompatActivity() {
-    private val btns = arrayListOf<View>()
+class PayPassWordActivity : ToolbarActivity() {
+    override fun bindLayout() = R.layout.activity_pay_password
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pay_password)
-        init()
+    override fun initView() {
+        pay_view.post {
+            init()
+            pay_view.requestLayout()
+        }
     }
+
+    private val btns = arrayListOf<View>()
 
     private fun init() {
         for (i in 0..pay_num_container.childCount - 1) {
@@ -43,7 +44,7 @@ class PayPassWordActivity : AppCompatActivity() {
         }
         pay_view.setOnFinishListener { ShowToast.shortToast(pay_view.getPassword()) }
 
-        switch_pay.setOnCheckedChangeListener { compoundButton, b ->
+        switch_pay.setOnCheckedChangeListener { _, b ->
             pay_view.isUseInputMethod(b)
             if (b) {
                 pay_num_container.visibility = View.INVISIBLE

@@ -20,7 +20,7 @@ import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
 import demos.module.AppModule;
 import demos.receiver.PackageMonitorReceiver;
-import demos.util.SharedPreferenceUtil;
+import demos.util.SPUtil;
 import demos.util.ShowToast;
 
 /**
@@ -40,8 +40,8 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
         this.receiver.addCallback(new PackageMonitorReceiver.ActionDoneCallback() {
             @Override
             public void onRemoved() {
-                int pos = SharedPreferenceUtil.getInt(context, "APP_POS", -1);
-                boolean isSysApp = SharedPreferenceUtil.getBoolean(context, "IS_SYSTEM_APP", false);
+                int pos = SPUtil.getInt(context, "APP_POS", -1);
+                boolean isSysApp = SPUtil.getBoolean(context, "IS_SYSTEM_APP", false);
                 if (isSystemApp == isSysApp) {
                     ShowToast.shortToast("成功卸载" + appModules.get(pos).getAppName());
                     appModules.remove(pos);
@@ -86,8 +86,8 @@ public class AppInstalledAdapter extends RecyclerView.Adapter<AppInstalledAdapte
                             .setPositiveButton("OK", null)
                             .show();
                 } else {
-                    SharedPreferenceUtil.setBoolean(context, "IS_SYSTEM_APP", isSystemApp);
-                    SharedPreferenceUtil.setInt(context, "APP_POS", position);
+                    SPUtil.setBoolean(context, "IS_SYSTEM_APP", isSystemApp);
+                    SPUtil.setInt(context, "APP_POS", position);
                     uninstallApk(appModules.get(position).getPackageName());
                 }
                 return true;

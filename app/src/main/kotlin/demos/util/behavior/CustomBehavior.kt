@@ -41,21 +41,31 @@ class CustomBehavior(context: Context, attributeSet: AttributeSet) : FloatingAct
     private fun hide(child: FloatingActionButton) {
         isAnim = true
         isHide = true
-        SimpleAnimator(child).values(y, AndroidDemos.screenHeight).property("y").duration(500).listener(object : SimpleAnimator.AnimatorListener() {
-            override fun onAnimationEnd(animation: Animator?) {
-                isAnim = false
-            }
-        }).go()
+        SimpleAnimator.create(child)
+                .values(y, AndroidDemos.screenHeight.toFloat())
+                .property("y")
+                .duration(500)
+                .listener(object : SimpleAnimator.AnimatorListener() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        isAnim = false
+                    }
+                })
+                .go()
     }
 
     private fun show(child: FloatingActionButton) {
         isAnim = true
         isHide = false
-        SimpleAnimator(child).values(AndroidDemos.screenHeight, y).property("y").duration(500).listener(object : SimpleAnimator.AnimatorListener() {
-            override fun onAnimationEnd(animation: Animator?) {
-                isAnim = false
-            }
-        }).go()
+        SimpleAnimator.create(child)
+                .values(AndroidDemos.screenHeight.toFloat(), y)
+                .property("y")
+                .duration(500)
+                .listener(object : SimpleAnimator.AnimatorListener() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        isAnim = false
+                    }
+                })
+                .go()
     }
 
 }

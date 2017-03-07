@@ -29,7 +29,9 @@ public class ShaderTextView extends TextView {
         if (mViewWidth == 0) {
             mViewWidth = getMeasuredWidth();
             if (mViewWidth > 0) {
-                mLinearGradient = new LinearGradient(0, 0, mViewWidth, 0, new int[]{Color.BLUE, Color.WHITE, Color.BLUE}, null, Shader.TileMode.CLAMP);
+                mLinearGradient = new LinearGradient(0, 0, mViewWidth, 0,
+                        new int[]{Color.parseColor("#f4f4f4"), Color.parseColor("#A020F0"), Color.parseColor("#f4f4f4")},
+                        null, Shader.TileMode.CLAMP);
                 getPaint().setShader(mLinearGradient);
                 mMatrix = new Matrix();
             }
@@ -40,13 +42,13 @@ public class ShaderTextView extends TextView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mMatrix != null) {
-            mTranslate += mViewWidth / 5;
+            mTranslate += mViewWidth / 10;
             if (mTranslate > mViewWidth * 2) {
                 mTranslate = -mViewWidth;
             }
             mMatrix.setTranslate(mTranslate, 0);
             mLinearGradient.setLocalMatrix(mMatrix);
-            postInvalidateDelayed(100);
+            postInvalidateDelayed(50);
         }
     }
 }

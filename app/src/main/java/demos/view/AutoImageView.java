@@ -21,27 +21,22 @@ import demos.util.DisplayUtil;
  */
 
 public class AutoImageView extends ImageView {
+    private final int STYLE_ARC = 1;
+    private final int STYLE_SWEEP = 2;
+    private final int STYLE_NONE = 0;
     private int mProportionHeight;
     private int mProportionWidth;
     private boolean mIsLoadingProcess;
     private TypedArray typedArray;
-
     private int mHeight;
     private int mWidth;
     private float mProcess;
-
     private Paint mPaint;
     private RectF mRectF;
-
     private float mProcessRectFHalfWidth;
     private float mProcessRectFHalfHeight;
     private float mProcessWidth;
-
     private int mStyle;
-    private final int STYLE_ARC = 1;
-    private final int STYLE_SWEEP = 2;
-    private final int STYLE_NONE = 0;
-
     private Drawable mDrawable;
 
     public AutoImageView(Context context) {
@@ -92,23 +87,23 @@ public class AutoImageView extends ImageView {
         }
         if (mDrawable == null) {
             if (mStyle == STYLE_ARC) {
-                canvas.drawColor(Color.parseColor("#EEEEEE"));
+                canvas.drawColor(Color.DKGRAY);
                 mPaint.setStyle(Paint.Style.STROKE);
                 mPaint.setStrokeWidth(mProcessWidth);
-                mPaint.setColor(Color.parseColor("#CCCCCC"));
+                mPaint.setColor(Color.LTGRAY);
                 canvas.drawCircle(mWidth / 2, mHeight / 2, mProcessRectFHalfWidth, mPaint);
                 mRectF.set(mWidth / 2 - mProcessRectFHalfWidth, mHeight / 2 - mProcessRectFHalfHeight, mWidth / 2 + mProcessRectFHalfWidth, mHeight / 2 + mProcessRectFHalfHeight);
-                mPaint.setColor(Color.parseColor("#757575"));
+                mPaint.setColor(Color.parseColor("#456789"));
                 canvas.drawArc(mRectF, -90, 360 * mProcess, false, mPaint);
 
             } else if (mStyle == STYLE_SWEEP) {
-                mPaint.setColor(Color.parseColor("#EEEEEE"));
+                mPaint.setColor(Color.DKGRAY);
                 mRectF.set(0, 0, mWidth, mHeight * mProcess);
                 canvas.drawRect(mRectF, mPaint);
                 mPaint.setColor(Color.LTGRAY);
                 mRectF.set(0, mHeight * mProcess, mWidth, mHeight);
                 canvas.drawRect(mRectF, mPaint);
-                mPaint.setColor(Color.parseColor("#FF757575"));
+                mPaint.setColor(Color.parseColor("#456789"));
                 canvas.drawText((int) (mProcess * 100) + "%", mWidth / 2, mHeight / 2, mPaint);
             }
         }

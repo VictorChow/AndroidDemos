@@ -23,8 +23,8 @@ import demos.util.DisplayUtil;
  */
 
 public class RippleView extends View {
-    private int colorStart = 0xFF3F51B5;
-    private int colorEnd = 0x003F51B5;
+    private int colorStart = 0xFFF8F8F8;
+    private int colorEnd = 0x00000000;
     private int radiusMin = DisplayUtil.dp2px(30);
     private int radiusMax;
     private int duration = 3000;
@@ -73,7 +73,7 @@ public class RippleView extends View {
         }
     }
 
-    public void startAnimation() {
+    public void createRipple() {
         final Paint paint = new Paint();
         paint.setStrokeWidth(100);
         paint.setStyle(Paint.Style.FILL);

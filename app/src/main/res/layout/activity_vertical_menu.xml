@@ -7,8 +7,7 @@
     <demos.view.VerticalMenuLayout
         android:id="@+id/vertical_menu_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey2">
+        android:layout_height="wrap_content">
 
         <View
             android:layout_width="match_parent"

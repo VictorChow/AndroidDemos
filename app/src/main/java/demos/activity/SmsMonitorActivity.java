@@ -3,7 +3,6 @@ package demos.activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import demos.receiver.SmsReceiver;
 import demos.service.SmsService;
 import demos.util.ShowToast;
 
-public class SmsMonitorActivity extends BaseActivity {
+public class SmsMonitorActivity extends ToolbarActivity {
     @BindView(R.id.tv_show_sms)
     TextView tvShowSms;
     @BindView(R.id.tv_sms_status)
@@ -70,11 +69,14 @@ public class SmsMonitorActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sms_monitor);
+    public int bindLayout() {
+        return R.layout.activity_sms_monitor;
+    }
+
+    @Override
+    public void initView() {
         Bind.bind(this);
-        intent = new Intent(mContext, SmsService.class);
+        intent = new Intent(this, SmsService.class);
     }
 
 

@@ -1,18 +1,17 @@
 package demos.activity;
 
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.victor.androiddemos.R;
 
 import demos.adapter.VpAppFragmentAdapter;
-import demos.receiver.PackageMonitorReceiver;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
+import demos.receiver.PackageMonitorReceiver;
 
-public class AppInfoActivity extends BaseActivity {
+public class AppInfoActivity extends ToolbarActivity {
 
     @BindView(R.id.tab_app)
     TabLayout tabApp;
@@ -22,9 +21,12 @@ public class AppInfoActivity extends BaseActivity {
     private PackageMonitorReceiver receiver;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app_info);
+    public int bindLayout() {
+        return R.layout.activity_app_info;
+    }
+
+    @Override
+    public void initView() {
         Bind.bind(this);
         receiver = new PackageMonitorReceiver();
         IntentFilter intentFilter = new IntentFilter();

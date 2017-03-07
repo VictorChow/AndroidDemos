@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/black2">
 
     <TextView
         android:id="@+id/tv_phone_status"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="状态: 未开启"
-        android:textSize="20sp" />
+        android:textColor="@color/white1"
+        android:textSize="30sp" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_start_watch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_btn_ripple"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
         android:text="开启监听"
-        android:textColor="#000000"
-        android:textSize="35sp" />
+        android:textColor="@color/white1"
+        android:textSize="26sp" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_stop_watch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_btn_ripple"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
         android:text="关闭监听"
-        android:textColor="#000000"
-        android:textSize="35sp" />
+        android:textColor="@color/white1"
+        android:textSize="26sp" />
 </LinearLayout>

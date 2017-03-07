@@ -13,9 +13,9 @@ import com.victor.androiddemos.R;
 
 import java.util.List;
 
-import demos.module.ContactModule;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
+import demos.module.ContactModule;
 
 /**
  * Created by Victor on 16/2/15.
@@ -40,8 +40,8 @@ public class ContactLocalAdapter extends RecyclerView.Adapter<ContactLocalAdapte
         holder.llContactPhones.removeAllViews();
         for (String s : contactModules.get(position).getPhones()) {
             TextView tv = new TextView(context);
-            tv.setTextColor(ContextCompat.getColor(context, R.color.text_default));
-            tv.setTextSize(14);
+            tv.setTextColor(ContextCompat.getColor(context, R.color.white1));
+            tv.setTextSize(20);
             tv.setText(s);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             holder.llContactPhones.addView(tv, lp);

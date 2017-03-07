@@ -4,10 +4,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.VelocityTracker;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewParent;
+
+import java.util.Locale;
 
 import demos.util.ShowToast;
 
@@ -16,7 +16,6 @@ import demos.util.ShowToast;
  */
 public class GestureVelocityView extends View {
     private GestureDetector gestureDetector;
-    private VelocityTracker velocityTracker;
 
     public GestureVelocityView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -32,22 +31,9 @@ public class GestureVelocityView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int pointId = event.getPointerId(0);
-        int mMaxFlingVelocity = ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity();
-        if (null == velocityTracker) {
-            velocityTracker = VelocityTracker.obtain();
-        }
-        velocityTracker.addMovement(event);
         ViewParent parent;
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
-//                velocityTracker.computeCurrentVelocity(1000, mMaxFlingVelocity);
-//                ShowToast.shortToast("x速度: " + velocityTracker.getXVelocity(pointId) + "  y速度: " + velocityTracker.getYVelocity(pointId));
-//                if (velocityTracker != null) {
-//                    velocityTracker.clear();
-//                    velocityTracker.recycle();
-//                    velocityTracker = null;
-//                }
                 parent = getParent();
                 while (parent != null) {
                     parent.requestDisallowInterceptTouchEvent(false);
@@ -65,11 +51,10 @@ public class GestureVelocityView extends View {
         return super.onTouchEvent(event);
     }
 
-    private class MyGesture extends GestureDetector.SimpleOnGestureListener {
+    private static class MyGesture extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             ShowToast.shortToast("onDoubleTap");
-//            System.out.println("onDoubleTap");
             return super.onDoubleTap(e);
         }
 
@@ -93,7 +78,7 @@ public class GestureVelocityView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            ShowToast.shortToast("onFling");
+            ShowToast.shortToast(String.format(Locale.CHINA, "onFling\nvelocityX %.2f\nvelocityY %.2f", velocityX, velocityY));
             return super.onFling(e1, e2, velocityX, velocityY);
         }
 
@@ -117,7 +102,7 @@ public class GestureVelocityView extends View {
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            ShowToast.shortToast("onScroll");
+            ShowToast.shortToast(String.format(Locale.CHINA, "onScroll\ndistanceX %.2f\ndistanceY %.2f", distanceX, distanceY));
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
 

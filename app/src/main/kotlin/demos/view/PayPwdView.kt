@@ -16,7 +16,7 @@ import demos.util.DisplayUtil
  */
 class PayPwdView(context: Context, attributeSet: AttributeSet) : EditText(context, attributeSet) {
     private var inputText = StringBuffer()
-    private val borderPaint: Paint
+    private val borderPaint: Paint = Paint()
     private val circlePaint: Paint
     private val borderWidth = DisplayUtil.dp2px(0.5f).toFloat()
     private val circleRadius = DisplayUtil.dp2px(8f).toFloat()
@@ -25,7 +25,6 @@ class PayPwdView(context: Context, attributeSet: AttributeSet) : EditText(contex
     private var useSystemInput = false
 
     init {
-        borderPaint = Paint()
         borderPaint.isAntiAlias = true
         borderPaint.color = Color.DKGRAY
         borderPaint.strokeWidth = borderWidth
@@ -42,7 +41,7 @@ class PayPwdView(context: Context, attributeSet: AttributeSet) : EditText(contex
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         setMeasuredDimension(widthMeasureSpec, MeasureSpec.getSize(widthMeasureSpec) / 6)
-        eachDis = ((width - borderWidth) / 6).toFloat()
+        eachDis = ((width - borderWidth) / 6)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -82,14 +81,14 @@ class PayPwdView(context: Context, attributeSet: AttributeSet) : EditText(contex
     }
 
     fun delete() {
-        if (inputText.length == 0)
+        if (inputText.isEmpty())
             return
         inputText.delete(inputText.length - 1, inputText.length)
         invalidate()
     }
 
     fun clear() {
-        if (inputText.length == 0)
+        if (inputText.isEmpty())
             return
         inputText.delete(0, inputText.length)
         invalidate()

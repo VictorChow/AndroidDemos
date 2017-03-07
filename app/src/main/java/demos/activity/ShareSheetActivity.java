@@ -1,9 +1,5 @@
 package demos.activity;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.util.DiffUtil;
-
 import com.victor.androiddemos.R;
 
 import java.util.ArrayList;
@@ -11,14 +7,17 @@ import java.util.List;
 
 import demos.view.ShareSheetView;
 
-public class ShareSheetActivity extends AppCompatActivity {
+public class ShareSheetActivity extends ToolbarActivity {
     private ShareSheetView sheetView;
     private int n = 1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share_sheet);
+    public int bindLayout() {
+        return R.layout.activity_share_sheet;
+    }
+
+    @Override
+    public void initView() {
         sheetView = (ShareSheetView) findViewById(R.id.share_sheet_view);
         initSSV();
     }

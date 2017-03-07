@@ -33,7 +33,7 @@ class RecycleViewFragment : ListFragment() {
         //获得我们在strings.xml中定义个数组
         val items = resources.getStringArray(R.array.main_items)
         //创建适配器
-        val adapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, items)
+        val adapter = ArrayAdapter(activity, R.layout.item_text, items)
         //设置适配器
         listAdapter = adapter
     }

@@ -30,14 +30,19 @@ public class ScratchCardView extends View {
 
     public ScratchCardView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         init();
     }
 
     private void init() {
         bgBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.iv_scratch_card);
-        fgBitmap = Bitmap.createBitmap(bgBitmap.getWidth(), bgBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        fgBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         fgCanvas = new Canvas(fgBitmap);
-        fgCanvas.drawColor(Color.LTGRAY);
+        fgCanvas.drawColor(Color.DKGRAY);
         fgPaint = new Paint();
         fgPaint.setAntiAlias(true);
         fgPaint.setDither(true);

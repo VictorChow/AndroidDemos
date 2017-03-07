@@ -2,20 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_cache_app"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="垃圾扫描"
-        android:textColor="@color/black2"
-        android:textSize="30sp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_cache_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0MB"
+            android:textColor="@color/white1"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/tv_cache_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white1"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_cache_package"
@@ -25,41 +40,29 @@
         android:gravity="center"
         android:maxLines="1"
         android:textColor="@color/text_default"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_cache_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never" />
 
     <TextView
-        android:id="@+id/tv_cache_size"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="0KB"
-        android:textColor="@color/text_default"
-        android:textSize="25sp" />
-
-    <Button
         android:id="@+id/btn_cache_scan"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/bg_btn_ripple"
-        android:text="扫描"
-        android:textSize="25sp" />
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="一键清理(20MB)"
+        android:textColor="@color/white1"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:overScrollMode="never">
-
-        <TextView
-            android:id="@+id/tv_cache_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="3dp"
-            android:textColor="@color/blue2"
-            android:textSize="15sp" />
-    </ScrollView>
 </LinearLayout>
