@@ -55,6 +55,7 @@ import demos.activity.VerticalMenuActivity;
 import demos.activity.XiuyixiuActivity;
 import demos.annotations.bus.Bus;
 import demos.drag_recycleview.DragRecycleViewActivity;
+import demos.util.ShowToast;
 
 public class ViewFragment extends BaseFragment implements View.OnTouchListener {
     public static final int LAYOUT_VIEW = -1;
@@ -166,9 +167,6 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
             case R.id.tv_contacts:
                 clazz = ReadContactActivity.class;
                 break;
-            case R.id.tv_scan_cache:
-                clazz = ClearCacheActivity.class;
-                break;
             case R.id.tv_installed_app:
                 clazz = AppInfoActivity.class;
                 break;
@@ -223,6 +221,14 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
                                 activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
                             }
                         })
+                        .setNeutralButton("缓存", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String title = "扫描缓存";
+                                activity.startActivity(new Intent(activity, ClearCacheActivity.class).putExtra("position", point).putExtra("title", title));
+                                activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
+                            }
+                        })
                         .show();
                 return;
             case R.id.tv_battery_info:
@@ -231,7 +237,9 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
             case R.id.tv_intercept_call:
                 clazz = CallInterceptActivity.class;
                 break;
-
+            case R.id.tv_swipe_finish:
+                ShowToast.shortToast("随便打开一个都是啊");
+                return;
         }
         String title = ((TextView) view).getText().toString();
         activity.startActivity(new Intent(activity, clazz).putExtra("position", point).putExtra("title", title));

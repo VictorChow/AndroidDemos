@@ -53,7 +53,6 @@
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
-
         <receiver android:name="demos.receiver.TelephonyReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
@@ -61,7 +60,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
         <receiver android:name="demos.receiver.SmsReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -72,6 +70,7 @@
 
         <activity
             android:name="demos.activity.MainActivity"
+            android:theme="@style/NoTitleTranslucentTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -79,9 +78,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="demos.activity.SlideToCloseActivity"
-            android:theme="@style/SlideToCloseStyle" />
         <activity
             android:name="demos.activity.AidlActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
@@ -184,7 +180,6 @@
         <activity
             android:name="demos.activity.CallInterceptActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
-
     </application>
 
 </manifest>

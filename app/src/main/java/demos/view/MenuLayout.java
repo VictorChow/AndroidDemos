@@ -3,12 +3,15 @@ package demos.view;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+
+import demos.util.DisplayUtil;
 
 /**
  * Created by Victor on 16/2/9.
@@ -38,6 +41,7 @@ public class MenuLayout extends ViewGroup {
         super.onFinishInflate();
         mMenuView = getChildAt(0);
         mContentView = getChildAt(1);
+        ViewCompat.setElevation(mContentView, DisplayUtil.dp2px(10));
         mContentWrapper = new ViewWrapper(mContentView);
         mMenuWrapper = new ViewWrapper(mMenuView);
     }

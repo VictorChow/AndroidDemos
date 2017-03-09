@@ -2,13 +2,10 @@ package demos.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -17,6 +14,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.victor.androiddemos.R;
 
 import demos.AndroidDemos;
@@ -25,27 +23,28 @@ import demos.AndroidDemos;
  * Created by Victor on 2017/3/6. (ง •̀_•́)ง
  */
 
-public abstract class ToolbarActivity extends AppCompatActivity {
+public abstract class ToolbarActivity extends SwipeFinishActivity {
+    protected RxPermissions rxPermissions;
     private Point point;
+    private boolean isExitAnim;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        rxPermissions = new RxPermissions(this);
         point = getIntent().getParcelableExtra("position");
 
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        View root = View.inflate(this, R.layout.activity_toolbar, null);
-        root.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
-        LinearLayout llRoot = (LinearLayout) root.findViewById(R.id.ll_toolbar_root);
+        View contentView = View.inflate(this, R.layout.activity_toolbar, null);
+        contentView.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
+        LinearLayout llRoot = (LinearLayout) contentView.findViewById(R.id.ll_toolbar_root);
         View content = getLayoutInflater().inflate(bindLayout(), llRoot, false);
         llRoot.addView(content);
-        setContentView(root);
+        setContentView(contentView);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitle(getIntent().getStringExtra("title"));
@@ -53,13 +52,16 @@ public abstract class ToolbarActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isExitAnim) {
+                    return;
+                }
+                isExitAnim = true;
                 animAtFinish();
             }
         });
 
         initView();
-
-        root.post(new Runnable() {
+        contentView.post(new Runnable() {
             @Override
             public void run() {
                 animAtStart();
@@ -110,6 +112,10 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (isExitAnim) {
+            return;
+        }
+        isExitAnim = true;
         animAtFinish();
     }
 

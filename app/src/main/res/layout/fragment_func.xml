@@ -5,7 +5,7 @@
     android:fillViewport="true"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:background="@color/black2">
+    tools:background="@drawable/bg_menu_main">
 
     <LinearLayout
         android:id="@+id/ll_tv_container"
@@ -91,6 +91,17 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/tv_swipe_finish"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="滑动关闭Activity"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/tv_aidl"
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -119,7 +130,7 @@
             android:gravity="center"
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
-            android:text="Gesture Detector"
+            android:text="Gesture"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -146,16 +157,6 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:text="滑动关闭Activity"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_local_msg"
@@ -198,17 +199,6 @@
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
             android:text="已安装应用"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tv_scan_cache"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:text="扫描缓存"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

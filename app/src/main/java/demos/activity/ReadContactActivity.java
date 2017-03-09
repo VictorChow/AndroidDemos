@@ -1,5 +1,6 @@
 package demos.activity;
 
+import android.Manifest;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
@@ -17,6 +18,9 @@ import demos.adapter.ContactLocalAdapter;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
 import demos.module.ContactModule;
+import demos.util.ShowToast;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class ReadContactActivity extends ToolbarActivity {
     @BindView(R.id.rv_contact_list)
@@ -35,7 +39,18 @@ public class ReadContactActivity extends ToolbarActivity {
     @Override
     public void initView() {
         Bind.bind(this);
-        new ReadContactTask().execute();
+        rxPermissions
+                .request(Manifest.permission.READ_CONTACTS)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean granted) throws Exception {
+                        if (granted) {
+                            new ReadContactTask().execute();
+                        } else {
+                            ShowToast.shortToast("申请READ_CONTACTS权限失败");
+                        }
+                    }
+                });
     }
 
     /*

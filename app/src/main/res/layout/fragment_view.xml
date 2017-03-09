@@ -5,7 +5,7 @@
     android:fillViewport="true"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:background="@color/black2">
+    tools:background="@drawable/bg_menu_main">
 
     <LinearLayout
         android:id="@+id/ll_tv_container"

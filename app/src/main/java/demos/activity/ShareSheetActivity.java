@@ -28,8 +28,9 @@ public class ShareSheetActivity extends ToolbarActivity {
         ShareSheetView.TitleSource titleSource = new ShareSheetView.TitleSource();
         List<String> leftTitles = new ArrayList<>();
         leftTitles.add("左标题1");
+        leftTitles.add("左标题2");
         List<String> rightTitles = new ArrayList<>();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 11; i++) {
             rightTitles.add("右标题" + i);
         }
         titleSource.setLeft(leftTitles);
@@ -40,9 +41,10 @@ public class ShareSheetActivity extends ToolbarActivity {
             ShareSheetView.ValueSource valueSource = new ShareSheetView.ValueSource();
             List<String> leftValues = new ArrayList<>();
             leftValues.add("左项" + i + "-1");
+            leftValues.add("左项" + i + "-2");
             valueSource.setLeft(leftValues);
             List<String> rightValues = new ArrayList<>();
-            for (int j = 1; j < 7; j++) {
+            for (int j = 1; j < 11; j++) {
                 rightValues.add("右项" + i + "-" + j);
             }
             valueSource.setRight(rightValues);

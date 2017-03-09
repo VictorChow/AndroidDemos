@@ -20,18 +20,13 @@ import java.lang.reflect.ParameterizedType
 class PTIRecyclerView(context: Context, attributeSet: AttributeSet) : ViewGroup(context, attributeSet) {
     private lateinit var recyclerView: RecyclerView
     private lateinit var headerView: LinearLayout
-    private val scroller: ScrollerCompat
+    private val scroller = ScrollerCompat.create(context, DecelerateInterpolator())
+    private val evaluator = FloatEvaluator()
     private var downY = 0f
     private var isComplete = false
     private var isResetDownY = false
-    private val evaluator: FloatEvaluator
     private var moveTimes = 0
-    private var isInit: Boolean = false
-
-    init {
-        scroller = ScrollerCompat.create(context, DecelerateInterpolator())
-        evaluator = FloatEvaluator()
-    }
+    private var isInit = false
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         if (isInit) {
@@ -121,6 +116,8 @@ class PTIRecyclerView(context: Context, attributeSet: AttributeSet) : ViewGroup(
         recyclerView = RecyclerView(context)
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         recyclerView.adapter = adapter
+        recyclerView.overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        recyclerView.itemAnimator = null
         headerView = LinearLayout(context)
         LayoutInflater.from(context).inflate(adapter.layoutId, headerView, true)
         addView(headerView, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
