@@ -1,8 +1,13 @@
 package demos.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,12 +19,14 @@ import com.victor.androiddemos.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import demos.AndroidDemos;
 import demos.adapter.VpMainAdapter;
 import demos.annotations.bind.Bind;
 import demos.annotations.bind.BindView;
 import demos.annotations.bus.Bus;
 import demos.annotations.bus.BusMethod;
 import demos.util.ShowToast;
+import demos.view.CircleTextImageView;
 import demos.view.CountDownView;
 import demos.view.MarqueeView;
 import demos.view.MenuLayout;
@@ -38,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.marquee_view)
     MarqueeView marqueeView;
+    @BindView(R.id.iv_myself)
+    CircleTextImageView circleTextImageView;
+
 
     //设置双击退出
     private long exitTime = 0L;
@@ -61,6 +71,26 @@ public class MainActivity extends AppCompatActivity {
 
         CountDownView countDownView = $(R.id.count_down_view);
         countDownView.setCountDownTime(1, 23, 45);
+
+        circleTextImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("问一下")
+                        .setMessage("生成桌面快捷方式?")
+                        .setNegativeButton("否", null)
+                        .setPositiveButton("嗯", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                createShortcut(MainActivity.this, ShortcutActivity.class, "Victor");
+                                Intent intent = new Intent(Intent.ACTION_MAIN);
+                                intent.addCategory(Intent.CATEGORY_HOME);
+                                startActivity(intent);
+                            }
+                        })
+                        .show();
+            }
+        });
     }
 
     private void initToolbar() {
@@ -110,7 +140,9 @@ public class MainActivity extends AppCompatActivity {
             ShowToast.shortToast("再按一次退出程序");
             exitTime = System.currentTimeMillis();
         } else {
-            finish();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
         }
     }
 
@@ -119,6 +151,24 @@ public class MainActivity extends AppCompatActivity {
         Bus.unregister(this);
         marqueeView.onDestroyView();
         super.onDestroy();
+    }
+
+    private void createShortcut(final Context context, final Class<?> clazz, final String name) {
+        Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
+        shortcutIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        shortcutIntent.setClass(context, clazz);
+        /**
+         * 设置这条属性，可以使点击快捷方式后关闭其他的任务栈的其他activity，然后创建指定的acticity
+         */
+        shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent shortcut = new Intent(Intent.ACTION_CREATE_SHORTCUT);
+        shortcut.putExtra("duplicate", false);
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
+        Parcelable icon = Intent.ShortcutIconResource.fromContext(AndroidDemos.getInstance(), R.drawable.iv_myself);
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+        shortcut.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        context.sendBroadcast(shortcut);
     }
 
     @BusMethod
