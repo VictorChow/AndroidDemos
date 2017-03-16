@@ -23,11 +23,11 @@ import demos.util.DisplayUtil;
  */
 
 public class RippleView extends View {
-    private int colorStart = 0xFFF8F8F8;
-    private int colorEnd = 0x00000000;
-    private int radiusMin = DisplayUtil.dp2px(30);
+    private final int colorStart = 0xFFF8F8F8;
+    private final int colorEnd = 0x00000000;
+    private final int radiusMin = DisplayUtil.dp2px(30);
+    private final int duration = 3000;
     private int radiusMax;
-    private int duration = 3000;
     private int centerX;
     private int centerY;
     private Shader shader;

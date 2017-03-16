@@ -42,6 +42,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="MY_NAME"
+            android:value="${MY_NAME}" />
 
         <service
             android:name="demos.service.CountService"
@@ -54,6 +57,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="pers.victor.AndroidDemos.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/appwidget_info" />
@@ -85,6 +89,7 @@
             android:theme="@style/NoTitleTranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -190,13 +195,18 @@
         <activity
             android:name="demos.activity.CallInterceptActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
-
-        <activity android:name="demos.activity.ShortcutActivity">
+        <activity
+            android:name="demos.activity.ShortcutActivity"
+            android:theme="@style/NoTitleTranslucentTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="demos.activity.TetrisActivity"
+            android:theme="@style/NoTitleTranslucentTheme" />
     </application>
 
 </manifest>

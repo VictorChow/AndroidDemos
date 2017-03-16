@@ -12,6 +12,9 @@ android {
         targetSdkVersion 25
         versionCode 2
         versionName "2.0"
+        manifestPlaceholders = [
+                MY_NAME: "Victor.Chow"
+        ]
     }
     buildTypes {
         release {

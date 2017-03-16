@@ -30,11 +30,11 @@
                 android:src="@drawable/iv_myself" />
 
             <demos.view.ShaderTextView
+                android:id="@+id/shader_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:text="Victor Chow"
                 android:textColor="@color/white1"
                 android:textSize="25sp" />
 

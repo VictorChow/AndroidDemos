@@ -11,7 +11,6 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
 import com.victor.androiddemos.R;
@@ -30,7 +29,7 @@ public class SwipeFinishActivity extends AppCompatActivity {
     private float downY;
     private float touchSlop;
     private float minX = DisplayUtil.dp2px(30);
-    private float elevation = DisplayUtil.dp2px(10);
+    private float elevation = DisplayUtil.dp2px(12);
     private boolean swipeBack = true;
     private View content;
     private VelocityTracker velocityTracker;
@@ -75,6 +74,7 @@ public class SwipeFinishActivity extends AppCompatActivity {
                 }
                 //其他位置的up事件不拦截
                 if (downX > minX) {
+                    velocityTracker.clear();
                     return super.dispatchTouchEvent(ev);
                 }
                 velocityTracker.computeCurrentVelocity(1000);

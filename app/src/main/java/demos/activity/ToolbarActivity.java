@@ -34,14 +34,14 @@ public abstract class ToolbarActivity extends SwipeFinishActivity {
         rxPermissions = new RxPermissions(this);
         point = getIntent().getParcelableExtra("position");
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         View contentView = View.inflate(this, R.layout.activity_toolbar, null);
         contentView.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
-        LinearLayout llRoot = (LinearLayout) contentView.findViewById(R.id.ll_toolbar_root);
+        LinearLayout llRoot = (LinearLayout) contentView.findViewById(R.id.ll_toolbar_content);
         View content = getLayoutInflater().inflate(bindLayout(), llRoot, false);
         llRoot.addView(content);
         setContentView(contentView);
@@ -70,7 +70,7 @@ public abstract class ToolbarActivity extends SwipeFinishActivity {
     }
 
     private void animAtStart() {
-        Animator animator = ViewAnimationUtils.createCircularReveal(findViewById(R.id.ll_toolbar_root),
+        Animator animator = ViewAnimationUtils.createCircularReveal(findViewById(R.id.ll_toolbar_content),
                 point.x,
                 point.y,
                 0,
@@ -81,7 +81,7 @@ public abstract class ToolbarActivity extends SwipeFinishActivity {
     }
 
     private void animAtFinish() {
-        Animator animator = ViewAnimationUtils.createCircularReveal(findViewById(R.id.ll_toolbar_root),
+        Animator animator = ViewAnimationUtils.createCircularReveal(findViewById(R.id.ll_toolbar_content),
                 point.x,
                 point.y,
                 getMaxRadius(),
@@ -91,7 +91,7 @@ public abstract class ToolbarActivity extends SwipeFinishActivity {
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                findViewById(R.id.ll_toolbar_root).setVisibility(View.INVISIBLE);
+                findViewById(R.id.ll_toolbar_content).setVisibility(View.INVISIBLE);
                 finish();
                 overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
             }

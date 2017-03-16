@@ -51,6 +51,7 @@ import demos.activity.SmartGoActivity;
 import demos.activity.SmsLocalActivity;
 import demos.activity.SmsMonitorActivity;
 import demos.activity.TelephonyActivity;
+import demos.activity.TetrisActivity;
 import demos.activity.VerticalMenuActivity;
 import demos.activity.XiuyixiuActivity;
 import demos.annotations.bus.Bus;
@@ -240,6 +241,9 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
             case R.id.tv_swipe_finish:
                 ShowToast.shortToast("随便打开一个都是啊");
                 return;
+            case R.id.tv_tetris:
+                clazz = TetrisActivity.class;
+                break;
         }
         String title = ((TextView) view).getText().toString();
         activity.startActivity(new Intent(activity, clazz).putExtra("position", point).putExtra("title", title));

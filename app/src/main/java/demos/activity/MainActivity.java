@@ -3,6 +3,8 @@ package demos.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
@@ -30,6 +32,8 @@ import demos.view.CircleTextImageView;
 import demos.view.CountDownView;
 import demos.view.MarqueeView;
 import demos.view.MenuLayout;
+import demos.view.ShaderTextView;
+import demos.view.tetris.TetrisShape;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
     MarqueeView marqueeView;
     @BindView(R.id.iv_myself)
     CircleTextImageView circleTextImageView;
-
+    @BindView(R.id.shader_text)
+    ShaderTextView shaderTextView;
 
     //设置双击退出
-    private long exitTime = 0L;
+    private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         Bind.bind(this);
         Bus.register(this);
         init();
+        getMetaData();
     }
 
     private void init() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getWindow().setBackgroundDrawable(null);
         initToolbar();
         initTabs();
@@ -91,6 +96,16 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+    }
+
+    private void getMetaData() {
+        try {
+            ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+            String name = applicationInfo.metaData.getString("MY_NAME");
+            shaderTextView.setText(name);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initToolbar() {
@@ -143,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
+            exitTime = 0;
         }
     }
 
