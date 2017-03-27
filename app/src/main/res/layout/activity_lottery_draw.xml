@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <demos.view.LotteryDrawView
+    <pers.victor.androiddemos.view.LotteryDrawView
         android:id="@+id/lottery_draw"
         android:layout_width="match_parent"
         android:layout_height="50dp"

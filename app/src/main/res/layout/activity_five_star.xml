@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <demos.view.FiveStarView
+    <pers.victor.androiddemos.view.FiveStarView
         android:id="@+id/five_star"
         android:layout_width="260dp"
         android:layout_height="wrap_content"

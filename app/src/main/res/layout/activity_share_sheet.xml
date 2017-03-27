@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <demos.view.ShareSheetView
+    <pers.victor.androiddemos.view.ShareSheetView
         android:id="@+id/share_sheet_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

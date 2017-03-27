@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:background="@color/black2">
 
-    <!--<demos.view.tetris.TetrisView-->
+    <!--<pers.victor.androiddemos.view.tetris.TetrisView-->
     <!--android:id="@+id/tetris_view"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
@@ -14,7 +14,7 @@
     <!--android:layout_marginStart="10dp"-->
     <!--android:visibility="gone" />-->
 
-    <demos.view.SnakeView
+    <pers.victor.androiddemos.view.SnakeView
         android:id="@+id/snake_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

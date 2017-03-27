@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <demos.view.DownloadProgressView
+    <pers.victor.androiddemos.view.DownloadProgressView
         android:id="@+id/download_progress"
         android:layout_width="match_parent"
         android:layout_height="50dp"

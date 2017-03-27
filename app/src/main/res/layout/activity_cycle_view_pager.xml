@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <demos.view.CycleViewPagerParent
+    <pers.victor.androiddemos.view.CycleViewPagerParent
         android:id="@+id/cycle_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

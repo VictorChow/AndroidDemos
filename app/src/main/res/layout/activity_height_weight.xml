@@ -6,12 +6,12 @@
     android:orientation="vertical"
     tools:context="demos.activity.HeightWeightActivity">
 
-    <demos.view.SlideView
+    <pers.victor.androiddemos.view.SlideView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/white1" />
 
-    <demos.view.CircleRulerView
+    <pers.victor.androiddemos.view.CircleRulerView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentBottom="true"

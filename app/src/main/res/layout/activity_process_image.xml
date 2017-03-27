@@ -7,14 +7,14 @@
     android:orientation="vertical"
     tools:context="demos.activity.ProcessImageActivity">
 
-    <demos.view.AutoImageView
+    <pers.victor.androiddemos.view.AutoImageView
         android:id="@+id/auto_image1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         app:loading_style="arc" />
 
-    <demos.view.AutoImageView
+    <pers.victor.androiddemos.view.AutoImageView
         android:id="@+id/auto_image2"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <demos.view.CircleRevealView
+    <pers.victor.androiddemos.view.CircleRevealView
         android:id="@+id/circle_reveal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

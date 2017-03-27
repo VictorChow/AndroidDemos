@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.victor.androiddemos">
+    package="pers.victor.androiddemos">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
@@ -36,7 +36,7 @@
     <uses-feature android:name="android.hardware.camera.flash" />
 
     <application
-        android:name="demos.AndroidDemos"
+        android:name=".AndroidDemos"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -47,12 +47,12 @@
             android:value="${MY_NAME}" />
 
         <service
-            android:name="demos.service.CountService"
+            android:name=".service.CountService"
             android:process=":countService" />
-        <service android:name="demos.service.SmsService" />
-        <service android:name="demos.service.TelephonyService" />
+        <service android:name=".service.SmsService" />
+        <service android:name=".service.TelephonyService" />
 
-        <receiver android:name="demos.provider.WidgetAppWidgetProvider">
+        <receiver android:name=".provider.WidgetAppWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="pers.victor.AndroidDemos.APPWIDGET_UPDATE" />
@@ -62,29 +62,29 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/appwidget_info" />
         </receiver>
-        <receiver android:name="demos.receiver.PhoneStateReceiver">
+        <receiver android:name=".receiver.PhoneStateReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
-        <receiver android:name="demos.receiver.TelephonyReceiver">
+        <receiver android:name=".receiver.TelephonyReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="demos.receiver.SmsReceiver">
+        <receiver android:name=".receiver.SmsReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
-        <service android:name="demos.service.TelephonyService" />
+        <service android:name=".service.TelephonyService" />
 
         <activity
-            android:name="demos.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/NoTitleTranslucentTheme">
             <intent-filter>
@@ -94,109 +94,109 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="demos.activity.AidlActivity"
+            android:name=".activity.AidlActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.SmsMonitorActivity"
+            android:name=".activity.SmsMonitorActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.TelephonyActivity"
+            android:name=".activity.TelephonyActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.AppInfoActivity"
+            android:name=".activity.AppInfoActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ClearCacheActivity"
+            android:name=".activity.ClearCacheActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.SmsLocalActivity"
+            android:name=".activity.SmsLocalActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ReadContactActivity"
+            android:name=".activity.ReadContactActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.TakePhotoActivity"
+            android:name=".activity.TakePhotoActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name="demos.drag_recycleview.DragRecycleViewActivity"
+            android:name=".drag_recycleview.DragRecycleViewActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.VerticalMenuActivity"
+            android:name=".activity.VerticalMenuActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.PTIRecyclerViewActivity"
+            android:name=".activity.PTIRecyclerViewActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.A2048Activity"
+            android:name=".activity.A2048Activity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.PayPassWordActivity"
+            android:name=".activity.PayPassWordActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.FixedFlowLayoutActivity"
+            android:name=".activity.FixedFlowLayoutActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.FiveStarActivity"
+            android:name=".activity.FiveStarActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ShareSheetActivity"
+            android:name=".activity.ShareSheetActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.XiuyixiuActivity"
+            android:name=".activity.XiuyixiuActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.CycleViewPagerActivity"
+            android:name=".activity.CycleViewPagerActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ReceiverGroupActivity"
+            android:name=".activity.ReceiverGroupActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.FitTextViewActivity"
+            android:name=".activity.FitTextViewActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.LotteryDrawActivity"
+            android:name=".activity.LotteryDrawActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.FlymeDownloadActivity"
+            android:name=".activity.FlymeDownloadActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.CircleRevealActivity"
+            android:name=".activity.CircleRevealActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ScratchCardActivity"
+            android:name=".activity.ScratchCardActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ProcessImageActivity"
+            android:name=".activity.ProcessImageActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.HeightWeightActivity"
+            android:name=".activity.HeightWeightActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.GestureActivity"
+            android:name=".activity.GestureActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.EventActivity"
+            android:name=".activity.EventActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.SmartGoActivity"
+            android:name=".activity.SmartGoActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.PhoneInfoActivity"
+            android:name=".activity.PhoneInfoActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.AppManageActivity"
+            android:name=".activity.AppManageActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ApkListActivity"
+            android:name=".activity.ApkListActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.BatteryActivity"
+            android:name=".activity.BatteryActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.CallInterceptActivity"
+            android:name=".activity.CallInterceptActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
         <activity
-            android:name="demos.activity.ShortcutActivity"
+            android:name=".activity.ShortcutActivity"
             android:theme="@style/NoTitleTranslucentTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -205,7 +205,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="demos.activity.TetrisActivity"
+            android:name=".activity.TetrisActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
     </application>
 

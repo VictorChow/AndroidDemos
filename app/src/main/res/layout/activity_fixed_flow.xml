@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <demos.view.FixedFlowLayout
+    <pers.victor.androiddemos.view.FixedFlowLayout
         android:id="@+id/flow_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -336,7 +336,7 @@
                 android:layout_height="match_parent"
                 android:background="#8B008B" />
         </android.support.v7.widget.CardView>
-    </demos.view.FixedFlowLayout>
+    </pers.victor.androiddemos.view.FixedFlowLayout>
 
 </RelativeLayout>
 

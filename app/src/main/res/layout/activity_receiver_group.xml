@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <demos.view.ReceiversGroup
+    <pers.victor.androiddemos.view.ReceiversGroup
         android:id="@+id/receivers_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

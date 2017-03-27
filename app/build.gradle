@@ -7,7 +7,7 @@ android {
     buildToolsVersion '25.0.2'
 
     defaultConfig {
-        applicationId "com.victor.androiddemos"
+        applicationId "pers.victor.androiddemos"
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 2
@@ -45,7 +45,6 @@ dependencies {
     compile 'com.orhanobut:logger:1.15'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.VictorChow.SmartGo:smartgo-annotation:1.0.4'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'

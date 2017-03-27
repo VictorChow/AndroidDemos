@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:background="@color/black2">
 
-    <demos.view.RippleView
+    <pers.victor.androiddemos.view.RippleView
         android:id="@+id/ripple_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

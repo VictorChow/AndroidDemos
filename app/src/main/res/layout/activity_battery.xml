@@ -22,7 +22,7 @@
             android:layout_marginStart="20dp"
             android:layout_weight="1">
 
-            <demos.view.waveview.WaveView
+            <pers.victor.androiddemos.view.waveview.WaveView
                 android:id="@+id/wv_battery_level"
                 android:layout_width="80dp"
                 android:layout_height="150dp"
