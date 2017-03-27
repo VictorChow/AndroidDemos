@@ -36,6 +36,17 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/tv_share_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="股票联动"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/tv_menu_layout"
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -143,6 +154,17 @@
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
             android:text="支付界面"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_drag_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="Drag RecyclerView"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

@@ -36,6 +36,7 @@ import pers.victor.androiddemos.activity.FixedFlowLayoutActivity;
 import pers.victor.androiddemos.activity.FlymeDownloadActivity;
 import pers.victor.androiddemos.activity.GestureActivity;
 import pers.victor.androiddemos.activity.HeightWeightActivity;
+import pers.victor.androiddemos.activity.LoaderActivity;
 import pers.victor.androiddemos.activity.LotteryDrawActivity;
 import pers.victor.androiddemos.activity.MainActivity;
 import pers.victor.androiddemos.activity.PTIRecyclerViewActivity;
@@ -246,6 +247,9 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
                 return;
             case R.id.tv_tetris:
                 clazz = TetrisActivity.class;
+                break;
+            case R.id.tv_dex_loader:
+                clazz = LoaderActivity.class;
                 break;
         }
         String title = ((TextView) view).getText().toString();

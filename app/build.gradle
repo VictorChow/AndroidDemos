@@ -15,7 +15,7 @@ android {
         manifestPlaceholders = [
                 MY_NAME: "Victor.Chow"
         ]
-        ndk{
+        ndk {
             moduleName 'hello'
         }
     }

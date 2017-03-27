@@ -25,16 +25,15 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tv_share_sheet"
+            android:id="@+id/tv_dex_loader"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center"
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
-            android:text="股票联动"
+            android:text="DexClassLoader"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
 
         <TextView
             android:id="@+id/tv_jni"
@@ -43,7 +42,7 @@
             android:gravity="center"
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
-            android:text="Jni"
+            android:text="JNI开发"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -146,7 +145,6 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-
         <TextView
             android:id="@+id/tv_2048"
             android:layout_width="match_parent"
@@ -157,18 +155,6 @@
             android:text="2048"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tv_drag_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:text="Drag RecyclerView"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
 
         <TextView
             android:id="@+id/tv_local_msg"

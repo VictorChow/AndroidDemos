@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.view_pager_main)
     ViewPager viewPagerMain;
-    @BindView(R.id.ll_main)
-    LinearLayout llMain;
     @BindView(R.id.menu_layout)
     MenuLayout menuLayout;
     @BindView(R.id.tab_main)

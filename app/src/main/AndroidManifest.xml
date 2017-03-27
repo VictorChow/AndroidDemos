@@ -207,6 +207,9 @@
         <activity
             android:name=".activity.TetrisActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
+        <activity
+            android:name=".activity.LoaderActivity"
+            android:theme="@style/NoTitleTranslucentTheme" />
     </application>
 
 </manifest>
