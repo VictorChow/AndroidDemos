@@ -35,6 +35,18 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
+
+        <TextView
+            android:id="@+id/tv_jni"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="Jni"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_swipe_finish"
             android:layout_width="match_parent"

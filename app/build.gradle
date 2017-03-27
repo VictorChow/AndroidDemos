@@ -15,6 +15,9 @@ android {
         manifestPlaceholders = [
                 MY_NAME: "Victor.Chow"
         ]
+        ndk{
+            moduleName 'hello'
+        }
     }
     buildTypes {
         release {

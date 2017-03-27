@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import pers.victor.androiddemos.R;
-
 import pers.victor.androiddemos.activity.A2048Activity;
 import pers.victor.androiddemos.activity.AidlActivity;
 import pers.victor.androiddemos.activity.ApkListActivity;
@@ -56,6 +55,7 @@ import pers.victor.androiddemos.activity.VerticalMenuActivity;
 import pers.victor.androiddemos.activity.XiuyixiuActivity;
 import pers.victor.androiddemos.annotations.bus.Bus;
 import pers.victor.androiddemos.drag_recycleview.DragRecycleViewActivity;
+import pers.victor.androiddemos.util.HelloJni;
 import pers.victor.androiddemos.util.ShowToast;
 
 public class ViewFragment extends BaseFragment implements View.OnTouchListener {
@@ -241,6 +241,9 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
             case R.id.tv_swipe_finish:
                 ShowToast.shortToast("随便打开一个都是啊");
                 return;
+            case R.id.tv_jni:
+                ShowToast.shortToast(HelloJni.sayHello());
+                return;
             case R.id.tv_tetris:
                 clazz = TetrisActivity.class;
                 break;
@@ -249,4 +252,5 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
         activity.startActivity(new Intent(activity, clazz).putExtra("position", point).putExtra("title", title));
         activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
     }
+
 }
