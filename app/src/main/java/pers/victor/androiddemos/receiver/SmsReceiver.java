@@ -5,22 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.SmsMessage;
 
+import com.orhanobut.logger.Logger;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
-import pers.victor.androiddemos.util.PrintLog;
 
 /**
  * Created by Victor on 16/2/13.
  */
 public class SmsReceiver extends BroadcastReceiver {
-    private DateFormat dateFormat;
-
-    public interface OnReceivedListener {
-        void onReceived(String sms);
-    }
-
     public static String SMS_FILTER = "android.provider.Telephony.SMS_RECEIVED";
+    private DateFormat dateFormat;
     private OnReceivedListener onReceivedListener;
 
     @Override
@@ -29,7 +24,7 @@ public class SmsReceiver extends BroadcastReceiver {
             dateFormat = SimpleDateFormat.getDateTimeInstance();
 
         }
-        PrintLog.d("收到广播");
+        Logger.d("收到广播");
         SmsMessage[] messages = getMessagesFromIntent(intent);
         StringBuilder sms = new StringBuilder();
         if (messages != null) {
@@ -65,5 +60,9 @@ public class SmsReceiver extends BroadcastReceiver {
 
     public void setOnReceivedListener(OnReceivedListener onReceivedListener) {
         this.onReceivedListener = onReceivedListener;
+    }
+
+    public interface OnReceivedListener {
+        void onReceived(String sms);
     }
 }

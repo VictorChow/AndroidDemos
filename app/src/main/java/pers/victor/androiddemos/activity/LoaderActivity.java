@@ -17,6 +17,7 @@ public class LoaderActivity extends ToolbarActivity {
     private DexClassLoader dexClassLoader;
     private Resources resources;
     private AssetManager assetManager;
+    private Fragment fragment;
 
     @Override
     public int bindLayout() {
@@ -39,7 +40,7 @@ public class LoaderActivity extends ToolbarActivity {
             AssetManager.class.getDeclaredMethod("addAssetPath", String.class).invoke(assetManager, apkPath);
             resources = new Resources(assetManager, this.getResources().getDisplayMetrics(), this.getResources().getConfiguration());
 
-            Fragment fragment = (Fragment) dexClassLoader.loadClass(className).newInstance();
+            fragment = (Fragment) dexClassLoader.loadClass(className).newInstance();
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.add(R.id.rl_container_loader, fragment);
@@ -66,4 +67,13 @@ public class LoaderActivity extends ToolbarActivity {
         return assetManager == null ? super.getAssets() : assetManager;
     }
 
+    @Override
+    protected void onResume() {
+        try {
+            Fragment.class.getDeclaredMethod("onResume").invoke(fragment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onResume();
+    }
 }

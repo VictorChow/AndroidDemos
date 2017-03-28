@@ -30,7 +30,7 @@ class AppManageActivity : ToolbarActivity() {
         val sdBlockSize = sfSdcardDir.blockSizeLong
         val sdBlockCount = sfSdcardDir.blockCountLong
         val sdAvailCount = sfSdcardDir.availableBlocksLong
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
+        if (Environment.MEDIA_MOUNTED.contentEquals(state)) {
             sdAvail = sdAvailCount * sdBlockSize / (1024 * 1024 * 1024.toFloat())
             pb_app_sd_card.max = sdBlockCount.toInt()
             pb_app_sd_card.progress = (sdBlockCount - sdAvailCount).toInt()
@@ -50,9 +50,9 @@ class AppManageActivity : ToolbarActivity() {
         tv_app_arc_used.text = String.format("%.1f GB", sdBlockSize * sdBlockCount / (1024 * 1024 * 1024.toFloat()) - sdAvailCount * sdBlockSize / (1024 * 1024 * 1024.toFloat()) + blockSize * blockCount / (1024 * 1024 * 1024.toFloat()) - availCount * blockSize / (1024 * 1024 * 1024.toFloat()))
 
 
-        arcList.add(ArcView.ArcEntity("数据分区", ContextCompat.getColor(this, R.color.blue2), (sdBlockSize * sdBlockCount / (1024 * 1024 * 1024.toFloat()) - sdAvailCount * sdBlockSize / (1024 * 1024 * 1024.toFloat())).toInt()))
-        arcList.add(ArcView.ArcEntity("系统分区", ContextCompat.getColor(this, R.color.green2), (blockSize * blockCount / (1024 * 1024 * 1024.toFloat()) - availCount * blockSize / (1024 * 1024 * 1024.toFloat())).toInt()))
-        arcList.add(ArcView.ArcEntity("剩余空间", ContextCompat.getColor(this, R.color.blue), (availCount * blockSize / (1024 * 1024 * 1024.toFloat()) + sdAvail).toInt()))
+        arcList.add(ArcView.ArcEntity("数据分区", ContextCompat.getColor(this, R.color.blue2), sdBlockSize * sdBlockCount / (1024 * 1024 * 1024.toFloat()) - sdAvailCount * sdBlockSize / (1024 * 1024 * 1024.toFloat())))
+        arcList.add(ArcView.ArcEntity("系统分区", ContextCompat.getColor(this, R.color.green2), blockSize * blockCount / (1024 * 1024 * 1024.toFloat()) - availCount * blockSize / (1024 * 1024 * 1024.toFloat())))
+        arcList.add(ArcView.ArcEntity("剩余空间", ContextCompat.getColor(this, R.color.blue), availCount * blockSize / (1024 * 1024 * 1024.toFloat()) + sdAvail))
         arc_app_manage.setArcEntities(arcList)
         //        println("系统 可用的block数目：:" + availCount + ",可用大小:" + availCount * blockSize / (1024 * 1024 * 1024.toFloat()) + "GB")
         //        println("系统 block大小:" + blockSize + ",block数目:" + blockCount + ",总大小:" + blockSize * blockCount / (1024 * 1024 * 1024.toFloat()) + "GB")

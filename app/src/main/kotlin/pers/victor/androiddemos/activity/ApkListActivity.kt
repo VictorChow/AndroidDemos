@@ -11,9 +11,9 @@ import pers.victor.androiddemos.R
 import pers.victor.androiddemos.adapter.ApkListAdapter
 import pers.victor.androiddemos.annotations.bus.Bus
 import pers.victor.androiddemos.annotations.bus.BusMethod
-import pers.victor.androiddemos.module.ApkModule
 import pers.victor.androiddemos.util.ApkUtil
 import kotlinx.android.synthetic.main.activity_apk_list.*
+import pers.victor.androiddemos.module.ApkModule
 import java.io.File
 
 class ApkListActivity : ToolbarActivity() {

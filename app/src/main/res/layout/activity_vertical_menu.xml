@@ -9,25 +9,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/black2" />
+            android:background="@color/black2"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/trans_white"
+            android:textSize="50sp" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/grey" />
+            android:background="@color/grey"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@color/trans_white"
+            android:textSize="50sp" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/blue2" />
+            android:background="@color/blue2"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@color/trans_white"
+            android:textSize="50sp" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/yellow0" />
+            android:background="@color/green"
+            android:gravity="center"
+            android:text="4"
+            android:textColor="@color/trans_white"
+            android:textSize="50sp" />
 
     </pers.victor.androiddemos.view.VerticalMenuLayout>
 

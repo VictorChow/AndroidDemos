@@ -17,13 +17,9 @@ class VerticalMenuLayout(context: Context, attributeSet: AttributeSet) : ViewGro
     private var currPage = 0
     private var downX = 0f
     private var downY = 0f
-    private lateinit var scroller: ScrollerCompat
+    private val scroller: ScrollerCompat = ScrollerCompat.create(context, DecelerateInterpolator())
     private var duration = 300
     private var tracker: VelocityTracker? = null
-
-    init {
-        scroller = ScrollerCompat.create(context, DecelerateInterpolator())
-    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         measureChildren(widthMeasureSpec, heightMeasureSpec)

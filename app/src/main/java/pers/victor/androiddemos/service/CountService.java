@@ -9,10 +9,10 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.victor.androiddemos.IMyActivity;
 import com.victor.androiddemos.IMyService;
 
-import pers.victor.androiddemos.util.PrintLog;
 
 public class CountService extends Service implements Runnable {
     private TextView textView;
@@ -67,7 +67,7 @@ public class CountService extends Service implements Runnable {
             try {
                 Thread.sleep(1000);
                 count++;
-                PrintLog.d("service count = " + count);
+                Logger.d("service count = " + count);
                 handler.sendMessage(new Message());
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -79,17 +79,17 @@ class PhoneInfoActivity : ToolbarActivity() {
 
         view = layoutInflater.inflate(R.layout.item_phone_info, ll_phone_info_container, false)
         view.tv_item_phone_info_left.text = "CPU最低频率"
-        view.tv_item_phone_info_right.text = "${CPUTool.minCpuFreq / 1000} MHz"
+        view.tv_item_phone_info_right.text = "${CPUTool.getMinCpuFreq() / 1000} MHz"
         ll_phone_info_container.addView(view)
 
         view = layoutInflater.inflate(R.layout.item_phone_info, ll_phone_info_container, false)
         view.tv_item_phone_info_left.text = "CPU最高频率"
-        view.tv_item_phone_info_right.text = "${CPUTool.maxCpuFreq / 1000} MHz"
+        view.tv_item_phone_info_right.text = "${CPUTool.getMaxCpuFreq() / 1000} MHz"
         ll_phone_info_container.addView(view)
 
         view = layoutInflater.inflate(R.layout.item_phone_info, ll_phone_info_container, false)
         view.tv_item_phone_info_left.text = "CPU核心数"
-        view.tv_item_phone_info_right.text = CPUTool.numCores.toString()
+        view.tv_item_phone_info_right.text = CPUTool.getNumCores().toString()
         ll_phone_info_container.addView(view)
 
         val dm = DisplayMetrics();

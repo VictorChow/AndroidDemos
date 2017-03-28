@@ -11,7 +11,7 @@ import pers.victor.androiddemos.R
  * Copyright (c) 16-9-18 by loren
  */
 
-class FiveStarView : View {
+class FiveStarView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val mPointA = PointF()
     private val mPointB = PointF()
     private val mPointC = PointF()
@@ -28,15 +28,6 @@ class FiveStarView : View {
     private var width = 0f
     private var height = 0f
     private var color = 0
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FiveStarView)
-        color = typedArray.getColor(R.styleable.FiveStarView_color, Color.BLACK)
-        typedArray.recycle()
-        mPaint.isAntiAlias = true
-        mPaint.strokeWidth = 3f
-        mPaint.style = Paint.Style.FILL
-    }
 
     override fun onDraw(canvas: Canvas) {
         canvas.drawPath(mPath, mPaint)
@@ -90,5 +81,14 @@ class FiveStarView : View {
     fun setColor(color: Int) {
         mPaint.color = color
         invalidate()
+    }
+
+    init {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FiveStarView)
+        color = typedArray.getColor(R.styleable.FiveStarView_color, Color.BLACK)
+        typedArray.recycle()
+        mPaint.isAntiAlias = true
+        mPaint.strokeWidth = 3f
+        mPaint.style = Paint.Style.FILL
     }
 }

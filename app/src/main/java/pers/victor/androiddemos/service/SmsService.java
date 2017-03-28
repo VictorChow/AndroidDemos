@@ -7,8 +7,9 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.orhanobut.logger.Logger;
+
 import pers.victor.androiddemos.receiver.SmsReceiver;
-import pers.victor.androiddemos.util.PrintLog;
 
 /**
  * Created by Victor on 16/2/13.
@@ -26,13 +27,13 @@ public class SmsService extends Service {
     public void onCreate() {
         smsReceiver = new SmsReceiver();
         registerReceiver(smsReceiver, new IntentFilter(SmsReceiver.SMS_FILTER));
-        PrintLog.d("注册广播");
+        Logger.d("注册广播");
     }
 
     @Override
     public void onDestroy() {
         unregisterReceiver(smsReceiver);
-        PrintLog.d("解注册广播");
+        Logger.d("解注册广播");
     }
 
     public SmsReceiver getSmsReceiver() {

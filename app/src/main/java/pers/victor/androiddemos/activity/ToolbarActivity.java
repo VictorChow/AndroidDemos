@@ -15,9 +15,9 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import pers.victor.androiddemos.R;
 
 import pers.victor.androiddemos.AndroidDemos;
+import pers.victor.androiddemos.R;
 
 /**
  * Created by Victor on 2017/3/6. (ง •̀_•́)ง
@@ -119,6 +119,7 @@ public abstract class ToolbarActivity extends SwipeFinishActivity {
         animAtFinish();
     }
 
+    @SuppressWarnings("unchecked")
     protected <T> T $(int id) {
         return (T) findViewById(id);
     }

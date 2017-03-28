@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import pers.victor.androiddemos.R
 import pers.victor.androiddemos.activity.ApkListActivity
-import pers.victor.androiddemos.module.ApkModule
 import pers.victor.androiddemos.util.ApkUtil
 import kotlinx.android.synthetic.main.item_apk_list.view.*
+import pers.victor.androiddemos.module.ApkModule
 import java.io.File
 
 /**
