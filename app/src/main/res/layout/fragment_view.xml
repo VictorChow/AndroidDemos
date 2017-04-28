@@ -14,6 +14,17 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_radar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="雷达扫描"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/tv_tetris"
             android:layout_width="match_parent"
             android:layout_height="55dp"

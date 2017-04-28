@@ -43,6 +43,7 @@ import pers.victor.androiddemos.activity.PTIRecyclerViewActivity;
 import pers.victor.androiddemos.activity.PayPassWordActivity;
 import pers.victor.androiddemos.activity.PhoneInfoActivity;
 import pers.victor.androiddemos.activity.ProcessImageActivity;
+import pers.victor.androiddemos.activity.RadarActivity;
 import pers.victor.androiddemos.activity.ReadContactActivity;
 import pers.victor.androiddemos.activity.ReceiverGroupActivity;
 import pers.victor.androiddemos.activity.ScratchCardActivity;
@@ -250,6 +251,9 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
                 break;
             case R.id.tv_dex_loader:
                 clazz = LoaderActivity.class;
+                break;
+            case R.id.tv_radar:
+                clazz = RadarActivity.class;
                 break;
         }
         String title = ((TextView) view).getText().toString();

@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.victor.androiddemos.IMyActivity;
 import com.victor.androiddemos.IMyService;
-import pers.victor.androiddemos.R;
 
+import pers.victor.androiddemos.R;
 import pers.victor.androiddemos.annotations.bind.Bind;
 import pers.victor.androiddemos.annotations.bind.BindClick;
 import pers.victor.androiddemos.annotations.bind.BindView;

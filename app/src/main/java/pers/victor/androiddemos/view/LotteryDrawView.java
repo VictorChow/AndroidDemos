@@ -61,12 +61,9 @@ public class LotteryDrawView extends View implements View.OnClickListener {
         animator = new ValueAnimator();
         animator.setDuration(time);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                offsetDegree = (int) animation.getAnimatedValue();
-                postInvalidate();
-            }
+        animator.addUpdateListener(animation -> {
+            offsetDegree = (int) animation.getAnimatedValue();
+            postInvalidate();
         });
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
