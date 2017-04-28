@@ -46,21 +46,24 @@ public class RadarView extends View {
     private void init() {
         paintRadar = new Paint();
         paintRadar.setAntiAlias(true);
+        paintRadar.setDither(true);
         paintRadar.setStyle(Paint.Style.FILL);
         paintBorder = new Paint();
         paintBorder.setAntiAlias(true);
+        paintBorder.setDither(true);
         paintBorder.setStyle(Paint.Style.STROKE);
         paintBorder.setStrokeWidth(borderSize);
         paintBorder.setColor(borderColor);
         paintLine = new Paint();
         paintLine.setAntiAlias(true);
+        paintLine.setDither(true);
         paintLine.setStyle(Paint.Style.STROKE);
         paintLine.setStrokeWidth(lineSize);
         paintLine.setColor(borderColor);
         rectF = new RectF();
         animator = new ValueAnimator();
         animator.setFloatValues(0, 359);
-        animator.setDuration(8000);
+        animator.setDuration(4000);
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);

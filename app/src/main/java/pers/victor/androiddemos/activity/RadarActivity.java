@@ -36,7 +36,7 @@ public class RadarActivity extends ToolbarActivity {
     }
 
     private void createPoint() {
-        Observable.interval(2, 3, TimeUnit.SECONDS)
+        Observable.interval(1, 3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(a -> {

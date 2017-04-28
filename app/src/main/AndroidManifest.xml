@@ -213,6 +213,9 @@
         <activity
             android:name=".activity.RadarActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
+        <activity
+            android:name=".activity.PathAnimActivity"
+            android:theme="@style/NoTitleTranslucentTheme" />
     </application>
 
 </manifest>
