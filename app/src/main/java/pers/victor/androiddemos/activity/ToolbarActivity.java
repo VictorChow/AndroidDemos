@@ -49,24 +49,16 @@ public abstract class ToolbarActivity extends SwipeFinishActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitle(getIntent().getStringExtra("title"));
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isExitAnim) {
-                    return;
-                }
-                isExitAnim = true;
-                animAtFinish();
+        toolbar.setNavigationOnClickListener(v -> {
+            if (isExitAnim) {
+                return;
             }
+            isExitAnim = true;
+            animAtFinish();
         });
 
         initView();
-        contentView.post(new Runnable() {
-            @Override
-            public void run() {
-                animAtStart();
-            }
-        });
+        contentView.post(() -> animAtStart());
     }
 
     private void animAtStart() {

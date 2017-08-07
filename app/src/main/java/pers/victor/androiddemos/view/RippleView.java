@@ -83,17 +83,14 @@ public class RippleView extends View {
         paintMap.put(animator, paint);
         animator.setInterpolator(new LinearInterpolator());
         animator.setDuration(duration);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int radiusCurr = (int) animation.getAnimatedValue();
-                radiusMap.put(animation, radiusCurr);
-                int color = (int) evaluator.evaluate(animation.getAnimatedFraction(), colorStart, colorEnd);
-                shader = new RadialGradient(centerX, centerY, radiusCurr + 1, Color.TRANSPARENT, color, Shader.TileMode.CLAMP);
-                paintMap.get(animation).setColor(color);
-                paintMap.get(animation).setShader(shader);
-                postInvalidate();
-            }
+        animator.addUpdateListener(animation -> {
+            int radiusCurr = (int) animation.getAnimatedValue();
+            radiusMap.put(animation, radiusCurr);
+            int color = (int) evaluator.evaluate(animation.getAnimatedFraction(), colorStart, colorEnd);
+            shader = new RadialGradient(centerX, centerY, radiusCurr + 1, Color.TRANSPARENT, color, Shader.TileMode.CLAMP);
+            paintMap.get(animation).setColor(color);
+            paintMap.get(animation).setShader(shader);
+            postInvalidate();
         });
         animator.addListener(new AnimatorListenerAdapter() {
             @Override

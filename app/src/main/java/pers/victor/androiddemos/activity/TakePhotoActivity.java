@@ -392,12 +392,9 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
                 camera.setPreviewCallback(new Camera.PreviewCallback() {
                     @Override
                     public void onPreviewFrame(byte[] data, Camera camera) {
-                        camera.autoFocus(new Camera.AutoFocusCallback() {
-                            @Override
-                            public void onAutoFocus(boolean success, final Camera camera) {
-                                System.out.println("onAutoFocus");
-                                camera.takePicture(null, null, new MyPictureCallback());
-                            }
+                        camera.autoFocus((success, camera1) -> {
+                            System.out.println("onAutoFocus");
+                            camera1.takePicture(null, null, new MyPictureCallback());
                         });
                     }
                 });

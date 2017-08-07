@@ -79,7 +79,7 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
         editText.filters = arrayOf<InputFilter>(android.text.InputFilter.LengthFilter(11))
         editText.inputType = InputType.TYPE_CLASS_NUMBER
         editText.imeOptions = EditorInfo.IME_ACTION_DONE
-        editText.setOnEditorActionListener { v, actionId, event ->
+        editText.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (!v.text.toString().contentEquals("")) {
                     addContact(Contact(v.text.toString()))
@@ -88,7 +88,7 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
             }
             false
         }
-        editText.setOnKeyListener { v, keyCode, event ->
+        editText.setOnKeyListener { _, keyCode, event ->
             if (!isDeleting && event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && editText.text.toString().contentEquals("")) {
                 if (receiverItems.size > 0) {
                     val child = getChildAt(childCount - 2) as TextView
@@ -185,8 +185,8 @@ class ReceiversGroup(context: Context, attributeSet: AttributeSet) : ViewGroup(c
             msg = msg.replace("、".toRegex(), "")
         }
         alertDialog.setTitle("提示").setMessage("确定删除 $msg 么？")
-                .setNegativeButton("不", { p0, p1 -> isDeleting = false })
-                .setPositiveButton("嗯", { p0, p1 ->
+                .setNegativeButton("不", { _, _ -> isDeleting = false })
+                .setPositiveButton("嗯", { _, _ ->
                     receiverItems.removeAt(pos)
                     //有个TitleTextView在位置0，但是receiverItems不包含这个，要+1
                     removeViewAt(pos + 1)

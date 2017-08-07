@@ -41,7 +41,7 @@ class DragRecyclerViewAdapter(val context: Context, val mStartDragListener: OnSt
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.itemView.text.text = mItems[position]
         //handle是我们拖动item时候要用的，目前先空着
-        holder.itemView.handle.setOnTouchListener { v, event ->
+        holder.itemView.handle.setOnTouchListener { _, event ->
             //如果按下
             if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
                 //回调RecyclerListFragment中的startDrag方法, 让mItemTouchHelper执行拖拽操作

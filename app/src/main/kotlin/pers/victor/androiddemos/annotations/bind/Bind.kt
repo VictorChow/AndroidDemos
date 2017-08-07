@@ -30,14 +30,14 @@ object Bind {
 
         //bind onClick
         o.javaClass.declaredMethods.forEach { method ->
-            method.annotations.forEach annotationForeach@{ annotation ->
+            method.annotations.forEach annotationForeach@ { annotation ->
                 if (method.parameterTypes.size != 1 || (method.parameterTypes.size == 1 && method.parameterTypes[0] != View::class.java))
                     return@annotationForeach
                 if (annotation.annotationClass == BindClick::class) {
                     val ids = method.getAnnotation(BindClick::class.java).value
                     ids.forEach { id ->
                         method.isAccessible = true
-                        val v = view.findViewById(id)
+                        val v = view.findViewById<View>(id)
                         v.setOnClickListener { method(o, v) }
                     }
                 }

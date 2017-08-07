@@ -75,25 +75,17 @@ public class MainActivity extends AppCompatActivity {
         CountDownView countDownView = $(R.id.count_down_view);
         countDownView.setCountDownTime(1, 23, 45);
 
-        circleTextImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("问一下")
-                        .setMessage("生成桌面快捷方式?")
-                        .setNegativeButton("否", null)
-                        .setPositiveButton("嗯", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                createShortcut(MainActivity.this, ShortcutActivity.class, "Victor");
-                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                intent.addCategory(Intent.CATEGORY_HOME);
-                                startActivity(intent);
-                            }
-                        })
-                        .show();
-            }
-        });
+        circleTextImageView.setOnClickListener(v -> new AlertDialog.Builder(MainActivity.this)
+                .setTitle("问一下")
+                .setMessage("生成桌面快捷方式?")
+                .setNegativeButton("否", null)
+                .setPositiveButton("嗯", (dialog, which) -> {
+                    createShortcut(MainActivity.this, ShortcutActivity.class, "Victor");
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    startActivity(intent);
+                })
+                .show());
     }
 
     private void getMetaData() {
@@ -108,23 +100,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                menuLayout.open();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> menuLayout.open());
     }
 
     private void initTabs() {
         viewPagerMain.setAdapter(new VpMainAdapter(getSupportFragmentManager()));
         setMenuItemClick();
-        menuLayout.shouldInterceptTouchEventToShowMenu(new MenuLayout.InterceptListener() {
-            @Override
-            public boolean shouldInterceptTouchEvent() {
-                return viewPagerMain.getCurrentItem() == 0;
-            }
-        });
+        menuLayout.shouldInterceptTouchEventToShowMenu(() -> viewPagerMain.getCurrentItem() == 0);
         tabLayout.setupWithViewPager(viewPagerMain);
     }
 
@@ -134,12 +116,9 @@ public class MainActivity extends AppCompatActivity {
         data.add("自定义VIEW");
         data.add("其它");
         marqueeView.setContentData(data);
-        marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                viewPagerMain.setCurrentItem(pos, false);
-                menuLayout.close();
-            }
+        marqueeView.setOnItemClickListener(pos -> {
+            viewPagerMain.setCurrentItem(pos, false);
+            menuLayout.close();
         });
     }
 
@@ -171,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
         Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
         shortcutIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         shortcutIntent.setClass(context, clazz);
-        /**
-         * 设置这条属性，可以使点击快捷方式后关闭其他的任务栈的其他activity，然后创建指定的acticity
+        /*
+          设置这条属性，可以使点击快捷方式后关闭其他的任务栈的其他activity，然后创建指定的acticity
          */
         shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Intent shortcut = new Intent(Intent.ACTION_CREATE_SHORTCUT);

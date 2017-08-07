@@ -3,7 +3,6 @@ package pers.victor.androiddemos.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -52,6 +51,7 @@ import pers.victor.androiddemos.activity.ShareSheetActivity;
 import pers.victor.androiddemos.activity.SmartGoActivity;
 import pers.victor.androiddemos.activity.SmsLocalActivity;
 import pers.victor.androiddemos.activity.SmsMonitorActivity;
+import pers.victor.androiddemos.activity.FlipActivity;
 import pers.victor.androiddemos.activity.TelephonyActivity;
 import pers.victor.androiddemos.activity.TetrisActivity;
 import pers.victor.androiddemos.activity.VerticalMenuActivity;
@@ -209,29 +209,20 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("问一下")
                         .setMessage("你扫啥?")
-                        .setPositiveButton("大文件", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String title = "扫描大文件";
-                                activity.startActivity(new Intent(activity, finalClazz).putExtra("position", point).putExtra("title", title).putExtra("search_type", 2));
-                                activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
-                            }
+                        .setPositiveButton("大文件", (dialog, which) -> {
+                            String title = "扫描大文件";
+                            activity.startActivity(new Intent(activity, finalClazz).putExtra("position", point).putExtra("title", title).putExtra("search_type", 2));
+                            activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
                         })
-                        .setNegativeButton("APK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String title = "扫描APK";
-                                activity.startActivity(new Intent(activity, finalClazz).putExtra("position", point).putExtra("title", title).putExtra("search_type", 1));
-                                activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
-                            }
+                        .setNegativeButton("APK", (dialog, which) -> {
+                            String title = "扫描APK";
+                            activity.startActivity(new Intent(activity, finalClazz).putExtra("position", point).putExtra("title", title).putExtra("search_type", 1));
+                            activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
                         })
-                        .setNeutralButton("缓存", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String title = "扫描缓存";
-                                activity.startActivity(new Intent(activity, ClearCacheActivity.class).putExtra("position", point).putExtra("title", title));
-                                activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
-                            }
+                        .setNeutralButton("缓存", (dialog, which) -> {
+                            String title = "扫描缓存";
+                            activity.startActivity(new Intent(activity, ClearCacheActivity.class).putExtra("position", point).putExtra("title", title));
+                            activity.overridePendingTransition(R.anim.anim_stay, R.anim.anim_stay);
                         })
                         .show();
                 return;
@@ -259,6 +250,10 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
             case R.id.tv_path_anim:
                 clazz = PathAnimActivity.class;
                 break;
+            case R.id.tv_flip:
+                clazz = FlipActivity.class;
+                break;
+
         }
         String title = ((TextView) view).getText().toString();
         activity.startActivity(new Intent(activity, clazz).putExtra("position", point).putExtra("title", title));
