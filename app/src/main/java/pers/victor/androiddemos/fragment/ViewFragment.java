@@ -32,9 +32,11 @@ import pers.victor.androiddemos.activity.EventActivity;
 import pers.victor.androiddemos.activity.FitTextViewActivity;
 import pers.victor.androiddemos.activity.FiveStarActivity;
 import pers.victor.androiddemos.activity.FixedFlowLayoutActivity;
+import pers.victor.androiddemos.activity.FlipActivity;
 import pers.victor.androiddemos.activity.FlymeDownloadActivity;
 import pers.victor.androiddemos.activity.GestureActivity;
 import pers.victor.androiddemos.activity.HeightWeightActivity;
+import pers.victor.androiddemos.activity.KotlinLibActivity;
 import pers.victor.androiddemos.activity.LoaderActivity;
 import pers.victor.androiddemos.activity.LotteryDrawActivity;
 import pers.victor.androiddemos.activity.MainActivity;
@@ -51,7 +53,6 @@ import pers.victor.androiddemos.activity.ShareSheetActivity;
 import pers.victor.androiddemos.activity.SmartGoActivity;
 import pers.victor.androiddemos.activity.SmsLocalActivity;
 import pers.victor.androiddemos.activity.SmsMonitorActivity;
-import pers.victor.androiddemos.activity.FlipActivity;
 import pers.victor.androiddemos.activity.TelephonyActivity;
 import pers.victor.androiddemos.activity.TetrisActivity;
 import pers.victor.androiddemos.activity.VerticalMenuActivity;
@@ -253,7 +254,9 @@ public class ViewFragment extends BaseFragment implements View.OnTouchListener {
             case R.id.tv_flip:
                 clazz = FlipActivity.class;
                 break;
-
+            case R.id.tv_kotlin_lib:
+                clazz = KotlinLibActivity.class;
+                break;
         }
         String title = ((TextView) view).getText().toString();
         activity.startActivity(new Intent(activity, clazz).putExtra("position", point).putExtra("title", title));

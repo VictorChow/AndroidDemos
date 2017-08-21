@@ -30,7 +30,7 @@ class FlipView(context: Context, attributeSet: AttributeSet) : View(context, att
         rectSrc.set(0, 0, bmpLeft.width, bmpLeft.height)
         camera.setLocation(0f, 0f, -18f)
         animator.duration = 3000
-        animator.setFloatValues(0f, -360f)
+        animator.setFloatValues(0f, -180f)
         animator.addUpdateListener {
             rotateY = it.animatedValue as Float
             invalidate()
@@ -49,7 +49,7 @@ class FlipView(context: Context, attributeSet: AttributeSet) : View(context, att
     }
 
     override fun onDraw(canvas: Canvas) {
-        canvas.save()
+        canvas.drawBitmap(bmpLeft, rectSrc, rectLeft, paint)
         camera.save()
         camera.rotateY(rotateY)
         canvas.translate(width / 2f, height / 2f)
@@ -57,7 +57,5 @@ class FlipView(context: Context, attributeSet: AttributeSet) : View(context, att
         canvas.translate(-width / 2f, -height / 2f)
         camera.restore()
         canvas.drawBitmap(bmpRight, rectSrc, rectRight, paint)
-        canvas.restore()
-        canvas.drawBitmap(bmpLeft, rectSrc, rectLeft, paint)
     }
 }

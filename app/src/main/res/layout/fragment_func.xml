@@ -25,24 +25,13 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tv_dex_loader"
+            android:id="@+id/tv_kotlin_lib"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center"
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
-            android:text="DexClassLoader"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tv_jni"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:text="JNI开发"
+            android:text="KotlinAndroidLib"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -208,6 +197,28 @@
             android:paddingEnd="20dp"
             android:paddingStart="20dp"
             android:text="读取通讯录"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_dex_loader"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="DexClassLoader"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_jni"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="JNI开发"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
